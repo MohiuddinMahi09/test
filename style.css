@@ -1,5 +1,5 @@
 body {
-
+  background-image: url('b.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed; 
   background-size: 100% 100%;
@@ -7,7 +7,7 @@ body {
 ul li{
 	list-style-type:none;
 	float:left;
-	padding-left:100px;
+	padding-left:226px;
 	padding-right:100px;
 	background-color:#08E8DE;
 }
@@ -23,8 +23,8 @@ ul{
 }
 ul li ul {
 	position:absolute;
-		margin-left:-100px;
-		margin-top:10px;
+		margin-left:-226px;
+		margin-top:1px;
 		opacity:0;
 		display:none;
 
