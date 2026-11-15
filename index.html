@@ -2,55 +2,60 @@
 <html lang="bn">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>বোধ — বাংলা এআই</title>
 <style>
 :root{--green:#08a66a;--green2:#0fc07d;--deep:#075c48;--ink:#102a2e;
       --muted:#7b8b90;--line:#e6ede9;--mint:#e9fbf2}
-*{box-sizing:border-box;margin:0}
-html,body{height:100%}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;height:100dvh}
 body{font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif;
   color:var(--ink);padding:14px;display:flex;flex-direction:column;gap:12px;
-  overflow:hidden;
+  overflow:hidden;overscroll-behavior:none;
   background:radial-gradient(1100px 500px at 6% -10%,#e8fbf2,transparent 60%),
              radial-gradient(800px 420px at 100% 0%,#eaf6ff,transparent 55%),#f6f8f7}
 
-/* ---------- হেডার ---------- */
-.top{flex:none;display:flex;align-items:center;gap:12px}
+/* ================= হেডার ================= */
+.top{flex:none;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;flex:none}
 .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
   background:linear-gradient(135deg,var(--green),var(--green2));
-  box-shadow:0 10px 22px rgba(8,166,106,.3)}
+  box-shadow:0 10px 22px rgba(8,166,106,.3);flex:none}
 .logo svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.7;
   stroke-linecap:round;stroke-linejoin:round}
 .brand h1{font-size:19px;font-weight:800;letter-spacing:-.4px;color:var(--deep)}
 
 .services{flex:1;min-width:0;display:flex;gap:4px;padding:5px;background:#fff;
   border:1px solid var(--line);border-radius:16px;overflow-x:auto;
-  box-shadow:0 10px 26px rgba(10,60,40,.05)}
+  box-shadow:0 10px 26px rgba(10,60,40,.05);scrollbar-width:none}
+.services::-webkit-scrollbar{display:none}
 .svc{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;border:0;
-  background:transparent;padding:10px 10px;border-radius:12px;font:600 13px inherit;
-  color:#546a70;cursor:pointer;white-space:nowrap;transition:.2s}
+  background:transparent;padding:10px;border-radius:12px;font:600 13px inherit;
+  color:#546a70;cursor:pointer;white-space:nowrap;transition:.2s;
+  min-width:0;touch-action:manipulation}
 .svc svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.9;
-  stroke-linecap:round;stroke-linejoin:round}
+  stroke-linecap:round;stroke-linejoin:round;flex:none}
 .svc:hover{background:#f2f9f5;color:var(--deep)}
 .svc.on{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;
   box-shadow:0 8px 18px rgba(8,166,106,.28)}
 
 .switch{flex:none;display:flex;gap:4px;padding:4px;background:#fff;
-  border:1px solid var(--line);border-radius:999px;box-shadow:0 6px 16px rgba(10,60,40,.05)}
+  border:1px solid var(--line);border-radius:999px;
+  box-shadow:0 6px 16px rgba(10,60,40,.05)}
 .switch button{border:0;background:transparent;border-radius:999px;padding:7px 13px;
-  font:600 12px inherit;color:var(--muted);cursor:pointer;transition:.2s}
+  font:600 12px inherit;color:var(--muted);cursor:pointer;transition:.2s;
+  white-space:nowrap;touch-action:manipulation}
 .switch button.on{background:linear-gradient(135deg,var(--green),var(--green2));
   color:#fff;box-shadow:0 6px 14px rgba(8,166,106,.3)}
 
 .gear{flex:none;width:40px;height:40px;border:1px solid var(--line);border-radius:12px;
-  background:#fff;display:grid;place-items:center;cursor:pointer;transition:.2s}
+  background:#fff;display:grid;place-items:center;cursor:pointer;transition:.2s;
+  touch-action:manipulation}
 .gear:hover{background:#f2f9f5;border-color:#c8ecda}
 .gear svg{width:19px;height:19px;stroke:var(--green);fill:none;stroke-width:1.9;
   stroke-linecap:round;stroke-linejoin:round}
 
-/* ---------- স্টেজ ---------- */
+/* ================= স্টেজ ================= */
 .stage{flex:1;min-height:0;position:relative}
 .panel{position:absolute;inset:0;display:none}
 .panel.on{display:block;animation:fade .28s ease}
@@ -58,40 +63,38 @@ body{font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif;
 
 textarea{width:100%;height:100%;padding:26px 26px 84px;border:1px solid var(--line);
   border-radius:22px;background:#fff;font:16.5px/1.9 inherit;color:inherit;
-  resize:none;outline:none;transition:.2s;
+  resize:none;outline:none;transition:.2s;-webkit-appearance:none;appearance:none;
   box-shadow:0 18px 40px rgba(10,60,40,.05)}
 textarea:focus{border-color:#9fe3c4;box-shadow:0 18px 40px rgba(8,166,106,.12)}
 textarea::placeholder{color:#9aa8ad}
 
-/* ---------- ভাসমান বাটন + স্পিনার ---------- */
-.fab{position:absolute;right:18px;bottom:18px;display:flex;align-items:center;gap:8px;
-  border:0;padding:12px 20px;border-radius:14px;cursor:pointer;min-width:132px;
-  justify-content:center;font:700 13.5px inherit;color:#fff;
+/* ================= FAB + স্পিনার ================= */
+.fab{position:absolute;right:18px;bottom:18px;display:flex;align-items:center;
+  justify-content:center;gap:8px;border:0;padding:12px 20px;border-radius:14px;
+  cursor:pointer;min-width:132px;font:700 13.5px inherit;color:#fff;
   background:linear-gradient(135deg,var(--green),var(--green2));
-  box-shadow:0 12px 26px rgba(8,166,106,.35);transition:.2s}
+  box-shadow:0 12px 26px rgba(8,166,106,.35);transition:.2s;
+  touch-action:manipulation}
 .fab:hover{filter:brightness(1.07);transform:translateY(-1px)}
 .fab svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2;
   stroke-linecap:round;stroke-linejoin:round}
-
-/* স্পিনার */
-.fab .spinner{display:none;width:16px;height:16px;border-radius:50%;
+.fab .spinner{display:none;width:18px;height:18px;border-radius:50%;
   border:2px solid rgba(255,255,255,.35);border-top-color:#fff;
   animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* লোডিং অবস্থা */
-.fab.loading{pointer-events:none}
-.fab.loading .icon{display:none}
-.fab.loading .label{display:none}
+.fab.loading{min-width:0;width:48px;height:48px;padding:0;border-radius:50%;
+  pointer-events:none}
+.fab.loading .icon,.fab.loading .label{display:none}
 .fab.loading .spinner{display:block}
 
-/* ---------- মাইক ---------- */
+/* ================= মাইক ================= */
 .micbox{height:100%;display:flex;flex-direction:column;align-items:center;
   justify-content:center;gap:20px;border:1px dashed #cfe6dc;border-radius:22px;
   background:linear-gradient(180deg,#f5fdf9,#fbfdfc)}
 .micbtn{width:84px;height:84px;border:0;border-radius:50%;cursor:pointer;display:grid;
   place-items:center;background:linear-gradient(135deg,var(--green),var(--green2));
-  box-shadow:0 16px 34px rgba(8,166,106,.38);transition:.25s}
+  box-shadow:0 16px 34px rgba(8,166,106,.38);transition:.25s;
+  touch-action:manipulation}
 .micbtn:hover{transform:scale(1.05)}
 .micbtn.live{animation:pulse 1.4s infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 16px rgba(8,166,106,.12)}}
@@ -105,47 +108,96 @@ textarea::placeholder{color:#9aa8ad}
 .wave span:nth-child(5){animation-delay:.6s}
 @keyframes wave{0%,100%{height:8px}50%{height:24px}}
 
-/* ---------- OCR ---------- */
+/* ================= OCR ================= */
 .drop{height:100%;display:grid;place-items:center;text-align:center;cursor:pointer;
   border:2px dashed #cfe6dc;border-radius:22px;background:#fbfdfc;
-  transition:.2s;padding:24px}
+  transition:.2s;padding:24px;touch-action:manipulation}
 .drop:hover{background:#f4fdf9;border-color:#9fe3c4}
 .drop svg{width:40px;height:40px;stroke:var(--green);fill:none;stroke-width:1.5;
-  stroke-linecap:round;stroke-linejoin:round;margin:0 auto}
+  stroke-linecap:round;stroke-linejoin:round;margin:0 auto;display:block}
 .drop p{margin-top:12px;font-size:13.5px;color:var(--muted)}
 .drop strong{color:var(--deep)}
 
-/* ---------- সেটিংস ---------- */
+/* ================= সেটিংস ================= */
 .overlay{position:fixed;inset:0;background:rgba(10,40,30,.28);backdrop-filter:blur(2px);
   opacity:0;visibility:hidden;transition:.25s;z-index:40}
 .overlay.on{opacity:1;visibility:visible}
-.drawer{position:fixed;top:0;right:0;height:100%;width:340px;max-width:88vw;z-index:50;
-  background:#fff;border-left:1px solid var(--line);padding:20px;overflow-y:auto;
+.drawer{position:fixed;top:0;right:0;height:100%;height:100dvh;width:340px;
+  max-width:88vw;z-index:50;background:#fff;border-left:1px solid var(--line);
+  padding:20px;padding-bottom:calc(20px + env(safe-area-inset-bottom));
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
   transform:translateX(100%);transition:.32s cubic-bezier(.2,.8,.2,1);
   box-shadow:-18px 0 40px rgba(10,60,40,.12)}
 .drawer.on{transform:translateX(0)}
 .dhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .dhead h3{font-size:16px;font-weight:800;color:var(--deep)}
-.dclose{border:0;background:#f2f9f5;color:var(--deep);width:30px;height:30px;
-  border-radius:10px;font:700 15px inherit;cursor:pointer}
+.dclose{border:0;background:#f2f9f5;color:var(--deep);width:32px;height:32px;
+  border-radius:10px;font:700 15px inherit;cursor:pointer;touch-action:manipulation}
 .dclose:hover{background:var(--mint)}
 
 .set-group{margin-bottom:18px}
 .set-group h4{font-size:11px;letter-spacing:.7px;text-transform:uppercase;
   color:#9aa8ad;font-weight:700;margin-bottom:6px}
 .set-row{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:8px 0;border-bottom:1px dashed #eef3f1;font-size:13.5px;font-weight:600}
+  padding:10px 0;border-bottom:1px dashed #eef3f1;font-size:13.5px;font-weight:600}
 .set-row:last-child{border-bottom:0}
-input[type=checkbox]{accent-color:var(--green);width:17px;height:17px;cursor:pointer;flex:none}
-select{width:130px;border:1px solid var(--line);border-radius:9px;padding:7px 9px;
-  font:600 12.5px inherit;color:#17424a;background:#fff;outline:none}
-input[type=range]{accent-color:var(--green);width:120px}
+input[type=checkbox]{accent-color:var(--green);width:18px;height:18px;
+  cursor:pointer;flex:none;touch-action:manipulation}
+select{width:130px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;
+  font:600 12.5px inherit;color:#17424a;background:#fff;outline:none;
+  -webkit-appearance:none;appearance:none;touch-action:manipulation}
+input[type=range]{accent-color:var(--green);width:120px;touch-action:manipulation}
 
-@media(max-width:760px){
-  .svc span{display:none}
-  .svc{padding:11px 6px}
-  .brand h1{display:none}
-  textarea{padding:18px 18px 78px;font-size:15.5px}
+/* ================= মোবাইল (৭২০px নিচে) ================= */
+@media (max-width: 720px) {
+  body{padding:10px;gap:10px;padding-top:calc(10px + env(safe-area-inset-top))}
+  .top{gap:8px}
+
+  /* এক লাইনে ব্র্যান্ড → স্পেস → এনকোডিং → সেটিংস */
+  .brand{order:1}
+  .switch{order:2;margin-left:auto}
+  .gear{order:3}
+
+  /* সার্ভিস ৫ কলামের গ্রিড — আইকন উপরে, ছোট লেবেল নিচে */
+  .services{order:4;flex:none;width:100%;display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:5px;
+    overflow:visible}
+  .svc{flex-direction:column;gap:3px;padding:8px 2px;font-size:10px;
+    border-radius:11px}
+  .svc svg{width:17px;height:17px}
+  .svc span{display:block;font-size:9.5px;font-weight:700;line-height:1.15;
+    text-align:center;overflow-wrap:anywhere;white-space:normal}
+
+  /* টেক্সট বক্স: iOS জুম ঠেকাতে ১৬px */
+  textarea{padding:16px 16px 76px;font-size:16px;line-height:1.7;border-radius:18px}
+
+  .fab{right:12px;bottom:12px;padding:11px 18px;font-size:13px;
+    min-width:118px;border-radius:13px}
+
+  .micbox,.drop{border-radius:18px}
+  .drop{padding:18px}
+  .micbtn{width:76px;height:76px}
+  .micbtn svg{width:28px;height:28px}
+
+  /* সেটিংস ড্রয়ার ফুল-স্ক্রিন */
+  .drawer{width:100%;max-width:100%;border-left:0;padding:16px;
+    padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+  .set-row{padding:12px 0}
+}
+
+/* ================= ছোট ফোন (৪০০px নিচে) ================= */
+@media (max-width: 400px) {
+  body{padding:8px;gap:8px;padding-top:calc(8px + env(safe-area-inset-top))}
+  .brand h1{font-size:16px}
+  .logo{width:36px;height:36px;border-radius:11px}
+  .logo svg{width:20px;height:20px}
+  .switch{padding:3px}
+  .switch button{padding:6px 9px;font-size:11px}
+  .gear{width:36px;height:36px}
+  .svc svg{width:16px;height:16px}
+  .svc span{font-size:9px}
+  textarea{padding:14px 14px 72px}
+  .fab{padding:10px 16px;font-size:12.5px;min-width:110px}
 }
 </style>
 </head>
@@ -186,7 +238,6 @@ input[type=range]{accent-color:var(--green);width:120px}
 
 <main class="stage">
 
-  <!-- ১. বানান -->
   <section class="panel on" id="p1">
     <textarea placeholder="এখানে বাংলা লিখুন বা পেস্ট করুন..."></textarea>
     <button class="fab" data-load>
@@ -196,7 +247,6 @@ input[type=range]{accent-color:var(--green);width:120px}
     </button>
   </section>
 
-  <!-- ২. ব্যাকরণ -->
   <section class="panel" id="p2">
     <textarea placeholder="এখানে বাক্য লিখুন..."></textarea>
     <button class="fab" data-load>
@@ -206,7 +256,6 @@ input[type=range]{accent-color:var(--green);width:120px}
     </button>
   </section>
 
-  <!-- ৩. কথা থেকে লেখা -->
   <section class="panel" id="p3">
     <div class="micbox">
       <button class="micbtn" id="mic"><svg><use href="#i-mic"/></svg></button>
@@ -214,7 +263,6 @@ input[type=range]{accent-color:var(--green);width:120px}
     </div>
   </section>
 
-  <!-- ৪. লেখা থেকে কথা -->
   <section class="panel" id="p4">
     <textarea placeholder="যে লেখাটি শুনতে চান তা লিখুন..."></textarea>
     <button class="fab">
@@ -223,7 +271,6 @@ input[type=range]{accent-color:var(--green);width:120px}
     </button>
   </section>
 
-  <!-- ৫. ওসিআর -->
   <section class="panel" id="p5">
     <label class="drop">
       <div>
@@ -294,7 +341,6 @@ input[type=range]{accent-color:var(--green);width:120px}
 </aside>
 
 <script>
-  /* সার্ভিস বদল */
   var svcs = document.querySelectorAll('.svc');
   svcs.forEach(function (s) {
     s.onclick = function () {
@@ -305,7 +351,6 @@ input[type=range]{accent-color:var(--green);width:120px}
     };
   });
 
-  /* ইউনিকোড / আনসি */
   var enc = document.querySelectorAll('#enc button');
   enc.forEach(function (b) {
     b.onclick = function () {
@@ -314,7 +359,6 @@ input[type=range]{accent-color:var(--green);width:120px}
     };
   });
 
-  /* সেটিংস ড্রয়ার */
   var drawer = document.getElementById('drawer');
   var overlay = document.getElementById('overlay');
   function toggleSet(open) {
@@ -325,19 +369,19 @@ input[type=range]{accent-color:var(--green);width:120px}
   document.getElementById('closeSet').onclick = function () { toggleSet(false); };
   overlay.onclick = function () { toggleSet(false); };
 
-  /* মাইক */
   document.getElementById('mic').onclick = function () {
     this.classList.toggle('live');
   };
 
-  /* লোডিং স্পিনার — যাচাই করুন ও পরীক্ষা করুন */
+  /* লেখা থাকলে ক্লিক করলে শুধু লোডিং স্পিনার */
   document.querySelectorAll('.fab[data-load]').forEach(function (btn) {
     btn.onclick = function () {
+      var panel = btn.closest('.panel');
+      var box = panel ? panel.querySelector('textarea') : null;
+      if (!box || !box.value.trim()) return;
       if (btn.classList.contains('loading')) return;
       btn.classList.add('loading');
-      setTimeout(function () {
-        btn.classList.remove('loading');
-      }, 1800);
+      setTimeout(function () { btn.classList.remove('loading'); }, 1800);
     };
   });
 </script>
