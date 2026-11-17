@@ -130,7 +130,7 @@
         .ribbon-group input[type="checkbox"] { accent-color: var(--blue); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
         .ribbon-group input[type="range"] { accent-color: var(--blue); width: 100px; }
 
-        /* ---------- TOOLBAR ---------- */
+        /* ---------- TOOLBAR (merged service) ---------- */
         .toolbar { background: var(--header-bg); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; z-index: 5; flex-shrink: 0; transition: background 0.3s; }
         .tool-group { display: flex; align-items: center; gap: 12px; padding-right: 20px; border-right: 1px solid var(--border); flex: 1; justify-content: center; }
         .tool-group:first-child { justify-content: flex-start; flex: 0; }
@@ -248,6 +248,7 @@
         .set-group { margin-bottom: 24px; display: none; }
         .set-group.active { display: block; }
         .set-group h4 { font-size: 12px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; letter-spacing: 0.5px; }
+        .set-group h4:not(:first-child) { margin-top: 18px; }
         .set-group .set-hint { font-size: 11px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
         .set-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 14px; font-weight: 500; color: var(--text); }
         .set-row:last-child { border-bottom: none; }
@@ -384,7 +385,6 @@
             .tool-group:first-child { flex: 1 1 100%; justify-content: center; }
             .tool-group:nth-child(2) { flex: 1 1 100%; justify-content: center; }
 
-            /* মোবাইলে রিবন — বাম অ্যালাইন + অনুভূমিক স্ক্রল */
             .settings-ribbon {
                 padding: 10px 0;
                 gap: 0;
@@ -561,6 +561,7 @@
             <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></symbol>
         </defs></svg>
 
+        <!-- Header -->
         <header>
             <div class="header-left">
                 <div class="brand">
@@ -572,8 +573,7 @@
                 </div>
                 
                 <nav class="top-nav" id="serviceNav">
-                    <div class="nav-item active" data-p="p1"><svg><use href="#i-spell"/></svg><span data-bn="বানান" data-en="Spelling">বানান</span></div>
-                    <div class="nav-item" data-p="p2"><svg><use href="#i-grammar"/></svg><span data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</span></div>
+                    <div class="nav-item active" data-p="p1"><svg><use href="#i-spell"/></svg><span data-bn="বানান ও ব্যাকরণ" data-en="Spelling & Grammar">বানান ও ব্যাকরণ</span></div>
                     <div class="nav-item" data-p="p3"><svg><use href="#i-mic"/></svg><span data-bn="কথা → লেখা" data-en="Speech → Text">কথা → লেখা</span></div>
                     <div class="nav-item" data-p="p4"><svg><use href="#i-speak"/></svg><span data-bn="লেখা → কথা" data-en="Text → Speech">লেখা → কথা</span></div>
                     <div class="nav-item" data-p="p5"><svg><use href="#i-ocr"/></svg><span data-bn="ওসিআর" data-en="OCR">ওসিআর</span></div>
@@ -616,7 +616,7 @@
             </div>
         </header>
 
-        <!-- Settings Ribbon -->
+        <!-- Settings Ribbon (for P3, P4, P5) -->
         <div class="settings-ribbon" id="settingsRibbon">
             <div class="ribbon-group" data-svc="p3" style="display: none;">
                 <div class="set-row" id="rb-p3-lang"><span data-bn="ভাষা:" data-en="Language:">ভাষা:</span><select><option data-bn="বাংলা" data-en="Bengali">বাংলা</option><option data-bn="ইংরেজি" data-en="English">ইংরেজি</option></select></div>
@@ -634,23 +634,26 @@
             </div>
         </div>
 
-        <!-- Toolbar -->
+        <!-- Toolbar / Ribbon for merged "বানান ও ব্যাকরণ" (p1) -->
         <div class="toolbar" id="mainToolbar">
-            <div class="tool-group">
+            <div class="tool-group" id="rb-p1-check">
                 <button class="btn-primary" onclick="checkSpelling()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                     <span data-bn="এখনই পরীক্ষা" data-en="Check Now">এখনই পরীক্ষা</span>
                 </button>
+            </div>
+
+            <div class="tool-group" id="rb-p1-live">
                 <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
                 <span style="font-size: 13px; font-weight: 500; white-space:nowrap;" data-bn="লেখার সময়" data-en="Live check">লেখার সময়</span>
             </div>
 
-            <div class="tool-group" id="sadhuCholitoGroup" style="display: none;">
+            <div class="tool-group" id="rb-p1-sadhu">
                 <span style="font-size: 13px; font-weight: 600; white-space:nowrap;" data-bn="সাধু-চলিত:" data-en="Sadhu-Cholito:">সাধু-চলিত:</span>
                 <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
             </div>
 
-            <div class="tool-group">
+            <div class="tool-group" id="rb-p1-errors">
                 <div class="badge-group">
                     <div class="badge red"><div class="dot red"></div> <span data-bn="বানান" data-en="Spelling">বানান</span> <span id="spellCount">২</span></div>
                     <div class="badge blue"><div class="dot blue"></div> <span data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</span> <span id="gramCount">১</span></div>
@@ -661,7 +664,7 @@
                 </button>
             </div>
 
-            <div class="tool-group">
+            <div class="tool-group" id="rb-p1-dict">
                 <button class="btn-outline" onclick="alert('শব্দটি অভিধানে যোগ করা হয়েছে!')">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
                     <span data-bn="অভিধানে যোগ" data-en="Add to Dictionary">অভিধানে যোগ</span>
@@ -672,14 +675,14 @@
                 </button>
             </div>
 
-            <div class="tool-group">
+            <div class="tool-group" id="rb-p1-standard">
                 <select class="dropdown">
                     <option data-bn="বাংলা একাডেমি প্রমিত" data-en="Bangla Academy Standard">বাংলা একাডেমি প্রমিত</option>
                     <option data-bn="কলকাতা বিশ্ববিদ্যালয়" data-en="Calcutta University">কলকাতা বিশ্ববিদ্যালয়</option>
                 </select>
             </div>
 
-            <div class="quality-widget">
+            <div class="quality-widget" id="rb-p1-quality">
                 <div class="quality-circle"><span class="quality-number">৯৬</span></div>
                 <div class="quality-text">
                     <div class="quality-title" data-bn="লেখার মান" data-en="Writing Quality">লেখার মান</div>
@@ -691,10 +694,10 @@
         <!-- Workspace -->
         <div class="workspace">
             
-            <!-- P1: Spell Check -->
+            <!-- P1: Merged Spelling & Grammar -->
             <div class="view-section active" id="p1">
                 <div class="sidebar" id="sidebar-p1">
-                    <div class="sidebar-header"><h3 data-bn="বানান" data-en="Spelling">বানান</h3></div>
+                    <div class="sidebar-header"><h3 data-bn="বানান ও ব্যাকরণ" data-en="Spelling & Grammar">বানান ও ব্যাকরণ</h3></div>
                     <div class="suggestion-card" id="card1">
                         <div class="card-type" data-bn="বানান" data-en="Spelling">বানান</div>
                         <div class="suggestion-action">
@@ -729,35 +732,6 @@
                         </p>
                     </div>
                     <button class="fab-btn listen-btn" onclick="toggleSpeak(document.getElementById('editor').innerText, this)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                        <span data-bn="শুনুন" data-en="Listen">শুনুন</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- P2: Grammar -->
-            <div class="view-section" id="p2">
-                <div class="sidebar" id="sidebar-p2">
-                    <div class="sidebar-header"><h3 data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</h3></div>
-                    <div class="suggestion-card">
-                        <div class="card-type blue" data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</div>
-                        <div class="suggestion-action">
-                            <span class="wrong-text">বিশ্বাব্যপী</span> <span>→</span>
-                            <button class="correct-btn" onclick="this.closest('.suggestion-card').style.display='none'">বিশ্বব্যাপী</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="editor-container">
-                    <button class="sidebar-toggle-tab" onclick="toggleSidebar(this)" title="Toggle Sidebar"><svg><use href="#i-chevron-left"/></svg></button>
-                    <div class="editor-content" id="editor-p2" contenteditable="true">
-                        <p>
-                            <span data-bn="আমার একুশে। বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা " data-en="My Ekushey. Bengali is our mother tongue. Every year on February 21st, we remember the language martyrs with deep respect. This day is now celebrated worldwide as International Mother Language Day.">আমার একুশে। বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা </span>
-                            <span class="grammar-error" id="err3">বিশ্বাব্যপী</span> 
-                            <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
-                        </p>
-                    </div>
-                    <button class="fab-btn listen-btn" onclick="toggleSpeak(document.getElementById('editor-p2').innerText, this)">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
                         <span data-bn="শুনুন" data-en="Listen">শুনুন</span>
                     </button>
@@ -812,23 +786,30 @@
                 <button class="close-btn" onclick="toggleDrawer(false)">✕</button>
             </div>
 
-            <!-- P1 Settings -->
+            <!-- P1 (বানান ও ব্যাকরণ) — Merged Settings -->
             <div class="set-group active" data-svc="p1">
-                <h4 data-bn="বানান" data-en="Spelling">বানান</h4>
+                <h4 data-bn="রিবনে দেখানোর অপশন" data-en="Show in Ribbon">রিবনে দেখানোর অপশন</h4>
+                <p class="set-hint" data-bn="যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।" data-en="Options checked here will appear in the ribbon.">যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।</p>
+                <div class="set-row"><span data-bn="চেক করুন" data-en="Check Now">চেক করুন</span><input type="checkbox" checked data-toggle-ribbon="rb-p1-check"></div>
+                <div class="set-row"><span data-bn="লাইভ চেক" data-en="Live Check">লাইভ চেক</span><input type="checkbox" checked data-toggle-ribbon="rb-p1-live"></div>
+                <div class="set-row"><span data-bn="সাধু-চলিত" data-en="Sadhu-Cholito">সাধু-চলিত</span><input type="checkbox" checked data-toggle-ribbon="rb-p1-sadhu"></div>
+                <div class="set-row"><span data-bn="ত্রুটি গণনা ও সংশোধন" data-en="Error Counts & Fix">ত্রুটি গণনা ও সংশোধন</span><input type="checkbox" checked data-toggle-ribbon="rb-p1-errors"></div>
+                <div class="set-row"><span data-bn="অভিধান ও অর্থ" data-en="Dictionary & Meaning">অভিধান ও অর্থ</span><input type="checkbox" checked data-toggle-ribbon="rb-p1-dict"></div>
+                <div class="set-row"><span data-bn="প্রমিত মান" data-en="Standard">প্রমিত মান</span><input type="checkbox" checked data-toggle-ribbon="rb-p1-standard"></div>
+                <div class="set-row"><span data-bn="লেখার মান" data-en="Writing Quality">লেখার মান</span><input type="checkbox" checked data-toggle-ribbon="rb-p1-quality"></div>
+
+                <h4 data-bn="বানান সংশোধন" data-en="Spelling Correction">বানান সংশোধন</h4>
                 <div class="set-row"><span data-bn="স্বয়ংক্রিয় সংশোধন" data-en="Auto Correct">স্বয়ংক্রিয় সংশোধন</span><input type="checkbox" checked></div>
                 <div class="set-row"><span data-bn="শব্দ প্রস্তাবনা" data-en="Word Suggestions">শব্দ প্রস্তাবনা</span><input type="checkbox"></div>
                 <div class="set-row"><span data-bn="নিজের অভিধান" data-en="Custom Dictionary">নিজের অভিধান</span><input type="checkbox" checked></div>
-            </div>
 
-            <!-- P2 Settings -->
-            <div class="set-group" data-svc="p2">
                 <h4 data-bn="ব্যাকরণ — ত্রুটির ধরন" data-en="Grammar — Error Types">ব্যাকরণ — ত্রুটির ধরন</h4>
                 <div class="set-row"><span data-bn="কর্তা-ক্রিয়ার সম্পর্ক" data-en="Subject-Verb Agreement">কর্তা-ক্রিয়ার সম্পর্ক</span><input type="checkbox" checked></div>
                 <div class="set-row"><span data-bn="সাধু-চলিত মিশ্রণ" data-en="Sadhu-Cholito Mix">সাধু-চলিত মিশ্রণ</span><input type="checkbox" checked></div>
                 <div class="set-row"><span data-bn="যতিচিহ্ন" data-en="Punctuation">যতিচিহ্ন</span><input type="checkbox" checked></div>
             </div>
 
-            <!-- P3 Settings — Ribbon Options -->
+            <!-- P3 Settings -->
             <div class="set-group" data-svc="p3">
                 <h4 data-bn="রিবনে দেখানোর অপশন" data-en="Show in Ribbon">রিবনে দেখানোর অপশন</h4>
                 <p class="set-hint" data-bn="যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।" data-en="Options checked here will appear in the ribbon.">যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।</p>
@@ -837,7 +818,7 @@
                 <div class="set-row"><span data-bn="অটো বিরাম" data-en="Auto Pause">অটো বিরাম</span><input type="checkbox" checked data-toggle-ribbon="rb-p3-pause"></div>
             </div>
 
-            <!-- P4 Settings — Ribbon Options -->
+            <!-- P4 Settings -->
             <div class="set-group" data-svc="p4">
                 <h4 data-bn="রিবনে দেখানোর অপশন" data-en="Show in Ribbon">রিবনে দেখানোর অপশন</h4>
                 <p class="set-hint" data-bn="যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।" data-en="Options checked here will appear in the ribbon.">যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।</p>
@@ -846,7 +827,7 @@
                 <div class="set-row"><span data-bn="অডিও ডাউনলোড" data-en="Download Audio">অডিও ডাউনলোড</span><input type="checkbox" checked data-toggle-ribbon="rb-p4-audio"></div>
             </div>
 
-            <!-- P5 Settings — Ribbon Options -->
+            <!-- P5 Settings -->
             <div class="set-group" data-svc="p5">
                 <h4 data-bn="রিবনে দেখানোর অপশন" data-en="Show in Ribbon">রিবনে দেখানোর অপশন</h4>
                 <p class="set-hint" data-bn="যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।" data-en="Options checked here will appear in the ribbon.">যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।</p>
@@ -922,10 +903,9 @@
                 document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
                 document.getElementById(targetId).classList.add('active');
 
-                if (targetId === 'p1' || targetId === 'p2') {
+                if (targetId === 'p1') {
                     document.getElementById('mainToolbar').style.display = 'flex';
                     document.getElementById('settingsRibbon').classList.remove('active');
-                    document.getElementById('sadhuCholitoGroup').style.display = (targetId === 'p2') ? 'flex' : 'none';
                 } else {
                     document.getElementById('mainToolbar').style.display = 'none';
                     document.getElementById('settingsRibbon').classList.add('active');
@@ -1087,7 +1067,7 @@
             btn.setAttribute('data-en', speaking ? 'Stop' : 'Listen');
         }
 
-        // Ribbon Visibility Toggles (from Settings Drawer)
+        // Ribbon Visibility Toggles (from Settings Drawer) — works for all services
         document.querySelectorAll('[data-toggle-ribbon]').forEach(cb => {
             const ribbonItem = document.getElementById(cb.dataset.toggleRibbon);
             if (!ribbonItem) return;
