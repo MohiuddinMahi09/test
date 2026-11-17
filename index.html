@@ -221,12 +221,83 @@
         .set-row input[type="checkbox"] { accent-color: var(--blue); width: 18px; height: 18px; cursor: pointer; }
         .hidden { display: none !important; }
 
+        /* ---------- SIDEBAR OVERLAY (MOBILE/TABLET) ---------- */
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+        }
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        @media (min-width: 1025px) {
+            .sidebar-overlay { display: none !important; }
+        }
+
         /* ---------- RESPONSIVE DESIGN ---------- */
         @media (max-width: 1024px) {
-            .workspace { flex-direction: column; padding: 16px; gap: 16px; overflow-y: auto; }
-            .editor-container { width: 100%; min-height: 50vh; order: 1; }
-            .sidebar { width: 100%; height: auto; max-height: 400px; order: 2; }
-            .sidebar-toggle-tab { display: none; }
+            .workspace {
+                flex-direction: column;
+                padding: 16px;
+                gap: 16px;
+                overflow-y: auto;
+            }
+
+            .editor-container {
+                width: 100%;
+                min-height: 50vh;
+                order: 1;
+            }
+
+            /* Sidebar becomes a fixed slide-in drawer */
+            .sidebar,
+            .sidebar.hidden-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 340px;
+                max-width: 85vw;
+                padding: 20px;
+                margin-right: 0;
+                opacity: 1;
+                z-index: 100;
+                border-radius: 0 16px 16px 0;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                overflow-y: auto;
+                border: none;
+                flex-direction: column;
+            }
+
+            .sidebar:not(.hidden-sidebar) {
+                transform: translateX(0);
+            }
+
+            /* Toggle tab positioned on the left edge of the editor */
+            .sidebar-toggle-tab {
+                left: -13px;
+                top: 16px;
+                transform: none;
+                width: 26px;
+                height: 48px;
+                border-radius: 0 8px 8px 0;
+                border-left: none;
+                border-right: 1px solid var(--border);
+                box-shadow: 2px 2px 8px rgba(0,0,0,0.08);
+            }
+            .sidebar-toggle-tab.closed {
+                left: -13px;
+            }
+
             .quality-widget { display: none; }
             .brand-text p { display: none; }
             .tool-group { padding-right: 12px; }
@@ -243,6 +314,12 @@
             .editor-container { padding: 20px; }
             .mic-view, .ocr-view { padding: 24px; }
             #ttsText { font-size: 16px; }
+
+            .sidebar,
+            .sidebar.hidden-sidebar {
+                width: 88vw;
+                max-width: 360px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -251,6 +328,14 @@
             .btn-share { padding: 8px; }
             .editor-content h1 { font-size: 24px; }
             .fab-btn { padding: 8px 12px; font-size: 13px; }
+            .sidebar-toggle-tab {
+                width: 24px;
+                height: 42px;
+                left: -12px;
+            }
+            .sidebar-toggle-tab.closed {
+                left: -12px;
+            }
         }
     </style>
 </head>
@@ -281,7 +366,7 @@
             <h2 data-bn="বোধ-এ স্বাগতম" data-en="Welcome to Bodh">বোধ-এ স্বাগতম</h2>
             <p data-bn="বাংলাকে বোঝে, নির্ভুলভাবে" data-en="Understands Bengali, Accurately">বাংলাকে বোঝে, নির্ভুলভাবে</p>
             <input type="text" id="loginEmail" placeholder="ইমেইল বা ফোন নম্বর" data-bn-placeholder="ইমেইল বা ফোন নম্বর" data-en-placeholder="Email or Phone">
-            <input type="password" id="loginPass" placeholder="পাসওয়ার্ড" data-bn-placeholder="পাসওয়ার্ড" data-en-placeholder="Password">
+            <input type="password" id="loginPass" placeholder="পাসওয়ার্ড" data-bn-placeholder="পাসওয়ার্ড" data-en-placeholder="Password">
             <button onclick="performLogin()" data-bn="প্রবেশ করুন" data-en="Enter">প্রবেশ করুন</button>
         </div>
     </div>
@@ -349,7 +434,7 @@
                 <div class="share-wrapper">
                     <button class="btn-share" onclick="toggleShareMenu(event)">
                         <svg><use href="#i-share"/></svg>
-                        <span data-bn="শেয়ার" data-en="Share">শেয়ার</span>
+                        <span data-bn="শেয়ার" data-en="Share">শেয়ার</span>
                     </button>
                     <div class="share-dropdown" id="shareMenu">
                         <a href="mailto:?subject=Check out Bodh&body=I found this awesome Bengali text editor: https://bodh.app" class="share-item" target="_blank">
@@ -361,7 +446,7 @@
                         <a href="https://twitter.com/intent/tweet?text=Check out Bodh&url=https://bodh.app" class="share-item" target="_blank">
                             <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg> Twitter
                         </a>
-                        <div class="share-item" onclick="navigator.clipboard.writeText('https://bodh.app'); alert('লিঙ্ক কপি করা হয়েছে!'); document.getElementById('shareMenu').classList.remove('active');">
+                        <div class="share-item" onclick="navigator.clipboard.writeText('https://bodh.app'); alert('লিঙ্ক কপি করা হয়েছে!'); document.getElementById('shareMenu').classList.remove('active');">
                             <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                             <span data-bn="লিঙ্ক কপি" data-en="Copy Link">লিঙ্ক কপি</span>
                         </div>
@@ -409,7 +494,7 @@
                     <input type="checkbox" checked>
                     <span class="slider"></span>
                 </label>
-                <span style="font-size: 13px; font-weight: 500; white-space:nowrap;" data-bn="লেখার সময়" data-en="Live check">লেখার সময়</span>
+                <span style="font-size: 13px; font-weight: 500; white-space:nowrap;" data-bn="লেখার সময়" data-en="Live check">লেখার সময়</span>
             </div>
 
             <div class="tool-group">
@@ -424,7 +509,7 @@
             </div>
 
             <div class="tool-group">
-                <button class="btn-outline" onclick="alert('শব্দটি অভিধানে যোগ করা হয়েছে!')">
+                <button class="btn-outline" onclick="alert('শব্দটি অভিধানে যোগ করা হয়েছে!')">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
                     <span data-bn="অভিধানে যোগ" data-en="Add to Dictionary">অভিধানে যোগ</span>
                 </button>
@@ -437,7 +522,7 @@
             <div class="tool-group">
                 <select class="dropdown">
                     <option data-bn="বাংলা একাডেমি প্রমিত" data-en="Bangla Academy Standard">বাংলা একাডেমি প্রমিত</option>
-                    <option data-bn="কলকাতা বিশ্ববিদ্যালয়" data-en="Calcutta University">কলকাতা বিশ্ববিদ্যালয়</option>
+                    <option data-bn="কলকাতা বিশ্ববিদ্যালয়" data-en="Calcutta University">কলকাতা বিশ্ববিদ্যালয়</option>
                 </select>
             </div>
 
@@ -494,11 +579,11 @@
                     <div class="editor-content" id="editor" contenteditable="true">
                         <h1 data-bn="আমার একুশে" data-en="My Ekushey">আমার একুশে</h1>
                         <p>
-                            <span data-bn="বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে " data-en="Bengali is our mother tongue. Every year on February 21st, we remember the language martyrs with deep respect. ">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে </span>
+                            <span data-bn="বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে " data-en="Bengali is our mother tongue. Every year on February 21st, we remember the language martyrs with deep respect. ">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে </span>
                             <span class="spell-error" id="err1" data-bn="স্মরন" data-en="remembr">স্মরন</span> 
                             <span data-bn=" করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা " data-en=". This day is now celebrated worldwide as International Mother Language Day."> করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা </span>
                             <span class="grammar-error" id="err2" data-bn="বিশ্বাব্যপী" data-en="world-wide">বিশ্বাব্যপী</span> 
-                            <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
+                            <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
                         </p>
                     </div>
                     <!-- Listen Button -->
@@ -529,9 +614,9 @@
                     <div class="editor-content" id="editor-p2" contenteditable="true">
                         <h1 data-bn="আমার একুশে" data-en="My Ekushey">আমার একুশে</h1>
                         <p>
-                            <span data-bn="বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা " data-en="Bengali is our mother tongue. Every year on February 21st, we remember the language martyrs with deep respect. This day is now celebrated worldwide as International Mother Language Day.">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা </span>
+                            <span data-bn="বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা " data-en="Bengali is our mother tongue. Every year on February 21st, we remember the language martyrs with deep respect. This day is now celebrated worldwide as International Mother Language Day.">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা </span>
                             <span class="grammar-error" id="err3">বিশ্বাব্যপী</span> 
-                            <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
+                            <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
                         </p>
                     </div>
                     <!-- Listen Button -->
@@ -557,7 +642,7 @@
             <!-- P4: Text to Speech -->
             <div class="view-section" id="p4">
                 <div class="editor-container">
-                    <textarea id="ttsText" placeholder="যে লেখাটি শুনতে চান তা লিখুন..." data-bn-placeholder="যে লেখাটি শুনতে চান তা লিখুন..." data-en-placeholder="Type the text you want to listen to...">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা বিশ্বব্যাপী পালিত হয়।</textarea>
+                    <textarea id="ttsText" placeholder="যে লেখাটি শুনতে চান তা লিখুন..." data-bn-placeholder="যে লেখাটি শুনতে চান তা লিখুন..." data-en-placeholder="Type the text you want to listen to...">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা বিশ্বব্যাপী পালিত হয়।</textarea>
                     <button class="btn-primary listen-btn" style="align-self: flex-start; padding: 12px 24px; font-size: 16px; margin-top: 16px;" onclick="toggleSpeak(document.getElementById('ttsText').value, this)">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
                         <span data-bn="শুনুন" data-en="Listen">শুনুন</span>
@@ -574,11 +659,14 @@
                     <label class="btn-primary" style="cursor: pointer;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-upload"/></svg>
                         <span data-bn="ছবি আপলোড করুন" data-en="Upload Image">ছবি আপলোড করুন</span>
-                        <input type="file" hidden accept="image/*,.pdf" onchange="alert('ছবি আপলোড সফল হয়েছে!')">
+                        <input type="file" hidden accept="image/*,.pdf" onchange="alert('ছবি আপলোড সফল হয়েছে!')">
                     </label>
                 </div>
             </div>
         </div>
+
+        <!-- Sidebar Overlay for Mobile/Tablet -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebarOnMobile()"></div>
 
         <!-- Settings Drawer (Only for P1 & P2 now) -->
         <div class="overlay" id="overlay" onclick="toggleDrawer(false)"></div>
@@ -611,7 +699,7 @@
         // 1. Login System
         function performLogin() {
             if(!document.getElementById('loginEmail').value || !document.getElementById('loginPass').value) {
-                alert(currentLang === 'bn' ? 'ইমেইল এবং পাসওয়ার্ড দিন!' : 'Please enter email and password!');
+                alert(currentLang === 'bn' ? 'ইমেইল এবং পাসওয়ার্ড দিন!' : 'Please enter email and password!');
                 return;
             }
             document.getElementById('authScreen').style.display = 'none';
@@ -661,6 +749,19 @@
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 const targetId = this.dataset.p;
+
+                // Close any open sidebar on mobile/tablet when switching views
+                if (window.innerWidth <= 1024) {
+                    document.querySelectorAll('.sidebar').forEach(sb => {
+                        sb.classList.add('hidden-sidebar');
+                        const tab = sb.parentElement.querySelector('.sidebar-toggle-tab');
+                        if (tab) {
+                            tab.querySelector('use').setAttribute('href', '#i-chevron-right');
+                            tab.classList.add('closed');
+                        }
+                    });
+                    hideSidebarOverlay();
+                }
                 
                 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
                 this.classList.add('active');
@@ -683,22 +784,90 @@
             });
         });
 
-        // 5. Sidebar Toggle
+        // 5. Sidebar Toggle (with mobile overlay support)
         function toggleSidebar(btn) {
             const activeView = btn.closest('.view-section');
             const sidebar = activeView.querySelector('.sidebar');
             const icon = btn.querySelector('use');
+            const isMobileOrTablet = window.innerWidth <= 1024;
             
             sidebar.classList.toggle('hidden-sidebar');
             
             if (sidebar.classList.contains('hidden-sidebar')) {
                 icon.setAttribute('href', '#i-chevron-right');
                 btn.classList.add('closed');
+                if (isMobileOrTablet) hideSidebarOverlay();
             } else {
                 icon.setAttribute('href', '#i-chevron-left');
                 btn.classList.remove('closed');
+                if (isMobileOrTablet) showSidebarOverlay();
             }
         }
+
+        // 5a. Sidebar overlay helpers
+        function showSidebarOverlay() {
+            if (window.innerWidth <= 1024) {
+                document.getElementById('sidebarOverlay').classList.add('active');
+            }
+        }
+
+        function hideSidebarOverlay() {
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+
+        function closeSidebarOnMobile() {
+            document.querySelectorAll('.sidebar').forEach(sb => {
+                sb.classList.add('hidden-sidebar');
+                const tab = sb.parentElement.querySelector('.sidebar-toggle-tab');
+                if (tab) {
+                    tab.querySelector('use').setAttribute('href', '#i-chevron-right');
+                    tab.classList.add('closed');
+                }
+            });
+            hideSidebarOverlay();
+        }
+
+        // 5b. Auto-hide sidebar on mobile/tablet (initial + resize)
+        let lastViewportIsMobile = null;
+
+        function applySidebarResponsive() {
+            const isMobileOrTablet = window.innerWidth <= 1024;
+            lastViewportIsMobile = isMobileOrTablet;
+
+            document.querySelectorAll('.sidebar').forEach(sb => {
+                const tab = sb.parentElement.querySelector('.sidebar-toggle-tab');
+                if (isMobileOrTablet) {
+                    sb.classList.add('hidden-sidebar');
+                    if (tab) {
+                        tab.querySelector('use').setAttribute('href', '#i-chevron-right');
+                        tab.classList.add('closed');
+                    }
+                } else {
+                    sb.classList.remove('hidden-sidebar');
+                    if (tab) {
+                        tab.querySelector('use').setAttribute('href', '#i-chevron-left');
+                        tab.classList.remove('closed');
+                    }
+                }
+            });
+
+            if (!isMobileOrTablet) hideSidebarOverlay();
+        }
+
+        // Initial state
+        applySidebarResponsive();
+
+        // On resize — reapply only when crossing the breakpoint
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const isMobileOrTablet = window.innerWidth <= 1024;
+                if (isMobileOrTablet !== lastViewportIsMobile) {
+                    applySidebarResponsive();
+                }
+            }, 150);
+        });
 
         // 6. Settings Drawer
         function toggleDrawer(open) {
