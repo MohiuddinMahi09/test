@@ -17,7 +17,6 @@
             --grammar-blue: #3b82f6;
             --green: #10b981;
             
-            /* Theme Variables */
             --header-bg: #ffffff;
             --sidebar-bg: #ffffff;
             --editor-bg: #ffffff;
@@ -26,7 +25,6 @@
             --shadow: rgba(0,0,0,0.05);
         }
 
-        /* Dark Mode Variables */
         [data-theme="dark"] {
             --blue: #3b82f6;
             --blue-hover: #60a5fa;
@@ -72,7 +70,6 @@
         .brand-text h1 { font-size: 18px; font-weight: 700; color: var(--blue); line-height: 1.2; }
         .brand-text p { font-size: 12px; color: var(--muted); }
 
-        /* Top Nav - Ribbon Style & Justified */
         .top-nav { 
             display: flex; 
             background: var(--hover-bg); 
@@ -102,7 +99,6 @@
         .nav-item:hover { color: var(--text); }
         .nav-item.active { background: var(--blue); color: white; box-shadow: 0 2px 4px rgba(41,82,227,0.2); }
 
-        /* Header Right */
         .header-right { display: flex; align-items: center; gap: 12px; position: relative; flex-shrink: 0; }
         .btn-icon { background: var(--header-bg); border: 1px solid var(--border); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; color: var(--text); }
         .btn-icon:hover { background: var(--hover-bg); }
@@ -113,7 +109,6 @@
         .btn-share:hover { background: var(--hover-bg); }
         .btn-share svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
         
-        /* Share Dropdown */
         .share-dropdown { position: absolute; top: 45px; right: 0; background: var(--header-bg); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 25px var(--shadow); display: none; flex-direction: column; width: 180px; z-index: 50; overflow: hidden; }
         .share-dropdown.active { display: flex; }
         .share-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; cursor: pointer; transition: 0.2s; border-bottom: 1px solid var(--border); }
@@ -126,16 +121,16 @@
         .lang-toggle span.active { background: var(--header-bg); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; cursor: pointer; }
 
-        /* ---------- SETTINGS RIBBON (P3, P4, P5) ---------- */
-        .settings-ribbon { display: none; background: var(--hover-bg); border-bottom: 1px solid var(--border); padding: 10px 24px; justify-content: space-between; align-items: center; z-index: 4; flex-shrink: 0; transition: background 0.3s; }
+        /* ---------- SETTINGS RIBBON ---------- */
+        .settings-ribbon { display: none; background: var(--hover-bg); border-bottom: 1px solid var(--border); padding: 10px 24px; justify-content: flex-start; align-items: center; z-index: 4; flex-shrink: 0; transition: background 0.3s; }
         .settings-ribbon.active { display: flex; }
-        .ribbon-group { display: flex; gap: 20px; align-items: center; justify-content: center; flex: 1; }
-        .ribbon-group .set-row { display: flex; align-items: center; gap: 10px; border: none; padding: 0; font-size: 13px; font-weight: 500; white-space: nowrap; }
+        .ribbon-group { display: flex; gap: 20px; align-items: center; justify-content: flex-start; flex: 1; flex-wrap: wrap; max-width: 100%; }
+        .ribbon-group .set-row { display: flex; align-items: center; gap: 10px; border: none; padding: 0; font-size: 13px; font-weight: 500; white-space: nowrap; flex-shrink: 0; }
         .ribbon-group select { padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border); font-family: inherit; font-size: 13px; outline: none; background: var(--input-bg); color: var(--text); }
-        .ribbon-group input[type="checkbox"] { accent-color: var(--blue); width: 16px; height: 16px; cursor: pointer; }
+        .ribbon-group input[type="checkbox"] { accent-color: var(--blue); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
         .ribbon-group input[type="range"] { accent-color: var(--blue); width: 100px; }
 
-        /* ---------- TOOLBAR (P1, P2) ---------- */
+        /* ---------- TOOLBAR ---------- */
         .toolbar { background: var(--header-bg); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; z-index: 5; flex-shrink: 0; transition: background 0.3s; }
         .tool-group { display: flex; align-items: center; gap: 12px; padding-right: 20px; border-right: 1px solid var(--border); flex: 1; justify-content: center; }
         .tool-group:first-child { justify-content: flex-start; flex: 0; }
@@ -162,7 +157,6 @@
         .btn-outline:hover { background: var(--hover-bg); }
         .dropdown { border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; font-size: 13px; outline: none; background: var(--input-bg); color: var(--text); cursor: pointer; }
 
-        /* Writing Quality Widget */
         .quality-widget { display: flex; align-items: center; gap: 12px; margin-left: 10px; flex-shrink: 0;}
         .quality-circle { width: 40px; height: 40px; border-radius: 50%; background: conic-gradient(from 180deg, #d946ef, #3b82f6, #06b6d4); display: flex; align-items: center; justify-content: center; position: relative; }
         .quality-circle::before { content: ""; position: absolute; inset: 3px; background: var(--header-bg); border-radius: 50%; transition: background 0.3s; }
@@ -171,27 +165,22 @@
         .quality-title { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.2; }
         .quality-sub { font-size: 12px; color: var(--muted); }
 
-        /* ---------- WORKSPACE & LAYOUT ---------- */
+        /* ---------- WORKSPACE ---------- */
         .workspace { display: flex; flex: 1; padding: 24px; gap: 24px; overflow: hidden; justify-content: center; }
         .view-section { display: none; width: 100%; height: 100%; gap: 24px; }
         .view-section.active { display: flex; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } }
 
-        /* Editor Area (Maximized) */
         .editor-container { background: var(--editor-bg); flex: 1; min-width: 0; border-radius: 16px; box-shadow: 0 4px 20px var(--shadow); padding: 32px; position: relative; display: flex; flex-direction: column; transition: flex 0.3s ease, background 0.3s; }
         .editor-content { flex: 1; font-size: 18px; line-height: 1.8; outline: none; overflow-y: auto; padding-left: 20px; padding-bottom: 70px; color: var(--text); }
-        /* Title font removed - all text same size */
         .editor-content p { font-size: 18px; }
 
-        /* Error Styles */
         .spell-error { text-decoration: underline wavy var(--red); text-underline-offset: 4px; cursor: pointer; background: rgba(239,68,68,0.1); }
         .grammar-error { text-decoration: underline solid var(--grammar-blue); text-underline-offset: 4px; text-decoration-thickness: 2px; cursor: pointer; background: rgba(59,130,246,0.1); }
 
-        /* Floating Action Button (FAB) */
         .fab-btn { position: absolute; bottom: 24px; right: 24px; background: var(--blue); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(41,82,227,0.3); transition: 0.2s; z-index: 10; font-family: inherit; font-size: 14px; font-weight: 600;}
         .fab-btn:hover { background: var(--blue-hover); transform: translateY(-2px); }
 
-        /* Sidebar Toggle Tab (Attached to Left of Editor) */
         .sidebar-toggle-tab {
             position: absolute;
             left: -24px;
@@ -215,7 +204,6 @@
         .sidebar-toggle-tab svg { width: 14px; height: 14px; stroke: var(--muted); fill: none; stroke-width: 2; }
         .sidebar-toggle-tab.closed { left: -24px; }
 
-        /* Sidebar (Moved to Left) */
         .sidebar { background: var(--sidebar-bg); width: 340px; flex-shrink: 0; border-radius: 16px; box-shadow: 0 4px 20px var(--shadow); padding: 20px; height: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; transition: all 0.3s ease; }
         .sidebar.hidden-sidebar { width: 0; padding: 0; opacity: 0; margin-right: -24px; overflow: hidden; border: none; }
         
@@ -230,9 +218,7 @@
         .wrong-text { text-decoration: line-through; color: var(--muted); }
         .correct-btn { background: var(--blue); color: white; border: none; padding: 4px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; }
         .correct-btn:hover { background: var(--blue-hover); }
-        .card-tags { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--muted); }
 
-        /* Other Views (Mic, OCR, TTS) */
         .mic-view, .ocr-view { background: var(--editor-bg); flex: 1; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 20px var(--shadow); padding: 40px; text-align: center; transition: background 0.3s; }
         .mic-btn { width: 80px; height: 80px; border-radius: 50%; background: var(--blue); color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(41,82,227,0.3); transition: 0.3s; }
         .mic-btn:hover { transform: scale(1.05); }
@@ -245,12 +231,11 @@
         .wave span:nth-child(4) { animation-delay: 0.3s; }
         @keyframes wave { 0%, 100% { height: 8px; } 50% { height: 20px; } }
 
-        /* TTS Full Screen Textarea */
         #p4 .editor-container { max-width: none; margin: 0; width: 100%; }
         #ttsText { width: 100%; flex: 1; min-height: 300px; padding: 20px; border: 1px solid var(--border); border-radius: 12px; font-size: 18px; resize: none; outline: none; margin-bottom: 16px; font-family: inherit; line-height: 1.8; transition: 0.2s; background: var(--input-bg); color: var(--text); }
         #ttsText:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(41,82,227,0.1); }
 
-        /* ---------- DRAWER (SETTINGS FOR P1, P2) ---------- */
+        /* ---------- DRAWER ---------- */
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(2px); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 90; }
         .overlay.on { opacity: 1; visibility: visible; }
         .drawer { position: fixed; top: 0; right: 0; height: 100%; width: 340px; background: var(--sidebar-bg); border-left: 1px solid var(--border); padding: 24px; z-index: 100; transform: translateX(100%); transition: 0.3s; overflow-y: auto; box-shadow: -10px 0 30px var(--shadow); }
@@ -263,15 +248,14 @@
         .set-group { margin-bottom: 24px; display: none; }
         .set-group.active { display: block; }
         .set-group h4 { font-size: 12px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; letter-spacing: 0.5px; }
+        .set-group .set-hint { font-size: 11px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
         .set-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 14px; font-weight: 500; color: var(--text); }
         .set-row:last-child { border-bottom: none; }
         .set-row input[type="checkbox"] { accent-color: var(--blue); width: 18px; height: 18px; cursor: pointer; }
         .hidden { display: none !important; }
 
-        /* ---------- MAIN APP HEIGHT ---------- */
         #mainApp { height: 100vh; height: 100dvh; }
 
-        /* ---------- SIDEBAR OVERLAY (MOBILE/TABLET) ---------- */
         .sidebar-overlay {
             position: fixed;
             inset: 0;
@@ -292,7 +276,7 @@
         }
 
         /* =====================================================
-           RESPONSIVE — TABLET & MOBILE (<= 1024px)
+           RESPONSIVE — TABLET & MOBILE
            ===================================================== */
         @media (max-width: 1024px) {
             header {
@@ -335,14 +319,12 @@
             .quality-widget { display: none; }
             .tool-group { padding-right: 12px; }
 
-            /* Toolbar elements wrap nicely on mobile */
             .toolbar { flex-wrap: wrap; justify-content: center; gap: 10px; }
             .tool-group { flex: 1 1 auto; border-right: none; justify-content: center; padding: 0; }
-            
-            .settings-ribbon { flex-wrap: wrap; justify-content: center; gap: 15px; padding: 10px; }
-            .ribbon-group { flex-wrap: wrap; justify-content: center; }
 
-            /* Sidebar fixed drawer */
+            .settings-ribbon { flex-wrap: wrap; justify-content: flex-start; gap: 12px; padding: 10px 16px; }
+            .ribbon-group { flex-wrap: wrap; justify-content: flex-start; gap: 12px 20px; width: 100%; }
+
             .sidebar,
             .sidebar.hidden-sidebar {
                 position: fixed;
@@ -396,12 +378,78 @@
                 width: 88vw;
                 max-width: 360px;
             }
-            /* Adjust nav item padding for smaller screens */
             .nav-item { padding: 10px 6px; font-size: 13px; }
             .nav-item svg { width: 16px; height: 16px; }
             .share-dropdown { right: auto; left: 0; }
             .tool-group:first-child { flex: 1 1 100%; justify-content: center; }
             .tool-group:nth-child(2) { flex: 1 1 100%; justify-content: center; }
+
+            /* মোবাইলে রিবন — বাম অ্যালাইন + অনুভূমিক স্ক্রল */
+            .settings-ribbon {
+                padding: 10px 0;
+                gap: 0;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                align-items: center;
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                scroll-behavior: smooth;
+            }
+            .settings-ribbon::-webkit-scrollbar { display: none; }
+
+            .ribbon-group {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 10px;
+                width: auto;
+                min-width: max-content;
+                flex: 0 0 auto;
+                margin-right: auto;
+                margin-left: 0;
+                padding: 0 16px;
+            }
+
+            .ribbon-group .set-row {
+                flex-shrink: 0;
+                white-space: nowrap;
+                width: auto;
+                background: var(--header-bg);
+                border: 1px solid var(--border);
+                border-radius: 20px;
+                padding: 6px 14px;
+                font-size: 13px;
+                gap: 10px;
+            }
+
+            .ribbon-group .set-row > label,
+            .ribbon-group .set-row > span {
+                flex: 0 0 auto;
+                min-width: auto;
+            }
+
+            .ribbon-group select {
+                flex: 0 0 auto;
+                max-width: none;
+                min-width: auto;
+            }
+
+            .ribbon-group input[type="range"] {
+                flex: 0 0 auto;
+                width: 90px;
+                max-width: none;
+                min-width: auto;
+            }
+
+            .ribbon-group input[type="checkbox"] { flex-shrink: 0; }
+
+            .ribbon-group .set-row:has(input[type="checkbox"]:first-child) {
+                flex-direction: row;
+            }
         }
 
         @media (max-width: 480px) {
@@ -422,9 +470,27 @@
 
             .login-box { padding: 28px 24px; }
             .drawer { width: 88vw; max-width: 340px; }
-            
-            /* Stack icons and text slightly tighter on phones */
             .nav-item { gap: 4px; font-size: 12px; padding: 8px 4px; }
+
+            .settings-ribbon { padding: 8px 0; justify-content: flex-start; }
+            .ribbon-group {
+                gap: 8px;
+                padding: 0 16px;
+                margin-right: auto;
+                margin-left: 0;
+                justify-content: flex-start;
+            }
+            .ribbon-group .set-row {
+                padding: 5px 12px;
+                font-size: 12px;
+                gap: 8px;
+            }
+            .ribbon-group select {
+                font-size: 12px;
+                padding: 3px 6px;
+            }
+            .ribbon-group input[type="range"] { width: 80px; }
+            .ribbon-group input[type="checkbox"] { width: 15px; height: 15px; }
         }
     </style>
 </head>
@@ -463,7 +529,6 @@
     <!-- Main App -->
     <div id="mainApp" class="hidden" style="display: flex; flex-direction: column;">
         
-        <!-- SVG Icons -->
         <svg style="position:absolute;width:0;height:0" aria-hidden="true"><defs>
             <symbol id="i-logo" viewBox="0 0 48 48">
                 <defs>
@@ -482,7 +547,6 @@
                 <rect x="30" y="16" width="4" height="12" rx="2" fill="white"/>
                 <path d="M27 22l3 3 6-6" stroke="url(#checkGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </symbol>
-            
             <symbol id="i-spell" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
             <symbol id="i-grammar" viewBox="0 0 24 24"><path d="M4 6h16M4 12h11M4 18h7"/><circle cx="18" cy="17" r="2.5"/></symbol>
             <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
@@ -493,13 +557,10 @@
             <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></symbol>
             <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
             <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
-            
-            <!-- Theme Icons -->
             <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
             <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></symbol>
         </defs></svg>
 
-        <!-- Header -->
         <header>
             <div class="header-left">
                 <div class="brand">
@@ -520,7 +581,6 @@
             </div>
 
             <div class="header-right">
-                <!-- Dark Mode Toggle -->
                 <button class="btn-icon" id="themeToggle" onclick="toggleTheme()">
                     <svg><use href="#i-moon" id="themeIcon"/></svg>
                 </button>
@@ -556,48 +616,38 @@
             </div>
         </header>
 
-        <!-- Settings Ribbon for P3, P4, P5 -->
+        <!-- Settings Ribbon -->
         <div class="settings-ribbon" id="settingsRibbon">
-            <!-- P3 Settings -->
             <div class="ribbon-group" data-svc="p3" style="display: none;">
-                <div class="set-row"><span data-bn="ভাষা:" data-en="Language:">ভাষা:</span><select><option data-bn="বাংলা" data-en="Bengali">বাংলা</option><option data-bn="ইংরেজি" data-en="English">ইংরেজি</option></select></div>
-                <div class="set-row"><input type="checkbox" checked id="chkLive"><label for="chkLive" data-bn="লাইভ প্রতিলিপি" data-en="Live Transcript">লাইভ প্রতিলিপি</label></div>
-                <div class="set-row"><input type="checkbox" checked id="chkPause"><label for="chkPause" data-bn="অটো বিরাম" data-en="Auto Pause">অটো বিরাম</label></div>
+                <div class="set-row" id="rb-p3-lang"><span data-bn="ভাষা:" data-en="Language:">ভাষা:</span><select><option data-bn="বাংলা" data-en="Bengali">বাংলা</option><option data-bn="ইংরেজি" data-en="English">ইংরেজি</option></select></div>
+                <div class="set-row" id="rb-p3-live"><input type="checkbox" checked id="chkLive"><label for="chkLive" data-bn="লাইভ প্রতিলিপি" data-en="Live Transcript">লাইভ প্রতিলিপি</label></div>
+                <div class="set-row" id="rb-p3-pause"><input type="checkbox" checked id="chkPause"><label for="chkPause" data-bn="অটো বিরাম" data-en="Auto Pause">অটো বিরাম</label></div>
             </div>
-            <!-- P4 Settings -->
             <div class="ribbon-group" data-svc="p4" style="display: none;">
-                <div class="set-row"><span data-bn="কণ্ঠ:" data-en="Voice:">কণ্ঠ:</span><select><option data-bn="নারী" data-en="Female">নারী</option><option data-bn="পুরুষ" data-en="Male">পুরুষ</option></select></div>
-                <div class="set-row"><span data-bn="গতি:" data-en="Speed:">গতি:</span><input type="range" min="0.5" max="2" step="0.1" value="1" id="voiceRateRibbon"></div>
-                <div class="set-row"><input type="checkbox" id="chkAudio"><label for="chkAudio" data-bn="অডিও ডাউনলোড" data-en="Download Audio">অডিও ডাউনলোড</label></div>
+                <div class="set-row" id="rb-p4-voice"><span data-bn="কণ্ঠ:" data-en="Voice:">কণ্ঠ:</span><select><option data-bn="নারী" data-en="Female">নারী</option><option data-bn="পুরুষ" data-en="Male">পুরুষ</option></select></div>
+                <div class="set-row" id="rb-p4-speed"><span data-bn="গতি:" data-en="Speed:">গতি:</span><input type="range" min="0.5" max="2" step="0.1" value="1" id="voiceRateRibbon"></div>
+                <div class="set-row" id="rb-p4-audio"><input type="checkbox" id="chkAudio"><label for="chkAudio" data-bn="অডিও ডাউনলোড" data-en="Download Audio">অডিও ডাউনলোড</label></div>
             </div>
-            <!-- P5 Settings -->
             <div class="ribbon-group" data-svc="p5" style="display: none;">
-                <div class="set-row"><input type="checkbox" checked id="chkHand"><label for="chkHand" data-bn="হাতে লেখা" data-en="Handwriting">হাতে লেখা</label></div>
-                <div class="set-row"><input type="checkbox" checked id="chkTable"><label for="chkTable" data-bn="টেবিল শনাক্ত" data-en="Table Detection">টেবিল শনাক্ত</label></div>
+                <div class="set-row" id="rb-p5-hand"><input type="checkbox" checked id="chkHand"><label for="chkHand" data-bn="হাতে লেখা" data-en="Handwriting">হাতে লেখা</label></div>
+                <div class="set-row" id="rb-p5-table"><input type="checkbox" checked id="chkTable"><label for="chkTable" data-bn="টেবিল শনাক্ত" data-en="Table Detection">টেবিল শনাক্ত</label></div>
             </div>
         </div>
 
-        <!-- Toolbar (Only for P1 & P2) -->
+        <!-- Toolbar -->
         <div class="toolbar" id="mainToolbar">
             <div class="tool-group">
                 <button class="btn-primary" onclick="checkSpelling()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                     <span data-bn="এখনই পরীক্ষা" data-en="Check Now">এখনই পরীক্ষা</span>
                 </button>
-                <label class="toggle-switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
+                <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
                 <span style="font-size: 13px; font-weight: 500; white-space:nowrap;" data-bn="লেখার সময়" data-en="Live check">লেখার সময়</span>
             </div>
 
-            <!-- Sadhu-Cholito Toggle for P2 -->
             <div class="tool-group" id="sadhuCholitoGroup" style="display: none;">
                 <span style="font-size: 13px; font-weight: 600; white-space:nowrap;" data-bn="সাধু-চলিত:" data-en="Sadhu-Cholito:">সাধু-চলিত:</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
+                <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
             </div>
 
             <div class="tool-group">
@@ -629,11 +679,8 @@
                 </select>
             </div>
 
-            <!-- Writing Quality Widget -->
             <div class="quality-widget">
-                <div class="quality-circle">
-                    <span class="quality-number">৯৬</span>
-                </div>
+                <div class="quality-circle"><span class="quality-number">৯৬</span></div>
                 <div class="quality-text">
                     <div class="quality-title" data-bn="লেখার মান" data-en="Writing Quality">লেখার মান</div>
                     <div class="quality-sub" data-bn="এটি ঠিক করুন ১০০" data-en="Fix it to 100">এটি ঠিক করুন ১০০</div>
@@ -648,7 +695,6 @@
             <div class="view-section active" id="p1">
                 <div class="sidebar" id="sidebar-p1">
                     <div class="sidebar-header"><h3 data-bn="বানান" data-en="Spelling">বানান</h3></div>
-                    <!-- Removed sidebar-tabs as requested -->
                     <div class="suggestion-card" id="card1">
                         <div class="card-type" data-bn="বানান" data-en="Spelling">বানান</div>
                         <div class="suggestion-action">
@@ -672,9 +718,7 @@
                 </div>
 
                 <div class="editor-container">
-                    <button class="sidebar-toggle-tab" onclick="toggleSidebar(this)" title="Toggle Sidebar">
-                        <svg><use href="#i-chevron-left"/></svg>
-                    </button>
+                    <button class="sidebar-toggle-tab" onclick="toggleSidebar(this)" title="Toggle Sidebar"><svg><use href="#i-chevron-left"/></svg></button>
                     <div class="editor-content" id="editor" contenteditable="true">
                         <p>
                             <span data-bn="আমার একুশে। বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে " data-en="My Ekushey. Bengali is our mother tongue. Every year on February 21st, we remember the language martyrs with deep respect. ">আমার একুশে। বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে </span>
@@ -684,7 +728,6 @@
                             <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
                         </p>
                     </div>
-                    <!-- Listen Button -->
                     <button class="fab-btn listen-btn" onclick="toggleSpeak(document.getElementById('editor').innerText, this)">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
                         <span data-bn="শুনুন" data-en="Listen">শুনুন</span>
@@ -706,9 +749,7 @@
                 </div>
 
                 <div class="editor-container">
-                    <button class="sidebar-toggle-tab" onclick="toggleSidebar(this)" title="Toggle Sidebar">
-                        <svg><use href="#i-chevron-left"/></svg>
-                    </button>
+                    <button class="sidebar-toggle-tab" onclick="toggleSidebar(this)" title="Toggle Sidebar"><svg><use href="#i-chevron-left"/></svg></button>
                     <div class="editor-content" id="editor-p2" contenteditable="true">
                         <p>
                             <span data-bn="আমার একুশে। বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা " data-en="My Ekushey. Bengali is our mother tongue. Every year on February 21st, we remember the language martyrs with deep respect. This day is now celebrated worldwide as International Mother Language Day.">আমার একুশে। বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা </span>
@@ -716,7 +757,6 @@
                             <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
                         </p>
                     </div>
-                    <!-- Listen Button -->
                     <button class="fab-btn listen-btn" onclick="toggleSpeak(document.getElementById('editor-p2').innerText, this)">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
                         <span data-bn="শুনুন" data-en="Listen">শুনুন</span>
@@ -762,10 +802,9 @@
             </div>
         </div>
 
-        <!-- Sidebar Overlay for Mobile/Tablet -->
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebarOnMobile()"></div>
 
-        <!-- Settings Drawer (Only for P1 & P2 now) -->
+        <!-- Settings Drawer -->
         <div class="overlay" id="overlay" onclick="toggleDrawer(false)"></div>
         <aside class="drawer" id="drawer">
             <div class="drawer-header">
@@ -773,6 +812,7 @@
                 <button class="close-btn" onclick="toggleDrawer(false)">✕</button>
             </div>
 
+            <!-- P1 Settings -->
             <div class="set-group active" data-svc="p1">
                 <h4 data-bn="বানান" data-en="Spelling">বানান</h4>
                 <div class="set-row"><span data-bn="স্বয়ংক্রিয় সংশোধন" data-en="Auto Correct">স্বয়ংক্রিয় সংশোধন</span><input type="checkbox" checked></div>
@@ -780,11 +820,38 @@
                 <div class="set-row"><span data-bn="নিজের অভিধান" data-en="Custom Dictionary">নিজের অভিধান</span><input type="checkbox" checked></div>
             </div>
 
+            <!-- P2 Settings -->
             <div class="set-group" data-svc="p2">
                 <h4 data-bn="ব্যাকরণ — ত্রুটির ধরন" data-en="Grammar — Error Types">ব্যাকরণ — ত্রুটির ধরন</h4>
                 <div class="set-row"><span data-bn="কর্তা-ক্রিয়ার সম্পর্ক" data-en="Subject-Verb Agreement">কর্তা-ক্রিয়ার সম্পর্ক</span><input type="checkbox" checked></div>
                 <div class="set-row"><span data-bn="সাধু-চলিত মিশ্রণ" data-en="Sadhu-Cholito Mix">সাধু-চলিত মিশ্রণ</span><input type="checkbox" checked></div>
                 <div class="set-row"><span data-bn="যতিচিহ্ন" data-en="Punctuation">যতিচিহ্ন</span><input type="checkbox" checked></div>
+            </div>
+
+            <!-- P3 Settings — Ribbon Options -->
+            <div class="set-group" data-svc="p3">
+                <h4 data-bn="রিবনে দেখানোর অপশন" data-en="Show in Ribbon">রিবনে দেখানোর অপশন</h4>
+                <p class="set-hint" data-bn="যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।" data-en="Options checked here will appear in the ribbon.">যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।</p>
+                <div class="set-row"><span data-bn="ভাষা" data-en="Language">ভাষা</span><input type="checkbox" checked data-toggle-ribbon="rb-p3-lang"></div>
+                <div class="set-row"><span data-bn="লাইভ প্রতিলিপি" data-en="Live Transcript">লাইভ প্রতিলিপি</span><input type="checkbox" checked data-toggle-ribbon="rb-p3-live"></div>
+                <div class="set-row"><span data-bn="অটো বিরাম" data-en="Auto Pause">অটো বিরাম</span><input type="checkbox" checked data-toggle-ribbon="rb-p3-pause"></div>
+            </div>
+
+            <!-- P4 Settings — Ribbon Options -->
+            <div class="set-group" data-svc="p4">
+                <h4 data-bn="রিবনে দেখানোর অপশন" data-en="Show in Ribbon">রিবনে দেখানোর অপশন</h4>
+                <p class="set-hint" data-bn="যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।" data-en="Options checked here will appear in the ribbon.">যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।</p>
+                <div class="set-row"><span data-bn="কণ্ঠ" data-en="Voice">কণ্ঠ</span><input type="checkbox" checked data-toggle-ribbon="rb-p4-voice"></div>
+                <div class="set-row"><span data-bn="গতি" data-en="Speed">গতি</span><input type="checkbox" checked data-toggle-ribbon="rb-p4-speed"></div>
+                <div class="set-row"><span data-bn="অডিও ডাউনলোড" data-en="Download Audio">অডিও ডাউনলোড</span><input type="checkbox" checked data-toggle-ribbon="rb-p4-audio"></div>
+            </div>
+
+            <!-- P5 Settings — Ribbon Options -->
+            <div class="set-group" data-svc="p5">
+                <h4 data-bn="রিবনে দেখানোর অপশন" data-en="Show in Ribbon">রিবনে দেখানোর অপশন</h4>
+                <p class="set-hint" data-bn="যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।" data-en="Options checked here will appear in the ribbon.">যে অপশনগুলো চেক করবেন, সেগুলো রিবনে দেখা যাবে।</p>
+                <div class="set-row"><span data-bn="হাতে লেখা" data-en="Handwriting">হাতে লেখা</span><input type="checkbox" checked data-toggle-ribbon="rb-p5-hand"></div>
+                <div class="set-row"><span data-bn="টেবিল শনাক্ত" data-en="Table Detection">টেবিল শনাক্ত</span><input type="checkbox" checked data-toggle-ribbon="rb-p5-table"></div>
             </div>
         </aside>
     </div>
@@ -793,7 +860,6 @@
         let currentLang = 'bn';
         let isSpeaking = false;
 
-        // Theme Toggle Logic
         function toggleTheme() {
             const root = document.documentElement;
             const isDark = root.getAttribute('data-theme') === 'dark';
@@ -801,7 +867,6 @@
             document.getElementById('themeIcon').setAttribute('href', isDark ? '#i-moon' : '#i-sun');
         }
 
-        // 1. Login System
         function performLogin() {
             if(!document.getElementById('loginEmail').value || !document.getElementById('loginPass').value) {
                 alert(currentLang === 'bn' ? 'ইমেইল এবং পাসওয়ার্ড দিন!' : 'Please enter email and password!');
@@ -811,14 +876,12 @@
             document.getElementById('mainApp').classList.remove('hidden');
         }
 
-        // 2. Language Toggle
         document.querySelectorAll('.lang-toggle span').forEach(btn => {
             btn.addEventListener('click', function() {
                 currentLang = this.dataset.lang;
                 document.querySelectorAll('.lang-toggle span').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
 
-                // Stop speaking if language is changed
                 if(isSpeaking) {
                     window.speechSynthesis.cancel();
                     isSpeaking = false;
@@ -838,7 +901,6 @@
             });
         });
 
-        // 3. Share Dropdown Toggle
         function toggleShareMenu(e) {
             e.stopPropagation();
             document.getElementById('shareMenu').classList.toggle('active');
@@ -850,15 +912,10 @@
             }
         });
 
-        // 4. Service Tab Switching
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 const targetId = this.dataset.p;
-
-                // Close any open sidebar on mobile/tablet when switching views
-                if (window.innerWidth <= 1024) {
-                    closeSidebarOnMobile();
-                }
+                if (window.innerWidth <= 1024) closeSidebarOnMobile();
                 
                 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
                 this.classList.add('active');
@@ -868,17 +925,10 @@
                 if (targetId === 'p1' || targetId === 'p2') {
                     document.getElementById('mainToolbar').style.display = 'flex';
                     document.getElementById('settingsRibbon').classList.remove('active');
-                    
-                    // Show/Hide Sadhu-Cholito toggle based on service
-                    if(targetId === 'p2') {
-                        document.getElementById('sadhuCholitoGroup').style.display = 'flex';
-                    } else {
-                        document.getElementById('sadhuCholitoGroup').style.display = 'none';
-                    }
+                    document.getElementById('sadhuCholitoGroup').style.display = (targetId === 'p2') ? 'flex' : 'none';
                 } else {
                     document.getElementById('mainToolbar').style.display = 'none';
                     document.getElementById('settingsRibbon').classList.add('active');
-                    
                     document.querySelectorAll('.ribbon-group').forEach(g => {
                         g.style.display = (g.dataset.svc === targetId) ? 'flex' : 'none';
                     });
@@ -888,7 +938,6 @@
             });
         });
 
-        // 5. Sidebar Toggle (with mobile overlay support)
         function toggleSidebar(btn) {
             const activeView = btn.closest('.view-section');
             const sidebar = activeView.querySelector('.sidebar');
@@ -908,13 +957,9 @@
             }
         }
 
-        // 5a. Sidebar overlay helpers
         function showSidebarOverlay() {
-            if (window.innerWidth <= 1024) {
-                document.getElementById('sidebarOverlay').classList.add('active');
-            }
+            if (window.innerWidth <= 1024) document.getElementById('sidebarOverlay').classList.add('active');
         }
-
         function hideSidebarOverlay() {
             document.getElementById('sidebarOverlay').classList.remove('active');
         }
@@ -931,56 +976,39 @@
             hideSidebarOverlay();
         }
 
-        // 5b. Auto-hide sidebar on mobile/tablet (initial + resize)
         let lastViewportIsMobile = null;
-
         function applySidebarResponsive() {
             const isMobileOrTablet = window.innerWidth <= 1024;
             lastViewportIsMobile = isMobileOrTablet;
-
             document.querySelectorAll('.sidebar').forEach(sb => {
                 const tab = sb.parentElement.querySelector('.sidebar-toggle-tab');
                 if (isMobileOrTablet) {
                     sb.classList.add('hidden-sidebar');
-                    if (tab) {
-                        tab.querySelector('use').setAttribute('href', '#i-chevron-right');
-                        tab.classList.add('closed');
-                    }
+                    if (tab) { tab.querySelector('use').setAttribute('href', '#i-chevron-right'); tab.classList.add('closed'); }
                 } else {
                     sb.classList.remove('hidden-sidebar');
-                    if (tab) {
-                        tab.querySelector('use').setAttribute('href', '#i-chevron-left');
-                        tab.classList.remove('closed');
-                    }
+                    if (tab) { tab.querySelector('use').setAttribute('href', '#i-chevron-left'); tab.classList.remove('closed'); }
                 }
             });
-
             if (!isMobileOrTablet) hideSidebarOverlay();
         }
-
-        // Initial state
         applySidebarResponsive();
 
-        // On resize — reapply only when crossing the breakpoint
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
                 const isMobileOrTablet = window.innerWidth <= 1024;
-                if (isMobileOrTablet !== lastViewportIsMobile) {
-                    applySidebarResponsive();
-                }
+                if (isMobileOrTablet !== lastViewportIsMobile) applySidebarResponsive();
             }, 150);
         });
 
-        // 6. Settings Drawer
         function toggleDrawer(open) {
             document.getElementById('drawer').classList.toggle('on', open);
             document.getElementById('overlay').classList.toggle('on', open);
         }
         document.getElementById('openSet').onclick = () => toggleDrawer(true);
 
-        // 7. Error Fixing
         function fixError(errorId, correctText, cardId) {
             const errEl = document.getElementById(errorId);
             if (errEl) {
@@ -995,7 +1023,6 @@
             if (spell) spell.parentNode.replaceChild(document.createTextNode('স্মরণ'), spell);
             const gram = document.querySelector('.grammar-error');
             if (gram) gram.parentNode.replaceChild(document.createTextNode('বিশ্বব্যাপী'), gram);
-            
             document.querySelectorAll('.suggestion-card').forEach(c => c.style.display = 'none');
             updateCounters();
         }
@@ -1017,7 +1044,6 @@
             }
         }
 
-        // 8. Text to Speech (Active Listen/Stop)
         function toggleSpeak(text, btn) {
             if (isSpeaking) {
                 window.speechSynthesis.cancel();
@@ -1025,31 +1051,25 @@
                 document.querySelectorAll('.listen-btn').forEach(b => updateListenBtn(b, false));
                 return;
             }
-
             if (!text || !text.trim()) {
                 alert(currentLang === 'bn' ? 'শোনার জন্য কোনো লেখা নেই!' : 'No text to read!');
                 return;
             }
-
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel(); 
                 const u = new SpeechSynthesisUtterance(text);
                 u.lang = currentLang === 'bn' ? 'bn-BD' : 'en-US';
-                
                 const rateEl = document.getElementById('voiceRateRibbon');
                 if (rateEl) u.rate = parseFloat(rateEl.value);
-
                 u.onstart = () => {
                     isSpeaking = true;
                     document.querySelectorAll('.listen-btn').forEach(b => updateListenBtn(b, false));
                     updateListenBtn(btn, true);
                 };
-
                 u.onend = u.onerror = () => {
                     isSpeaking = false;
                     updateListenBtn(btn, false);
                 };
-
                 window.speechSynthesis.speak(u);
             } else {
                 alert(currentLang === 'bn' ? 'আপনার ব্রাউজার ভয়েস সাপোর্ট করছে না।' : 'Your browser does not support speech synthesis.');
@@ -1062,11 +1082,21 @@
             const svgStr = speaking 
                 ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="2" ry="2"/></svg>' 
                 : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>';
-            
             btn.innerHTML = svgStr + ' <span>' + text + '</span>';
             btn.setAttribute('data-bn', speaking ? 'থামুন' : 'শুনুন');
             btn.setAttribute('data-en', speaking ? 'Stop' : 'Listen');
         }
+
+        // Ribbon Visibility Toggles (from Settings Drawer)
+        document.querySelectorAll('[data-toggle-ribbon]').forEach(cb => {
+            const ribbonItem = document.getElementById(cb.dataset.toggleRibbon);
+            if (!ribbonItem) return;
+            const syncRibbon = () => {
+                ribbonItem.style.display = cb.checked ? '' : 'none';
+            };
+            syncRibbon();
+            cb.addEventListener('change', syncRibbon);
+        });
 
         updateCounters();
     </script>
