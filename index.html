@@ -1,389 +1,743 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>বোধ — বাংলা এআই</title>
-<style>
-:root{--green:#08a66a;--green2:#0fc07d;--deep:#075c48;--ink:#102a2e;
-      --muted:#7b8b90;--line:#e6ede9;--mint:#e9fbf2}
-*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;height:100dvh}
-body{font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif;
-  color:var(--ink);padding:14px;display:flex;flex-direction:column;gap:12px;
-  overflow:hidden;overscroll-behavior:none;
-  background:radial-gradient(1100px 500px at 6% -10%,#e8fbf2,transparent 60%),
-             radial-gradient(800px 420px at 100% 0%,#eaf6ff,transparent 55%),#f6f8f7}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বোধ — বাংলাকে বোঝে, নির্ভুলভাবে</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #2952e3;
+            --blue-hover: #1e40af;
+            --bg: #f4f6f9;
+            --text: #1a1a1a;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --red: #ef4444;
+            --grammar-blue: #3b82f6;
+            --green: #10b981;
+        }
 
-/* ================= হেডার ================= */
-.top{flex:none;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;flex:none}
-.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
-  background:linear-gradient(135deg,var(--green),var(--green2));
-  box-shadow:0 10px 22px rgba(8,166,106,.3);flex:none}
-.logo svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.7;
-  stroke-linecap:round;stroke-linejoin:round}
-.brand h1{font-size:19px;font-weight:800;letter-spacing:-.4px;color:var(--deep)}
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
+        body { background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        svg { display: block; }
 
-.services{flex:1;min-width:0;display:flex;gap:4px;padding:5px;background:#fff;
-  border:1px solid var(--line);border-radius:16px;overflow-x:auto;
-  box-shadow:0 10px 26px rgba(10,60,40,.05);scrollbar-width:none}
-.services::-webkit-scrollbar{display:none}
-.svc{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;border:0;
-  background:transparent;padding:10px;border-radius:12px;font:600 13px inherit;
-  color:#546a70;cursor:pointer;white-space:nowrap;transition:.2s;
-  min-width:0;touch-action:manipulation}
-.svc svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.9;
-  stroke-linecap:round;stroke-linejoin:round;flex:none}
-.svc:hover{background:#f2f9f5;color:var(--deep)}
-.svc.on{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;
-  box-shadow:0 8px 18px rgba(8,166,106,.28)}
+        /* ---------- LOGIN ---------- */
+        #authScreen { position: fixed; inset: 0; background: radial-gradient(1100px 500px at 6% -10%, #e8fbf2, transparent 60%), radial-gradient(800px 420px at 100% 0%, #eaf6ff, transparent 55%), #f6f8f7; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;}
+        .login-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); width: 100%; max-width: 400px; text-align: center; }
+        .login-box .logo { margin: 0 auto 20px; width: 60px; height: 60px; }
+        .login-box h2 { font-size: 24px; margin-bottom: 8px; color: #075c48; }
+        .login-box p { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+        .login-box input { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 16px; font-size: 15px; outline: none; transition: 0.2s; }
+        .login-box input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(41, 82, 227, 0.1); }
+        .login-box button { width: 100%; padding: 12px; background: var(--blue); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .login-box button:hover { background: var(--blue-hover); }
 
-.switch{flex:none;display:flex;gap:4px;padding:4px;background:#fff;
-  border:1px solid var(--line);border-radius:999px;
-  box-shadow:0 6px 16px rgba(10,60,40,.05)}
-.switch button{border:0;background:transparent;border-radius:999px;padding:7px 13px;
-  font:600 12px inherit;color:var(--muted);cursor:pointer;transition:.2s;
-  white-space:nowrap;touch-action:manipulation}
-.switch button.on{background:linear-gradient(135deg,var(--green),var(--green2));
-  color:#fff;box-shadow:0 6px 14px rgba(8,166,106,.3)}
+        /* ---------- HEADER ---------- */
+        header { background: white; border-bottom: 1px solid var(--border); padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; z-index: 10; flex-shrink: 0; }
+        .header-left { display: flex; align-items: center; gap: 32px; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        
+        .brand-logo { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .brand-logo svg { width: 100%; height: 100%; }
+        
+        .brand-text h1 { font-size: 18px; font-weight: 700; color: #075c48; line-height: 1.2; }
+        .brand-text p { font-size: 12px; color: var(--muted); }
 
-.gear{flex:none;width:40px;height:40px;border:1px solid var(--line);border-radius:12px;
-  background:#fff;display:grid;place-items:center;cursor:pointer;transition:.2s;
-  touch-action:manipulation}
-.gear:hover{background:#f2f9f5;border-color:#c8ecda}
-.gear svg{width:19px;height:19px;stroke:var(--green);fill:none;stroke-width:1.9;
-  stroke-linecap:round;stroke-linejoin:round}
+        /* Top Nav */
+        .top-nav { display: flex; background: #f3f4f6; padding: 4px; border-radius: 999px; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+        .top-nav::-webkit-scrollbar { display: none; }
+        .nav-item { padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+        .nav-item svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+        .nav-item:hover { color: var(--text); }
+        .nav-item.active { background: var(--blue); color: white; box-shadow: 0 2px 4px rgba(41,82,227,0.2); }
 
-/* ================= স্টেজ ================= */
-.stage{flex:1;min-height:0;position:relative}
-.panel{position:absolute;inset:0;display:none}
-.panel.on{display:block;animation:fade .28s ease}
-@keyframes fade{from{opacity:0;transform:scale(.995)}}
+        /* Header Right */
+        .header-right { display: flex; align-items: center; gap: 12px; position: relative; flex-shrink: 0; }
+        .btn-icon { background: white; border: 1px solid var(--border); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
+        .btn-icon:hover { background: #f9fafb; }
+        .btn-icon svg { width: 18px; height: 18px; stroke: var(--text); fill: none; stroke-width: 2; }
+        
+        .share-wrapper { position: relative; }
+        .btn-share { display: flex; align-items: center; gap: 6px; background: white; border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-share:hover { background: #f9fafb; }
+        .btn-share svg { width: 16px; height: 16px; stroke: var(--text); fill: none; stroke-width: 2; }
+        
+        /* Share Dropdown */
+        .share-dropdown { position: absolute; top: 45px; right: 0; background: white; border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: none; flex-direction: column; width: 180px; z-index: 50; overflow: hidden; }
+        .share-dropdown.active { display: flex; }
+        .share-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; cursor: pointer; transition: 0.2s; border-bottom: 1px solid #f3f4f6; }
+        .share-item:last-child { border-bottom: none; }
+        .share-item:hover { background: #f9fafb; }
+        .share-item svg { width: 16px; height: 16px; fill: currentColor; }
 
-textarea{width:100%;height:100%;padding:26px 26px 84px;border:1px solid var(--line);
-  border-radius:22px;background:#fff;font:16.5px/1.9 inherit;color:inherit;
-  resize:none;outline:none;transition:.2s;-webkit-appearance:none;appearance:none;
-  box-shadow:0 18px 40px rgba(10,60,40,.05)}
-textarea:focus{border-color:#9fe3c4;box-shadow:0 18px 40px rgba(8,166,106,.12)}
-textarea::placeholder{color:#9aa8ad}
+        .lang-toggle { display: flex; background: #f3f4f6; border-radius: 8px; padding: 4px; font-size: 12px; font-weight: 600; cursor: pointer; }
+        .lang-toggle span { padding: 4px 12px; border-radius: 6px; color: var(--muted); transition: 0.2s; }
+        .lang-toggle span.active { background: white; color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; cursor: pointer; }
 
-/* ================= FAB + স্পিনার ================= */
-.fab{position:absolute;right:18px;bottom:18px;display:flex;align-items:center;
-  justify-content:center;gap:8px;border:0;padding:12px 20px;border-radius:14px;
-  cursor:pointer;min-width:132px;font:700 13.5px inherit;color:#fff;
-  background:linear-gradient(135deg,var(--green),var(--green2));
-  box-shadow:0 12px 26px rgba(8,166,106,.35);transition:.2s;
-  touch-action:manipulation}
-.fab:hover{filter:brightness(1.07);transform:translateY(-1px)}
-.fab svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2;
-  stroke-linecap:round;stroke-linejoin:round}
-.fab .spinner{display:none;width:18px;height:18px;border-radius:50%;
-  border:2px solid rgba(255,255,255,.35);border-top-color:#fff;
-  animation:spin .7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.fab.loading{min-width:0;width:48px;height:48px;padding:0;border-radius:50%;
-  pointer-events:none}
-.fab.loading .icon,.fab.loading .label{display:none}
-.fab.loading .spinner{display:block}
+        /* ---------- SETTINGS RIBBON (P3, P4, P5) ---------- */
+        .settings-ribbon { display: none; background: #f8fafc; border-bottom: 1px solid var(--border); padding: 10px 24px; gap: 20px; overflow-x: auto; align-items: center; z-index: 4; flex-shrink: 0; scrollbar-width: none; }
+        .settings-ribbon::-webkit-scrollbar { display: none; }
+        .settings-ribbon.active { display: flex; }
+        .ribbon-group { display: flex; gap: 20px; align-items: center; }
+        .ribbon-group .set-row { display: flex; align-items: center; gap: 10px; border: none; padding: 0; font-size: 13px; font-weight: 500; white-space: nowrap; }
+        .ribbon-group select { padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border); font-family: inherit; font-size: 13px; outline: none; }
+        .ribbon-group input[type="checkbox"] { accent-color: var(--blue); width: 16px; height: 16px; cursor: pointer; }
+        .ribbon-group input[type="range"] { accent-color: var(--blue); width: 100px; }
 
-/* ================= মাইক ================= */
-.micbox{height:100%;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:20px;border:1px dashed #cfe6dc;border-radius:22px;
-  background:linear-gradient(180deg,#f5fdf9,#fbfdfc)}
-.micbtn{width:84px;height:84px;border:0;border-radius:50%;cursor:pointer;display:grid;
-  place-items:center;background:linear-gradient(135deg,var(--green),var(--green2));
-  box-shadow:0 16px 34px rgba(8,166,106,.38);transition:.25s;
-  touch-action:manipulation}
-.micbtn:hover{transform:scale(1.05)}
-.micbtn.live{animation:pulse 1.4s infinite}
-@keyframes pulse{50%{box-shadow:0 0 0 16px rgba(8,166,106,.12)}}
-.micbtn svg{width:32px;height:32px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round}
-.wave{display:flex;align-items:center;gap:5px;height:26px}
-.wave span{width:4px;height:8px;border-radius:3px;background:#0fc07d;
-  animation:wave 1s infinite ease-in-out}
-.wave span:nth-child(2){animation-delay:.15s}
-.wave span:nth-child(3){animation-delay:.3s}
-.wave span:nth-child(4){animation-delay:.45s}
-.wave span:nth-child(5){animation-delay:.6s}
-@keyframes wave{0%,100%{height:8px}50%{height:24px}}
+        /* ---------- TOOLBAR (P1, P2) ---------- */
+        .toolbar { background: white; border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; gap: 20px; overflow-x: auto; z-index: 5; flex-shrink: 0; scrollbar-width: none;}
+        .toolbar::-webkit-scrollbar { display: none; }
+        .tool-group { display: flex; align-items: center; gap: 12px; padding-right: 20px; border-right: 1px solid var(--border); flex-shrink: 0; }
+        .tool-group:last-child { border-right: none; }
+        .btn-primary { background: var(--blue); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
+        .btn-primary:hover { background: var(--blue-hover); }
+        
+        .toggle-switch { position: relative; display: inline-block; width: 40px; height: 22px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; inset: 0; background: #cbd5e1; transition: .4s; border-radius: 22px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background: var(--blue); }
+        input:checked + .slider:before { transform: translateX(18px); }
 
-/* ================= OCR ================= */
-.drop{height:100%;display:grid;place-items:center;text-align:center;cursor:pointer;
-  border:2px dashed #cfe6dc;border-radius:22px;background:#fbfdfc;
-  transition:.2s;padding:24px;touch-action:manipulation}
-.drop:hover{background:#f4fdf9;border-color:#9fe3c4}
-.drop svg{width:40px;height:40px;stroke:var(--green);fill:none;stroke-width:1.5;
-  stroke-linecap:round;stroke-linejoin:round;margin:0 auto;display:block}
-.drop p{margin-top:12px;font-size:13.5px;color:var(--muted)}
-.drop strong{color:var(--deep)}
+        .badge-group { display: flex; gap: 8px; }
+        .badge { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .badge.red { background: #fef2f2; color: var(--red); }
+        .badge.blue { background: #eff6ff; color: var(--grammar-blue); }
+        .dot { width: 6px; height: 6px; border-radius: 50%; }
+        .dot.red { background: var(--red); }
+        .dot.blue { background: var(--grammar-blue); }
 
-/* ================= সেটিংস ================= */
-.overlay{position:fixed;inset:0;background:rgba(10,40,30,.28);backdrop-filter:blur(2px);
-  opacity:0;visibility:hidden;transition:.25s;z-index:40}
-.overlay.on{opacity:1;visibility:visible}
-.drawer{position:fixed;top:0;right:0;height:100%;height:100dvh;width:340px;
-  max-width:88vw;z-index:50;background:#fff;border-left:1px solid var(--line);
-  padding:20px;padding-bottom:calc(20px + env(safe-area-inset-bottom));
-  overflow-y:auto;-webkit-overflow-scrolling:touch;
-  transform:translateX(100%);transition:.32s cubic-bezier(.2,.8,.2,1);
-  box-shadow:-18px 0 40px rgba(10,60,40,.12)}
-.drawer.on{transform:translateX(0)}
-.dhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.dhead h3{font-size:16px;font-weight:800;color:var(--deep)}
-.dclose{border:0;background:#f2f9f5;color:var(--deep);width:32px;height:32px;
-  border-radius:10px;font:700 15px inherit;cursor:pointer;touch-action:manipulation}
-.dclose:hover{background:var(--mint)}
+        .btn-outline { background: white; border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--text); cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
+        .btn-outline:hover { background: #f9fafb; }
+        .dropdown { border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; font-size: 13px; outline: none; background: white; cursor: pointer; }
 
-.set-group{margin-bottom:18px}
-.set-group h4{font-size:11px;letter-spacing:.7px;text-transform:uppercase;
-  color:#9aa8ad;font-weight:700;margin-bottom:6px}
-.set-row{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:10px 0;border-bottom:1px dashed #eef3f1;font-size:13.5px;font-weight:600}
-.set-row:last-child{border-bottom:0}
-input[type=checkbox]{accent-color:var(--green);width:18px;height:18px;
-  cursor:pointer;flex:none;touch-action:manipulation}
-select{width:130px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;
-  font:600 12.5px inherit;color:#17424a;background:#fff;outline:none;
-  -webkit-appearance:none;appearance:none;touch-action:manipulation}
-input[type=range]{accent-color:var(--green);width:120px;touch-action:manipulation}
+        /* Writing Quality Widget */
+        .quality-widget { display: flex; align-items: center; gap: 12px; margin-left: auto; padding-left: 20px; border-left: 1px solid var(--border); flex-shrink: 0;}
+        .quality-circle { width: 40px; height: 40px; border-radius: 50%; background: conic-gradient(from 180deg, #d946ef, #3b82f6, #06b6d4); display: flex; align-items: center; justify-content: center; position: relative; }
+        .quality-circle::before { content: ""; position: absolute; inset: 3px; background: white; border-radius: 50%; }
+        .quality-number { position: relative; font-size: 14px; font-weight: 700; color: var(--text); }
+        .quality-text { display: flex; flex-direction: column; }
+        .quality-title { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.2; }
+        .quality-sub { font-size: 12px; color: var(--muted); }
 
-/* ================= মোবাইল (৭২০px নিচে) ================= */
-@media (max-width: 720px) {
-  body{padding:10px;gap:10px;padding-top:calc(10px + env(safe-area-inset-top))}
-  .top{gap:8px}
+        /* ---------- WORKSPACE & LAYOUT ---------- */
+        .workspace { display: flex; flex: 1; padding: 24px; gap: 24px; overflow: hidden; justify-content: center; }
+        .view-section { display: none; width: 100%; height: 100%; gap: 24px; }
+        .view-section.active { display: flex; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } }
 
-  /* এক লাইনে ব্র্যান্ড → স্পেস → এনকোডিং → সেটিংস */
-  .brand{order:1}
-  .switch{order:2;margin-left:auto}
-  .gear{order:3}
+        /* Editor Area (Maximized) */
+        .editor-container { background: white; flex: 1; min-width: 0; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 32px; position: relative; display: flex; flex-direction: column; transition: flex 0.3s ease; }
+        /* Removed editor-header */
+        .editor-content { flex: 1; font-size: 18px; line-height: 1.8; outline: none; overflow-y: auto; padding-left: 20px; } /* Padding changed to left to accommodate tab */
+        .editor-content h1 { font-size: 28px; margin-bottom: 24px; }
 
-  /* সার্ভিস ৫ কলামের গ্রিড — আইকন উপরে, ছোট লেবেল নিচে */
-  .services{order:4;flex:none;width:100%;display:grid;
-    grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:5px;
-    overflow:visible}
-  .svc{flex-direction:column;gap:3px;padding:8px 2px;font-size:10px;
-    border-radius:11px}
-  .svc svg{width:17px;height:17px}
-  .svc span{display:block;font-size:9.5px;font-weight:700;line-height:1.15;
-    text-align:center;overflow-wrap:anywhere;white-space:normal}
+        /* Error Styles */
+        .spell-error { text-decoration: underline wavy var(--red); text-underline-offset: 4px; cursor: pointer; background: rgba(239,68,68,0.05); }
+        .grammar-error { text-decoration: underline solid var(--grammar-blue); text-underline-offset: 4px; text-decoration-thickness: 2px; cursor: pointer; background: rgba(59,130,246,0.05); }
 
-  /* টেক্সট বক্স: iOS জুম ঠেকাতে ১৬px */
-  textarea{padding:16px 16px 76px;font-size:16px;line-height:1.7;border-radius:18px}
+        /* Sidebar Toggle Tab (Attached to Left of Editor) */
+        .sidebar-toggle-tab {
+            position: absolute;
+            left: -24px; /* Changed from right */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 60px;
+            background: white;
+            border: 1px solid var(--border);
+            border-right: none; /* Changed */
+            border-radius: 8px 0 0 8px; /* Changed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: -4px 0 10px rgba(0,0,0,0.05);
+            z-index: 10;
+            transition: 0.2s;
+        }
+        .sidebar-toggle-tab:hover { background: #f9fafb; }
+        .sidebar-toggle-tab svg { width: 14px; height: 14px; stroke: var(--muted); fill: none; stroke-width: 2; }
+        .sidebar-toggle-tab.closed { left: -24px; }
 
-  .fab{right:12px;bottom:12px;padding:11px 18px;font-size:13px;
-    min-width:118px;border-radius:13px}
+        /* Sidebar (Moved to Left) */
+        .sidebar { background: white; width: 340px; flex-shrink: 0; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 20px; height: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; transition: all 0.3s ease; }
+        .sidebar.hidden-sidebar { width: 0; padding: 0; opacity: 0; margin-right: -24px; overflow: hidden; border: none; } /* Changed to margin-right */
+        
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; }
+        .sidebar-header h3 { font-size: 16px; font-weight: 700; }
+        .sidebar-tabs { display: flex; gap: 4px; background: #f3f4f6; padding: 4px; border-radius: 8px; }
+        .s-tab { flex: 1; text-align: center; padding: 6px; font-size: 13px; font-weight: 600; color: var(--muted); border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        .s-tab.active { background: white; color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        
+        .suggestion-card { border: 1px solid var(--border); border-radius: 12px; padding: 16px; cursor: pointer; transition: 0.2s; }
+        .suggestion-card:hover { border-color: var(--blue); box-shadow: 0 4px 12px rgba(41,82,227,0.08); }
+        .card-type { font-size: 12px; font-weight: 700; margin-bottom: 8px; color: var(--red); }
+        .card-type.blue { color: var(--grammar-blue); }
+        .suggestion-action { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .wrong-text { text-decoration: line-through; color: var(--muted); }
+        .correct-btn { background: var(--blue); color: white; border: none; padding: 4px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        .correct-btn:hover { background: var(--blue-hover); }
+        .card-tags { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--muted); }
 
-  .micbox,.drop{border-radius:18px}
-  .drop{padding:18px}
-  .micbtn{width:76px;height:76px}
-  .micbtn svg{width:28px;height:28px}
+        /* Other Views (Mic, OCR, TTS) */
+        .mic-view, .ocr-view { background: white; flex: 1; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 40px; text-align: center; }
+        .mic-btn { width: 80px; height: 80px; border-radius: 50%; background: var(--blue); color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(41,82,227,0.3); transition: 0.3s; }
+        .mic-btn:hover { transform: scale(1.05); }
+        .mic-btn.live { animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(41,82,227,0.4); } 70% { box-shadow: 0 0 0 20px rgba(41,82,227,0); } 100% { box-shadow: 0 0 0 0 rgba(41,82,227,0); } }
+        .wave { display: flex; gap: 4px; height: 20px; margin-top: 24px; align-items: center; }
+        .wave span { width: 4px; height: 8px; background: var(--blue); border-radius: 2px; animation: wave 1s infinite; }
+        .wave span:nth-child(2) { animation-delay: 0.1s; }
+        .wave span:nth-child(3) { animation-delay: 0.2s; }
+        .wave span:nth-child(4) { animation-delay: 0.3s; }
+        @keyframes wave { 0%, 100% { height: 8px; } 50% { height: 20px; } }
 
-  /* সেটিংস ড্রয়ার ফুল-স্ক্রিন */
-  .drawer{width:100%;max-width:100%;border-left:0;padding:16px;
-    padding-bottom:calc(16px + env(safe-area-inset-bottom))}
-  .set-row{padding:12px 0}
-}
+        /* TTS Full Screen Textarea */
+        #p4 .editor-container { max-width: none; margin: 0; width: 100%; }
+        #ttsText { width: 100%; flex: 1; min-height: 300px; padding: 20px; border: 1px solid var(--border); border-radius: 12px; font-size: 18px; resize: none; outline: none; margin-bottom: 16px; font-family: inherit; line-height: 1.8; transition: 0.2s; }
+        #ttsText:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(41,82,227,0.1); }
 
-/* ================= ছোট ফোন (৪০০px নিচে) ================= */
-@media (max-width: 400px) {
-  body{padding:8px;gap:8px;padding-top:calc(8px + env(safe-area-inset-top))}
-  .brand h1{font-size:16px}
-  .logo{width:36px;height:36px;border-radius:11px}
-  .logo svg{width:20px;height:20px}
-  .switch{padding:3px}
-  .switch button{padding:6px 9px;font-size:11px}
-  .gear{width:36px;height:36px}
-  .svc svg{width:16px;height:16px}
-  .svc span{font-size:9px}
-  textarea{padding:14px 14px 72px}
-  .fab{padding:10px 16px;font-size:12.5px;min-width:110px}
-}
-</style>
+        /* ---------- DRAWER (SETTINGS FOR P1, P2) ---------- */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(2px); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 90; }
+        .overlay.on { opacity: 1; visibility: visible; }
+        .drawer { position: fixed; top: 0; right: 0; height: 100%; width: 340px; background: white; border-left: 1px solid var(--border); padding: 24px; z-index: 100; transform: translateX(100%); transition: 0.3s; overflow-y: auto; box-shadow: -10px 0 30px rgba(0,0,0,0.05); }
+        .drawer.on { transform: translateX(0); }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .drawer-header h3 { font-size: 18px; font-weight: 800; color: #075c48; }
+        .close-btn { background: #f3f4f6; border: none; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        .close-btn:hover { background: #e5e7eb; }
+
+        .set-group { margin-bottom: 24px; display: none; }
+        .set-group.active { display: block; }
+        .set-group h4 { font-size: 12px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; letter-spacing: 0.5px; }
+        .set-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #eef3f1; font-size: 14px; font-weight: 500; }
+        .set-row:last-child { border-bottom: none; }
+        .set-row input[type="checkbox"] { accent-color: var(--blue); width: 18px; height: 18px; cursor: pointer; }
+        .hidden { display: none !important; }
+
+        /* ---------- RESPONSIVE DESIGN ---------- */
+        @media (max-width: 1024px) {
+            .workspace { flex-direction: column; padding: 16px; gap: 16px; overflow-y: auto; }
+            .editor-container { width: 100%; min-height: 50vh; order: 1; } /* Editor First */
+            .sidebar { width: 100%; height: auto; max-height: 400px; order: 2; } /* Sidebar Second */
+            .sidebar-toggle-tab { display: none; }
+            .quality-widget { display: none; }
+            .brand-text p { display: none; }
+            .tool-group { padding-right: 12px; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 10px 16px; height: auto; flex-wrap: wrap; gap: 10px; }
+            .header-left { width: 100%; justify-content: space-between; gap: 10px; }
+            .top-nav { order: 3; width: 100%; margin-top: 5px; padding: 4px; }
+            .header-right { width: 100%; justify-content: space-between; }
+            .share-dropdown { right: auto; left: 0; }
+            .settings-ribbon { padding: 10px 16px; gap: 12px; }
+            .toolbar { padding: 10px 16px; gap: 12px; }
+            .editor-container { padding: 20px; }
+            .mic-view, .ocr-view { padding: 24px; }
+            #ttsText { font-size: 16px; }
+        }
+        
+        @media (max-width: 480px) {
+            .lang-toggle span { padding: 4px 8px; }
+            .btn-share span { display: none; }
+            .btn-share { padding: 8px; }
+            .editor-content h1 { font-size: 24px; }
+        }
+    </style>
 </head>
 <body>
 
-<svg style="position:absolute;width:0;height:0" aria-hidden="true"><defs>
-  <symbol id="i-spell" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
-  <symbol id="i-grammar" viewBox="0 0 24 24"><path d="M4 6h16M4 12h11M4 18h7"/><circle cx="18" cy="17" r="2.5"/></symbol>
-  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
-  <symbol id="i-speak" viewBox="0 0 24 24"><path d="M4 10v4h3l4 3V7l-4 3H4z"/><path d="M16 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11"/></symbol>
-  <symbol id="i-ocr" viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></symbol>
-  <symbol id="i-lotus" viewBox="0 0 24 24"><path d="M12 3c2 2.4 3 4.6 3 6.6 0 1.9-1.3 3.1-3 3.1s-3-1.2-3-3.1C9 7.6 10 5.4 12 3Z"/><path d="M4 12.5c2 3.2 4.8 4.8 8 4.8s6-1.6 8-4.8"/></symbol>
-  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></symbol>
-</defs></svg>
-
-<header class="top">
-  <div class="brand">
-    <div class="logo"><svg><use href="#i-lotus"/></svg></div>
-    <h1>বোধ</h1>
-  </div>
-
-  <nav class="services">
-    <button class="svc on" data-p="p1"><svg><use href="#i-spell"/></svg><span>বানান</span></button>
-    <button class="svc" data-p="p2"><svg><use href="#i-grammar"/></svg><span>ব্যাকরণ</span></button>
-    <button class="svc" data-p="p3"><svg><use href="#i-mic"/></svg><span>কথা → লেখা</span></button>
-    <button class="svc" data-p="p4"><svg><use href="#i-speak"/></svg><span>লেখা → কথা</span></button>
-    <button class="svc" data-p="p5"><svg><use href="#i-ocr"/></svg><span>ওসিআর</span></button>
-  </nav>
-
-  <div class="switch" id="enc">
-    <button class="on" data-enc="ইউনিকোড">ইউনিকোড</button>
-    <button data-enc="আনসি">আনসি</button>
-  </div>
-
-  <button class="gear" id="openSet" title="সেটিংস"><svg><use href="#i-gear"/></svg></button>
-</header>
-
-<main class="stage">
-
-  <section class="panel on" id="p1">
-    <textarea placeholder="এখানে বাংলা লিখুন বা পেস্ট করুন..."></textarea>
-    <button class="fab" data-load>
-      <svg class="icon"><use href="#i-spell"/></svg>
-      <span class="label">যাচাই করুন</span>
-      <span class="spinner"></span>
-    </button>
-  </section>
-
-  <section class="panel" id="p2">
-    <textarea placeholder="এখানে বাক্য লিখুন..."></textarea>
-    <button class="fab" data-load>
-      <svg class="icon"><use href="#i-grammar"/></svg>
-      <span class="label">পরীক্ষা করুন</span>
-      <span class="spinner"></span>
-    </button>
-  </section>
-
-  <section class="panel" id="p3">
-    <div class="micbox">
-      <button class="micbtn" id="mic"><svg><use href="#i-mic"/></svg></button>
-      <div class="wave"><span></span><span></span><span></span><span></span><span></span></div>
+    <!-- Login Screen -->
+    <div id="authScreen">
+        <div class="login-box">
+            <div class="logo">
+                <svg viewBox="0 0 48 48">
+                    <defs>
+                        <linearGradient id="bgGradLogin" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#2952e3"/>
+                            <stop offset="100%" stop-color="#8b5cf6"/>
+                        </linearGradient>
+                        <linearGradient id="checkGradLogin" x1="0" y1="1" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#06b6d4"/>
+                            <stop offset="100%" stop-color="#ec4899"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M12 6h24a6 6 0 016 6v20a6 6 0 01-6 6H20l-8 8v-8h-4a6 6 0 01-6-6V12a6 6 0 016-6z" fill="url(#bgGradLogin)"/>
+                    <rect x="14" y="16" width="4" height="12" rx="2" fill="white"/>
+                    <rect x="22" y="12" width="4" height="20" rx="2" fill="white"/>
+                    <rect x="30" y="16" width="4" height="12" rx="2" fill="white"/>
+                    <path d="M27 22l3 3 6-6" stroke="url(#checkGradLogin)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </div>
+            <h2 data-bn="বোধ-এ স্বাগতম" data-en="Welcome to Bodh">বোধ-এ স্বাগতম</h2>
+            <p data-bn="বাংলাকে বোঝে, নির্ভুলভাবে" data-en="Understands Bengali, Accurately">বাংলাকে বোঝে, নির্ভুলভাবে</p>
+            <input type="text" id="loginEmail" placeholder="ইমেইল বা ফোন নম্বর" data-bn-placeholder="ইমেইল বা ফোন নম্বর" data-en-placeholder="Email or Phone">
+            <input type="password" id="loginPass" placeholder="পাসওয়ার্ড" data-bn-placeholder="পাসওয়ার্ড" data-en-placeholder="Password">
+            <button onclick="performLogin()" data-bn="প্রবেশ করুন" data-en="Enter">প্রবেশ করুন</button>
+        </div>
     </div>
-  </section>
 
-  <section class="panel" id="p4">
-    <textarea placeholder="যে লেখাটি শুনতে চান তা লিখুন..."></textarea>
-    <button class="fab">
-      <svg class="icon"><use href="#i-play"/></svg>
-      <span class="label">শুনুন</span>
-    </button>
-  </section>
+    <!-- Main App -->
+    <div id="mainApp" class="hidden" style="display: flex; flex-direction: column; height: 100vh;">
+        
+        <!-- SVG Icons -->
+        <svg style="position:absolute;width:0;height:0" aria-hidden="true"><defs>
+            <symbol id="i-logo" viewBox="0 0 48 48">
+                <defs>
+                    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#2952e3"/>
+                        <stop offset="100%" stop-color="#8b5cf6"/>
+                    </linearGradient>
+                    <linearGradient id="checkGrad" x1="0" y1="1" x2="1" y2="0">
+                        <stop offset="0%" stop-color="#06b6d4"/>
+                        <stop offset="100%" stop-color="#ec4899"/>
+                    </linearGradient>
+                </defs>
+                <path d="M12 6h24a6 6 0 016 6v20a6 6 0 01-6 6H20l-8 8v-8h-4a6 6 0 01-6-6V12a6 6 0 016-6z" fill="url(#bgGrad)"/>
+                <rect x="14" y="16" width="4" height="12" rx="2" fill="white"/>
+                <rect x="22" y="12" width="4" height="20" rx="2" fill="white"/>
+                <rect x="30" y="16" width="4" height="12" rx="2" fill="white"/>
+                <path d="M27 22l3 3 6-6" stroke="url(#checkGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="i-spell" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+            <symbol id="i-grammar" viewBox="0 0 24 24"><path d="M4 6h16M4 12h11M4 18h7"/><circle cx="18" cy="17" r="2.5"/></symbol>
+            <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+            <symbol id="i-speak" viewBox="0 0 24 24"><path d="M4 10v4h3l4 3V7l-4 3H4z"/><path d="M16 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11"/></symbol>
+            <symbol id="i-ocr" viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></symbol>
+            <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+            <symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></symbol>
+            <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></symbol>
+            <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></symbol>
+            <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+            <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
+        </defs></svg>
 
-  <section class="panel" id="p5">
-    <label class="drop">
-      <div>
-        <svg><use href="#i-ocr"/></svg>
-        <p><strong>ছবি টেনে ছাড়ুন</strong> অথবা ক্লিক করে বেছে নিন</p>
-      </div>
-      <input type="file" hidden accept="image/*,.pdf">
-    </label>
-  </section>
+        <!-- Header -->
+        <header>
+            <div class="header-left">
+                <div class="brand">
+                    <div class="brand-logo"><svg><use href="#i-logo"/></svg></div>
+                    <div class="brand-text">
+                        <h1 data-bn="বোধ" data-en="Bodh">বোধ</h1>
+                        <p data-bn="বাংলাকে বোঝে, নির্ভুলভাবে" data-en="Understands Bengali, Accurately">বাংলাকে বোঝে, নির্ভুলভাবে</p>
+                    </div>
+                </div>
+                
+                <nav class="top-nav" id="serviceNav">
+                    <div class="nav-item active" data-p="p1"><svg><use href="#i-spell"/></svg><span data-bn="বানান" data-en="Spelling">বানান</span></div>
+                    <div class="nav-item" data-p="p2"><svg><use href="#i-grammar"/></svg><span data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</span></div>
+                    <div class="nav-item" data-p="p3"><svg><use href="#i-mic"/></svg><span data-bn="কথা → লেখা" data-en="Speech → Text">কথা → লেখা</span></div>
+                    <div class="nav-item" data-p="p4"><svg><use href="#i-speak"/></svg><span data-bn="লেখা → কথা" data-en="Text → Speech">লেখা → কথা</span></div>
+                    <div class="nav-item" data-p="p5"><svg><use href="#i-ocr"/></svg><span data-bn="ওসিআর" data-en="OCR">ওসিআর</span></div>
+                </nav>
+            </div>
 
-</main>
+            <div class="header-right">
+                <div class="share-wrapper">
+                    <button class="btn-share" onclick="toggleShareMenu(event)">
+                        <svg><use href="#i-share"/></svg>
+                        <span data-bn="শেয়ার" data-en="Share">শেয়ার</span>
+                    </button>
+                    <div class="share-dropdown" id="shareMenu">
+                        <a href="mailto:?subject=Check out Bodh&body=I found this awesome Bengali text editor: https://bodh.app" class="share-item" target="_blank">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> Email
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://bodh.app" class="share-item" target="_blank">
+                            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?text=Check out Bodh&url=https://bodh.app" class="share-item" target="_blank">
+                            <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg> Twitter
+                        </a>
+                        <div class="share-item" onclick="navigator.clipboard.writeText('https://bodh.app'); alert('লিঙ্ক কপি করা হয়েছে!'); document.getElementById('shareMenu').classList.remove('active');">
+                            <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                            <span data-bn="লিঙ্ক কপি" data-en="Copy Link">লিঙ্ক কপি</span>
+                        </div>
+                    </div>
+                </div>
 
-<div class="overlay" id="overlay"></div>
-<aside class="drawer" id="drawer">
-  <div class="dhead">
-    <h3>সেটিংস</h3>
-    <button class="dclose" id="closeSet">✕</button>
-  </div>
+                <div class="lang-toggle" id="langToggle">
+                    <span class="active" data-lang="bn">BN</span>
+                    <span data-lang="en">EN</span>
+                </div>
+                <div class="user-avatar">P</div>
+                <button class="btn-icon" id="openSet"><svg><use href="#i-gear"/></svg></button>
+            </div>
+        </header>
 
-  <div class="set-group">
-    <h4>সাধারণ</h4>
-    <div class="set-row">ইন্টারফেসের ভাষা
-      <select><option>বাংলা</option><option>English</option></select></div>
-    <div class="set-row">লেখার ধরন
-      <select><option>ইউনিকোড</option><option>আনসি</option></select></div>
-  </div>
+        <!-- Settings Ribbon for P3, P4, P5 -->
+        <div class="settings-ribbon" id="settingsRibbon">
+            <!-- P3 Settings -->
+            <div class="ribbon-group" data-svc="p3" style="display: none;">
+                <div class="set-row"><span data-bn="ভাষা:" data-en="Language:">ভাষা:</span><select><option data-bn="বাংলা" data-en="Bengali">বাংলা</option><option data-bn="ইংরেজি" data-en="English">ইংরেজি</option></select></div>
+                <div class="set-row"><input type="checkbox" checked id="chkLive"><label for="chkLive" data-bn="লাইভ প্রতিলিপি" data-en="Live Transcript">লাইভ প্রতিলিপি</label></div>
+                <div class="set-row"><input type="checkbox" checked id="chkPause"><label for="chkPause" data-bn="অটো বিরাম" data-en="Auto Pause">অটো বিরাম</label></div>
+            </div>
+            <!-- P4 Settings -->
+            <div class="ribbon-group" data-svc="p4" style="display: none;">
+                <div class="set-row"><span data-bn="কণ্ঠ:" data-en="Voice:">কণ্ঠ:</span><select><option data-bn="নারী" data-en="Female">নারী</option><option data-bn="পুরুষ" data-en="Male">পুরুষ</option></select></div>
+                <div class="set-row"><span data-bn="গতি:" data-en="Speed:">গতি:</span><input type="range" min="0.5" max="2" step="0.1" value="1" id="voiceRateRibbon"></div>
+                <div class="set-row"><input type="checkbox" id="chkAudio"><label for="chkAudio" data-bn="অডিও ডাউনলোড" data-en="Download Audio">অডিও ডাউনলোড</label></div>
+            </div>
+            <!-- P5 Settings -->
+            <div class="ribbon-group" data-svc="p5" style="display: none;">
+                <div class="set-row"><input type="checkbox" checked id="chkHand"><label for="chkHand" data-bn="হাতে লেখা" data-en="Handwriting">হাতে লেখা</label></div>
+                <div class="set-row"><input type="checkbox" checked id="chkTable"><label for="chkTable" data-bn="টেবিল শনাক্ত" data-en="Table Detection">টেবিল শনাক্ত</label></div>
+            </div>
+        </div>
 
-  <div class="set-group">
-    <h4>বানান</h4>
-    <div class="set-row"><span>স্বয়ংক্রিয় সংশোধন</span><input type="checkbox" checked></div>
-    <div class="set-row"><span>শব্দ প্রস্তাবনা</span><input type="checkbox"></div>
-    <div class="set-row"><span>নিজের অভিধান</span><input type="checkbox" checked></div>
-    <div class="set-row"><span>যুক্তবর্ণ যাচাই</span><input type="checkbox"></div>
-  </div>
+        <!-- Toolbar (Only for P1 & P2) -->
+        <div class="toolbar" id="mainToolbar">
+            <div class="tool-group">
+                <button class="btn-primary" onclick="checkSpelling()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    <span data-bn="এখনই পরীক্ষা" data-en="Check Now">এখনই পরীক্ষা</span>
+                </button>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+                <span style="font-size: 13px; font-weight: 500; white-space:nowrap;" data-bn="লেখার সময়" data-en="Live check">লেখার সময়</span>
+            </div>
 
-  <div class="set-group">
-    <h4>ব্যাকরণ</h4>
-    <div class="set-row"><span>বাক্য গঠন</span><input type="checkbox" checked></div>
-    <div class="set-row"><span>ক্রিয়ারূপ</span><input type="checkbox" checked></div>
-    <div class="set-row"><span>সন্ধি ও সমাস</span><input type="checkbox"></div>
-    <div class="set-row"><span>বিরামচিহ্ন</span><input type="checkbox"></div>
-  </div>
+            <div class="tool-group">
+                <div class="badge-group">
+                    <div class="badge red"><div class="dot red"></div> <span data-bn="বানান" data-en="Spelling">বানান</span> <span id="spellCount">২</span></div>
+                    <div class="badge blue"><div class="dot blue"></div> <span data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</span> <span id="gramCount">১</span></div>
+                </div>
+                <button class="btn-outline" onclick="fixAllErrors()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                    <span data-bn="সব ঠিক করুন" data-en="Fix All">সব ঠিক করুন</span>
+                </button>
+            </div>
 
-  <div class="set-group">
-    <h4>কথা → লেখা</h4>
-    <div class="set-row">ভাষা
-      <select><option>বাংলা</option><option>ইংরেজি</option><option>মিশ্র</option></select></div>
-    <div class="set-row"><span>লাইভ প্রতিলিপি</span><input type="checkbox" checked></div>
-    <div class="set-row"><span>অটো বিরাম</span><input type="checkbox" checked></div>
-    <div class="set-row"><span>সময়-স্ট্যাম্প</span><input type="checkbox"></div>
-  </div>
+            <div class="tool-group">
+                <button class="btn-outline" onclick="alert('শব্দটি অভিধানে যোগ করা হয়েছে!')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    <span data-bn="অভিধানে যোগ" data-en="Add to Dictionary">অভিধানে যোগ</span>
+                </button>
+                <button class="btn-outline" onclick="alert('শব্দের অর্থ: ভাষা শহিদদের স্মরণ করা')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <span data-bn="শব্দের অর্থ" data-en="Word Meaning">শব্দের অর্থ</span>
+                </button>
+            </div>
 
-  <div class="set-group">
-    <h4>লেখা → কথা</h4>
-    <div class="set-row">কণ্ঠ
-      <select><option>নারী</option><option>পুরুষ</option></select></div>
-    <div class="set-row"><span>গতি</span><input type="range" min="0.5" max="2" step="0.1" value="1"></div>
-    <div class="set-row"><span>লম্বা লেখা</span><input type="checkbox" checked></div>
-    <div class="set-row"><span>অডিও ডাউনলোড</span><input type="checkbox"></div>
-  </div>
+            <div class="tool-group">
+                <select class="dropdown">
+                    <option data-bn="বাংলা একাডেমি প্রমিত" data-en="Bangla Academy Standard">বাংলা একাডেমি প্রমিত</option>
+                    <option data-bn="কলকাতা বিশ্ববিদ্যালয়" data-en="Calcutta University">কলকাতা বিশ্ববিদ্যালয়</option>
+                </select>
+            </div>
 
-  <div class="set-group">
-    <h4>ওসিআর</h4>
-    <div class="set-row"><span>হাতে লেখা</span><input type="checkbox" checked></div>
-    <div class="set-row"><span>টেবিল শনাক্ত</span><input type="checkbox" checked></div>
-    <div class="set-row"><span>একাধিক পৃষ্ঠা</span><input type="checkbox"></div>
-  </div>
-</aside>
+            <!-- Writing Quality Widget -->
+            <div class="quality-widget">
+                <div class="quality-circle">
+                    <span class="quality-number">৯৬</span>
+                </div>
+                <div class="quality-text">
+                    <div class="quality-title" data-bn="লেখার মান" data-en="Writing Quality">লেখার মান</div>
+                    <div class="quality-sub" data-bn="এটি ঠিক করুন ১০০" data-en="Fix it to 100">এটি ঠিক করুন ১০০</div>
+                </div>
+            </div>
+        </div>
 
-<script>
-  var svcs = document.querySelectorAll('.svc');
-  svcs.forEach(function (s) {
-    s.onclick = function () {
-      svcs.forEach(function (x) { x.classList.remove('on'); });
-      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('on'); });
-      s.classList.add('on');
-      document.getElementById(s.dataset.p).classList.add('on');
-    };
-  });
+        <!-- Workspace -->
+        <div class="workspace">
+            
+            <!-- P1: Spell Check (Sidebar First, Editor Second) -->
+            <div class="view-section active" id="p1">
+                
+                <div class="sidebar" id="sidebar-p1">
+                    <div class="sidebar-header"><h3 data-bn="পরামর্শ" data-en="Suggestions">পরামর্শ</h3></div>
+                    <div class="sidebar-tabs">
+                        <div class="s-tab active" data-bn="সব ৩" data-en="All 3">সব ৩</div>
+                        <div class="s-tab" data-bn="বানান ২" data-en="Spelling 2">বানান ২</div>
+                        <div class="s-tab" data-bn="ব্যাকরণ ১" data-en="Grammar 1">ব্যাকরণ ১</div>
+                    </div>
+                    <div class="suggestion-card" id="card1">
+                        <div class="card-type" data-bn="বানান" data-en="Spelling">বানান</div>
+                        <div class="suggestion-action">
+                            <span class="wrong-text">স্মরন</span> <span>→</span>
+                            <button class="correct-btn" onclick="fixError('err1', 'স্মরণ', 'card1')">স্মরণ</button>
+                        </div>
+                    </div>
+                    <div class="suggestion-card" id="card2">
+                        <div class="card-type" data-bn="বানান" data-en="Spelling">বানান</div>
+                        <div class="suggestion-action">
+                            <span class="wrong-text">দিবস</span> <span>→</span> <span style="font-weight: 600;">দিবস</span>
+                        </div>
+                    </div>
+                    <div class="suggestion-card" id="card3">
+                        <div class="card-type blue" data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</div>
+                        <div class="suggestion-action">
+                            <span class="wrong-text">বিশ্বাব্যপী</span> <span>→</span>
+                            <button class="correct-btn" onclick="fixError('err2', 'বিশ্বব্যাপী', 'card3')">বিশ্বব্যাপী</button>
+                        </div>
+                    </div>
+                </div>
 
-  var enc = document.querySelectorAll('#enc button');
-  enc.forEach(function (b) {
-    b.onclick = function () {
-      enc.forEach(function (x) { x.classList.remove('on'); });
-      b.classList.add('on');
-    };
-  });
+                <div class="editor-container">
+                    <button class="sidebar-toggle-tab" onclick="toggleSidebar(this)" title="Toggle Sidebar">
+                        <svg><use href="#i-chevron-left"/></svg>
+                    </button>
+                    <div class="editor-content" id="editor" contenteditable="true">
+                        <h1 data-bn="আমার একুশে" data-en="My Ekushey">আমার একুশে</h1>
+                        <p>
+                            <span data-bn="বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে " data-en="Bengali is our mother tongue. Every year on February 21st, we remember the language martyrs with deep respect. ">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে </span>
+                            <span class="spell-error" id="err1" data-bn="স্মরন" data-en="remembr">স্মরন</span> 
+                            <span data-bn=" করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা " data-en=". This day is now celebrated worldwide as International Mother Language Day."> করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা </span>
+                            <span class="grammar-error" id="err2" data-bn="বিশ্বাব্যপী" data-en="world-wide">বিশ্বাব্যপী</span> 
+                            <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-  var drawer = document.getElementById('drawer');
-  var overlay = document.getElementById('overlay');
-  function toggleSet(open) {
-    drawer.classList.toggle('on', open);
-    overlay.classList.toggle('on', open);
-  }
-  document.getElementById('openSet').onclick = function () { toggleSet(true); };
-  document.getElementById('closeSet').onclick = function () { toggleSet(false); };
-  overlay.onclick = function () { toggleSet(false); };
+            <!-- P2: Grammar (Sidebar First, Editor Second) -->
+            <div class="view-section" id="p2">
+                
+                <div class="sidebar" id="sidebar-p2">
+                    <div class="sidebar-header"><h3 data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</h3></div>
+                    <div class="suggestion-card">
+                        <div class="card-type blue" data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</div>
+                        <div class="suggestion-action">
+                            <span class="wrong-text">বিশ্বাব্যপী</span> <span>→</span>
+                            <button class="correct-btn" onclick="this.closest('.suggestion-card').style.display='none'">বিশ্বব্যাপী</button>
+                        </div>
+                    </div>
+                </div>
 
-  document.getElementById('mic').onclick = function () {
-    this.classList.toggle('live');
-  };
+                <div class="editor-container">
+                    <button class="sidebar-toggle-tab" onclick="toggleSidebar(this)" title="Toggle Sidebar">
+                        <svg><use href="#i-chevron-left"/></svg>
+                    </button>
+                    <div class="editor-content" contenteditable="true">
+                        <h1 data-bn="আমার একুশে" data-en="My Ekushey">আমার একুশে</h1>
+                        <p>
+                            <span data-bn="বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা " data-en="Bengali is our mother tongue. Every year on February 21st, we remember the language martyrs with deep respect. This day is now celebrated worldwide as International Mother Language Day.">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা </span>
+                            <span class="grammar-error" id="err3">বিশ্বাব্যপী</span> 
+                            <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-  /* লেখা থাকলে ক্লিক করলে শুধু লোডিং স্পিনার */
-  document.querySelectorAll('.fab[data-load]').forEach(function (btn) {
-    btn.onclick = function () {
-      var panel = btn.closest('.panel');
-      var box = panel ? panel.querySelector('textarea') : null;
-      if (!box || !box.value.trim()) return;
-      if (btn.classList.contains('loading')) return;
-      btn.classList.add('loading');
-      setTimeout(function () { btn.classList.remove('loading'); }, 1800);
-    };
-  });
-</script>
+            <!-- P3: Speech to Text -->
+            <div class="view-section" id="p3">
+                <div class="mic-view">
+                    <h2 style="margin-bottom: 8px;" data-bn="কথা থেকে লেখা" data-en="Speech to Text">কথা থেকে লেখা</h2>
+                    <p style="color: var(--muted); margin-bottom: 32px;" data-bn="কথা বলুন — আপনার কথা লেখায় রূপান্তর হবে।" data-en="Speak — your words will be converted to text.">কথা বলুন — আপনার কথা লেখায় রূপান্তর হবে।</p>
+                    <button class="mic-btn" id="micBtn" onclick="this.classList.toggle('live'); document.getElementById('micWave').style.display = this.classList.contains('live') ? 'flex' : 'none';">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+                    </button>
+                    <div class="wave" id="micWave" style="display: none;"><span></span><span></span><span></span><span></span><span></span></div>
+                </div>
+            </div>
+
+            <!-- P4: Text to Speech -->
+            <div class="view-section" id="p4">
+                <div class="editor-container">
+                    <textarea id="ttsText" placeholder="যে লেখাটি শুনতে চান তা লিখুন..." data-bn-placeholder="যে লেখাটি শুনতে চান তা লিখুন..." data-en-placeholder="Type the text you want to listen to...">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা বিশ্বব্যাপী পালিত হয়।</textarea>
+                    <button class="btn-primary" style="align-self: flex-start; padding: 12px 24px; font-size: 16px; margin-top: 16px;" onclick="speakTextCustom()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4l14 8-14 8V4z"/></svg>
+                        <span data-bn="শুনুন" data-en="Listen">শুনুন</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- P5: OCR -->
+            <div class="view-section" id="p5">
+                <div class="ocr-view">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.5" style="margin-bottom: 16px;"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></svg>
+                    <h2 style="margin-bottom: 8px;" data-bn="ওসিআর — ছবি থেকে লেখা" data-en="OCR - Image to Text">ওসিআর — ছবি থেকে লেখা</h2>
+                    <p style="color: var(--muted); margin-bottom: 24px;" data-bn="ছবি বা স্ক্যান করা পৃষ্ঠা থেকে বাংলা লেখা বের করুন" data-en="Extract Bengali text from images or scanned pages">ছবি বা স্ক্যান করা পৃষ্ঠা থেকে বাংলা লেখা বের করুন</p>
+                    <label class="btn-primary" style="cursor: pointer;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-upload"/></svg>
+                        <span data-bn="ছবি আপলোড করুন" data-en="Upload Image">ছবি আপলোড করুন</span>
+                        <input type="file" hidden accept="image/*,.pdf" onchange="alert('ছবি আপলোড সফল হয়েছে!')">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Drawer (Only for P1 & P2 now) -->
+        <div class="overlay" id="overlay" onclick="toggleDrawer(false)"></div>
+        <aside class="drawer" id="drawer">
+            <div class="drawer-header">
+                <h3 data-bn="সেটিংস" data-en="Settings">সেটিংস</h3>
+                <button class="close-btn" onclick="toggleDrawer(false)">✕</button>
+            </div>
+
+            <div class="set-group active" data-svc="p1">
+                <h4 data-bn="বানান" data-en="Spelling">বানান</h4>
+                <div class="set-row"><span data-bn="স্বয়ংক্রিয় সংশোধন" data-en="Auto Correct">স্বয়ংক্রিয় সংশোধন</span><input type="checkbox" checked></div>
+                <div class="set-row"><span data-bn="শব্দ প্রস্তাবনা" data-en="Word Suggestions">শব্দ প্রস্তাবনা</span><input type="checkbox"></div>
+                <div class="set-row"><span data-bn="নিজের অভিধান" data-en="Custom Dictionary">নিজের অভিধান</span><input type="checkbox" checked></div>
+            </div>
+
+            <div class="set-group" data-svc="p2">
+                <h4 data-bn="ব্যাকরণ — ত্রুটির ধরন" data-en="Grammar — Error Types">ব্যাকরণ — ত্রুটির ধরন</h4>
+                <div class="set-row"><span data-bn="কর্তা-ক্রিয়ার সম্পর্ক" data-en="Subject-Verb Agreement">কর্তা-ক্রিয়ার সম্পর্ক</span><input type="checkbox" checked></div>
+                <div class="set-row"><span data-bn="সাধু-চলিত মিশ্রণ" data-en="Sadhu-Cholito Mix">সাধু-চলিত মিশ্রণ</span><input type="checkbox" checked></div>
+                <div class="set-row"><span data-bn="যতিচিহ্ন" data-en="Punctuation">যতিচিহ্ন</span><input type="checkbox" checked></div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        let currentLang = 'bn';
+
+        // 1. Login System
+        function performLogin() {
+            if(!document.getElementById('loginEmail').value || !document.getElementById('loginPass').value) {
+                alert(currentLang === 'bn' ? 'ইমেইল এবং পাসওয়ার্ড দিন!' : 'Please enter email and password!');
+                return;
+            }
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('mainApp').classList.remove('hidden');
+        }
+
+        // 2. Language Toggle
+        document.querySelectorAll('.lang-toggle span').forEach(btn => {
+            btn.addEventListener('click', function() {
+                currentLang = this.dataset.lang;
+                document.querySelectorAll('.lang-toggle span').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                document.querySelectorAll('[data-bn], [data-en]').forEach(el => {
+                    const text = el.getAttribute(`data-${currentLang}`);
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        const ph = el.getAttribute(`data-${currentLang}-placeholder`);
+                        if (ph) el.placeholder = ph;
+                    } else if (text) {
+                        const svg = el.querySelector('svg');
+                        el.innerHTML = (svg ? svg.outerHTML + ' ' : '') + text;
+                    }
+                });
+            });
+        });
+
+        // 3. Share Dropdown Toggle
+        function toggleShareMenu(e) {
+            e.stopPropagation();
+            document.getElementById('shareMenu').classList.toggle('active');
+        }
+        document.addEventListener('click', function(e) {
+            const shareMenu = document.getElementById('shareMenu');
+            if (shareMenu && !e.target.closest('.share-wrapper')) {
+                shareMenu.classList.remove('active');
+            }
+        });
+
+        // 4. Service Tab Switching
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const targetId = this.dataset.p;
+                
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+                document.getElementById(targetId).classList.add('active');
+
+                if (targetId === 'p1' || targetId === 'p2') {
+                    document.getElementById('mainToolbar').style.display = 'flex';
+                    document.getElementById('settingsRibbon').classList.remove('active');
+                } else {
+                    document.getElementById('mainToolbar').style.display = 'none';
+                    document.getElementById('settingsRibbon').classList.add('active');
+                    
+                    // Toggle ribbon groups
+                    document.querySelectorAll('.ribbon-group').forEach(g => {
+                        g.style.display = (g.dataset.svc === targetId) ? 'flex' : 'none';
+                    });
+                }
+                
+                document.querySelectorAll('.set-group').forEach(g => g.classList.toggle('active', g.dataset.svc === targetId));
+            });
+        });
+
+        // 5. Sidebar Toggle (Smooth Slide & Icon Change)
+        function toggleSidebar(btn) {
+            const activeView = btn.closest('.view-section');
+            const sidebar = activeView.querySelector('.sidebar');
+            const icon = btn.querySelector('use');
+            
+            sidebar.classList.toggle('hidden-sidebar');
+            
+            if (sidebar.classList.contains('hidden-sidebar')) {
+                icon.setAttribute('href', '#i-chevron-right'); // Arrow right to open
+                btn.classList.add('closed');
+            } else {
+                icon.setAttribute('href', '#i-chevron-left'); // Arrow left to close
+                btn.classList.remove('closed');
+            }
+        }
+
+        // 6. Settings Drawer
+        function toggleDrawer(open) {
+            document.getElementById('drawer').classList.toggle('on', open);
+            document.getElementById('overlay').classList.toggle('on', open);
+        }
+        document.getElementById('openSet').onclick = () => toggleDrawer(true);
+
+        // 7. Error Fixing
+        function fixError(errorId, correctText, cardId) {
+            const errEl = document.getElementById(errorId);
+            if (errEl) {
+                errEl.parentNode.replaceChild(document.createTextNode(correctText), errEl);
+                document.getElementById(cardId).style.display = 'none';
+                updateCounters();
+            }
+        }
+
+        function fixAllErrors() {
+            const spell = document.querySelector('.spell-error');
+            if (spell) spell.parentNode.replaceChild(document.createTextNode('স্মরণ'), spell);
+            const gram = document.querySelector('.grammar-error');
+            if (gram) gram.parentNode.replaceChild(document.createTextNode('বিশ্বব্যাপী'), gram);
+            
+            document.querySelectorAll('.suggestion-card').forEach(c => c.style.display = 'none');
+            updateCounters();
+        }
+
+        function updateCounters() {
+            document.getElementById('spellCount').innerText = document.querySelectorAll('.spell-error').length;
+            document.getElementById('gramCount').innerText = document.querySelectorAll('.grammar-error').length;
+        }
+
+        function checkSpelling() {
+            const editor = document.getElementById('editor');
+            if (!editor.innerHTML.includes('spell-error')) {
+                editor.innerHTML = editor.innerHTML.replace('স্মরণ', '<span class="spell-error" id="err1">স্মরন</span>');
+                editor.innerHTML = editor.innerHTML.replace('বিশ্বব্যাপী', '<span class="grammar-error" id="err2">বিশ্বাব্যপী</span>');
+                document.querySelectorAll('.suggestion-card').forEach(c => c.style.display = 'block');
+                document.getElementById('sidebar-p1').classList.remove('hidden-sidebar');
+                updateCounters();
+            }
+        }
+
+        // 8. Text to Speech
+        function speakTextCustom() {
+            const text = document.getElementById('ttsText').value;
+            if ('speechSynthesis' in window && text.trim()) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = currentLang === 'bn' ? 'bn-BD' : 'en-US';
+                // Get rate from ribbon
+                const rate = document.getElementById('voiceRateRibbon') ? document.getElementById('voiceRateRibbon').value : 1;
+                u.rate = rate;
+                window.speechSynthesis.speak(u);
+            } else {
+                alert(currentLang === 'bn' ? 'লেখা নেই!' : 'No text!');
+            }
+        }
+
+        updateCounters();
+    </script>
 </body>
 </html>
