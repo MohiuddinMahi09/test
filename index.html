@@ -130,26 +130,29 @@
 
         /* Editor Area (Maximized) */
         .editor-container { background: white; flex: 1; min-width: 0; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 32px; position: relative; display: flex; flex-direction: column; transition: flex 0.3s ease; }
-        /* Removed editor-header */
-        .editor-content { flex: 1; font-size: 18px; line-height: 1.8; outline: none; overflow-y: auto; padding-left: 20px; } /* Padding changed to left to accommodate tab */
+        .editor-content { flex: 1; font-size: 18px; line-height: 1.8; outline: none; overflow-y: auto; padding-left: 20px; padding-bottom: 70px; }
         .editor-content h1 { font-size: 28px; margin-bottom: 24px; }
 
         /* Error Styles */
         .spell-error { text-decoration: underline wavy var(--red); text-underline-offset: 4px; cursor: pointer; background: rgba(239,68,68,0.05); }
         .grammar-error { text-decoration: underline solid var(--grammar-blue); text-underline-offset: 4px; text-decoration-thickness: 2px; cursor: pointer; background: rgba(59,130,246,0.05); }
 
+        /* Floating Action Button (FAB) */
+        .fab-btn { position: absolute; bottom: 24px; right: 24px; background: var(--blue); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(41,82,227,0.3); transition: 0.2s; z-index: 10; font-family: inherit; font-size: 14px; font-weight: 600;}
+        .fab-btn:hover { background: var(--blue-hover); transform: translateY(-2px); }
+
         /* Sidebar Toggle Tab (Attached to Left of Editor) */
         .sidebar-toggle-tab {
             position: absolute;
-            left: -24px; /* Changed from right */
+            left: -24px;
             top: 50%;
             transform: translateY(-50%);
             width: 24px;
             height: 60px;
             background: white;
             border: 1px solid var(--border);
-            border-right: none; /* Changed */
-            border-radius: 8px 0 0 8px; /* Changed */
+            border-right: none;
+            border-radius: 8px 0 0 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -164,7 +167,7 @@
 
         /* Sidebar (Moved to Left) */
         .sidebar { background: white; width: 340px; flex-shrink: 0; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 20px; height: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; transition: all 0.3s ease; }
-        .sidebar.hidden-sidebar { width: 0; padding: 0; opacity: 0; margin-right: -24px; overflow: hidden; border: none; } /* Changed to margin-right */
+        .sidebar.hidden-sidebar { width: 0; padding: 0; opacity: 0; margin-right: -24px; overflow: hidden; border: none; }
         
         .sidebar-header { display: flex; justify-content: space-between; align-items: center; }
         .sidebar-header h3 { font-size: 16px; font-weight: 700; }
@@ -221,8 +224,8 @@
         /* ---------- RESPONSIVE DESIGN ---------- */
         @media (max-width: 1024px) {
             .workspace { flex-direction: column; padding: 16px; gap: 16px; overflow-y: auto; }
-            .editor-container { width: 100%; min-height: 50vh; order: 1; } /* Editor First */
-            .sidebar { width: 100%; height: auto; max-height: 400px; order: 2; } /* Sidebar Second */
+            .editor-container { width: 100%; min-height: 50vh; order: 1; }
+            .sidebar { width: 100%; height: auto; max-height: 400px; order: 2; }
             .sidebar-toggle-tab { display: none; }
             .quality-widget { display: none; }
             .brand-text p { display: none; }
@@ -247,6 +250,7 @@
             .btn-share span { display: none; }
             .btn-share { padding: 8px; }
             .editor-content h1 { font-size: 24px; }
+            .fab-btn { padding: 8px 12px; font-size: 13px; }
         }
     </style>
 </head>
@@ -316,6 +320,9 @@
             <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></symbol>
             <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
             <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
+            
+            <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
+            <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" ry="2"/></symbol>
         </defs></svg>
 
         <!-- Header -->
@@ -449,9 +456,8 @@
         <!-- Workspace -->
         <div class="workspace">
             
-            <!-- P1: Spell Check (Sidebar First, Editor Second) -->
+            <!-- P1: Spell Check -->
             <div class="view-section active" id="p1">
-                
                 <div class="sidebar" id="sidebar-p1">
                     <div class="sidebar-header"><h3 data-bn="পরামর্শ" data-en="Suggestions">পরামর্শ</h3></div>
                     <div class="sidebar-tabs">
@@ -495,12 +501,16 @@
                             <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
                         </p>
                     </div>
+                    <!-- Listen Button -->
+                    <button class="fab-btn listen-btn" onclick="toggleSpeak(document.getElementById('editor').innerText, this)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                        <span data-bn="শুনুন" data-en="Listen">শুনুন</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- P2: Grammar (Sidebar First, Editor Second) -->
+            <!-- P2: Grammar -->
             <div class="view-section" id="p2">
-                
                 <div class="sidebar" id="sidebar-p2">
                     <div class="sidebar-header"><h3 data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</h3></div>
                     <div class="suggestion-card">
@@ -516,7 +526,7 @@
                     <button class="sidebar-toggle-tab" onclick="toggleSidebar(this)" title="Toggle Sidebar">
                         <svg><use href="#i-chevron-left"/></svg>
                     </button>
-                    <div class="editor-content" contenteditable="true">
+                    <div class="editor-content" id="editor-p2" contenteditable="true">
                         <h1 data-bn="আমার একুশে" data-en="My Ekushey">আমার একুশে</h1>
                         <p>
                             <span data-bn="বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা " data-en="Bengali is our mother tongue. Every year on February 21st, we remember the language martyrs with deep respect. This day is now celebrated worldwide as International Mother Language Day.">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা </span>
@@ -524,6 +534,11 @@
                             <span data-bn=" পালিত হয়।" data-en=" "> পালিত হয়।</span>
                         </p>
                     </div>
+                    <!-- Listen Button -->
+                    <button class="fab-btn listen-btn" onclick="toggleSpeak(document.getElementById('editor-p2').innerText, this)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                        <span data-bn="শুনুন" data-en="Listen">শুনুন</span>
+                    </button>
                 </div>
             </div>
 
@@ -543,8 +558,8 @@
             <div class="view-section" id="p4">
                 <div class="editor-container">
                     <textarea id="ttsText" placeholder="যে লেখাটি শুনতে চান তা লিখুন..." data-bn-placeholder="যে লেখাটি শুনতে চান তা লিখুন..." data-en-placeholder="Type the text you want to listen to...">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা বিশ্বব্যাপী পালিত হয়।</textarea>
-                    <button class="btn-primary" style="align-self: flex-start; padding: 12px 24px; font-size: 16px; margin-top: 16px;" onclick="speakTextCustom()">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4l14 8-14 8V4z"/></svg>
+                    <button class="btn-primary listen-btn" style="align-self: flex-start; padding: 12px 24px; font-size: 16px; margin-top: 16px;" onclick="toggleSpeak(document.getElementById('ttsText').value, this)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
                         <span data-bn="শুনুন" data-en="Listen">শুনুন</span>
                     </button>
                 </div>
@@ -591,6 +606,7 @@
 
     <script>
         let currentLang = 'bn';
+        let isSpeaking = false;
 
         // 1. Login System
         function performLogin() {
@@ -608,6 +624,13 @@
                 currentLang = this.dataset.lang;
                 document.querySelectorAll('.lang-toggle span').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
+
+                // Stop speaking if language is changed
+                if(isSpeaking) {
+                    window.speechSynthesis.cancel();
+                    isSpeaking = false;
+                    document.querySelectorAll('.listen-btn').forEach(b => updateListenBtn(b, false));
+                }
 
                 document.querySelectorAll('[data-bn], [data-en]').forEach(el => {
                     const text = el.getAttribute(`data-${currentLang}`);
@@ -651,7 +674,6 @@
                     document.getElementById('mainToolbar').style.display = 'none';
                     document.getElementById('settingsRibbon').classList.add('active');
                     
-                    // Toggle ribbon groups
                     document.querySelectorAll('.ribbon-group').forEach(g => {
                         g.style.display = (g.dataset.svc === targetId) ? 'flex' : 'none';
                     });
@@ -661,7 +683,7 @@
             });
         });
 
-        // 5. Sidebar Toggle (Smooth Slide & Icon Change)
+        // 5. Sidebar Toggle
         function toggleSidebar(btn) {
             const activeView = btn.closest('.view-section');
             const sidebar = activeView.querySelector('.sidebar');
@@ -670,10 +692,10 @@
             sidebar.classList.toggle('hidden-sidebar');
             
             if (sidebar.classList.contains('hidden-sidebar')) {
-                icon.setAttribute('href', '#i-chevron-right'); // Arrow right to open
+                icon.setAttribute('href', '#i-chevron-right');
                 btn.classList.add('closed');
             } else {
-                icon.setAttribute('href', '#i-chevron-left'); // Arrow left to close
+                icon.setAttribute('href', '#i-chevron-left');
                 btn.classList.remove('closed');
             }
         }
@@ -721,20 +743,55 @@
             }
         }
 
-        // 8. Text to Speech
-        function speakTextCustom() {
-            const text = document.getElementById('ttsText').value;
-            if ('speechSynthesis' in window && text.trim()) {
+        // 8. Text to Speech (Active Listen/Stop)
+        function toggleSpeak(text, btn) {
+            if (isSpeaking) {
                 window.speechSynthesis.cancel();
+                isSpeaking = false;
+                document.querySelectorAll('.listen-btn').forEach(b => updateListenBtn(b, false));
+                return;
+            }
+
+            if (!text || !text.trim()) {
+                alert(currentLang === 'bn' ? 'শোনার জন্য কোনো লেখা নেই!' : 'No text to read!');
+                return;
+            }
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); 
                 const u = new SpeechSynthesisUtterance(text);
                 u.lang = currentLang === 'bn' ? 'bn-BD' : 'en-US';
-                // Get rate from ribbon
-                const rate = document.getElementById('voiceRateRibbon') ? document.getElementById('voiceRateRibbon').value : 1;
-                u.rate = rate;
+                
+                const rateEl = document.getElementById('voiceRateRibbon');
+                if (rateEl) u.rate = parseFloat(rateEl.value);
+
+                u.onstart = () => {
+                    isSpeaking = true;
+                    document.querySelectorAll('.listen-btn').forEach(b => updateListenBtn(b, false));
+                    updateListenBtn(btn, true);
+                };
+
+                u.onend = u.onerror = () => {
+                    isSpeaking = false;
+                    updateListenBtn(btn, false);
+                };
+
                 window.speechSynthesis.speak(u);
             } else {
-                alert(currentLang === 'bn' ? 'লেখা নেই!' : 'No text!');
+                alert(currentLang === 'bn' ? 'আপনার ব্রাউজার ভয়েস সাপোর্ট করছে না।' : 'Your browser does not support speech synthesis.');
             }
+        }
+
+        function updateListenBtn(btn, speaking) {
+            if(!btn) return;
+            const text = speaking ? (currentLang === 'bn' ? 'থামুন' : 'Stop') : (currentLang === 'bn' ? 'শুনুন' : 'Listen');
+            const svgStr = speaking 
+                ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="2" ry="2"/></svg>' 
+                : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>';
+            
+            btn.innerHTML = svgStr + ' <span>' + text + '</span>';
+            btn.setAttribute('data-bn', speaking ? 'থামুন' : 'শুনুন');
+            btn.setAttribute('data-en', speaking ? 'Stop' : 'Listen');
         }
 
         updateCounters();
