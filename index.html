@@ -80,21 +80,28 @@ header{background:var(--header-bg);border-bottom:1px solid var(--border);padding
 .user-logout-btn{background:rgba(239,68,68,.1);color:var(--red);border:none;padding:9px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
 .user-logout-btn:hover{background:rgba(239,68,68,.2)}
 
+/* TOP LINKS BAR */
+.top-links-bar{background:var(--header-bg);border-bottom:1px solid var(--border);padding:6px 24px;display:flex;justify-content:flex-end;align-items:center;gap:4px;z-index:6;flex-shrink:0;transition:background .3s;flex-wrap:wrap}
+.top-links-bar a{font-size:12px;color:var(--muted);text-decoration:none;padding:5px 10px;border-radius:6px;transition:.2s;font-weight:500;white-space:nowrap;display:inline-block;line-height:1.3}
+.top-links-bar a:hover{color:var(--blue);background:rgba(41,82,227,.08)}
+.top-links-bar a:active,.top-links-bar a.active{background:rgba(41,82,227,.15);color:var(--blue)}
+[data-theme="dark"] .top-links-bar a:hover{background:rgba(59,130,246,.15);color:var(--blue)}
+[data-theme="dark"] .top-links-bar a:active,[data-theme="dark"] .top-links-bar a.active{background:rgba(59,130,246,.25);color:var(--blue)}
+
 /* RIBBON */
-.settings-ribbon{display:none;background:var(--hover-bg);border-bottom:1px solid var(--border);padding:10px 24px;justify-content:flex-start;align-items:center;z-index:4;flex-shrink:0}
+.settings-ribbon{display:none;background:var(--hover-bg);border-bottom:1px solid var(--border);padding:10px 24px;justify-content:flex-start;align-items:center;z-index:4;flex-shrink:0;flex-wrap:wrap;gap:12px}
 .settings-ribbon.active{display:flex}
-.ribbon-group{display:flex;gap:20px;align-items:center;flex:1;flex-wrap:wrap}
+.ribbon-group{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 .ribbon-group .set-row{display:flex;align-items:center;gap:10px;border:none;padding:0;font-size:13px;font-weight:500;white-space:nowrap;flex-shrink:0}
 .ribbon-group select{padding:4px 8px;border-radius:6px;border:1px solid var(--border);font-family:inherit;font-size:13px;outline:none;background:var(--input-bg);color:var(--text)}
 .ribbon-group input[type="checkbox"]{accent-color:var(--blue);width:16px;height:16px;cursor:pointer;flex-shrink:0}
 .ribbon-group input[type="range"]{accent-color:var(--blue);width:100px}
 
 /* TOOLBAR */
-.toolbar{background:var(--header-bg);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;z-index:5;flex-shrink:0;gap:12px;flex-wrap:wrap}
-.tool-group{display:flex;align-items:center;gap:12px;padding-right:20px;border-right:1px solid var(--border);flex:1;justify-content:center}
-.tool-group:first-child{justify-content:flex-start;flex:0}
-.tool-group:last-child{border-right:none;justify-content:flex-end;flex:0}
-.btn-primary{background:var(--blue);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.toolbar{background:var(--header-bg);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;flex-wrap:wrap;gap:12px;z-index:5;flex-shrink:0}
+.tool-group{display:flex;align-items:center;gap:10px;flex-shrink:0;padding-right:14px;border-right:1px solid var(--border)}
+.tool-group:last-of-type{border-right:none}
+.btn-primary{background:var(--blue);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit}
 .btn-primary:hover{background:var(--blue-hover)}
 .toggle-switch{position:relative;display:inline-block;width:40px;height:22px}
 .toggle-switch input{opacity:0;width:0;height:0}
@@ -108,16 +115,19 @@ input:checked + .slider:before{transform:translateX(18px)}
 .badge.blue{background:rgba(59,130,246,.1);color:var(--grammar-blue)}
 .dot{width:6px;height:6px;border-radius:50%}
 .dot.red{background:var(--red)}.dot.blue{background:var(--grammar-blue)}
-.btn-outline{background:var(--header-bg);border:1px solid var(--border);padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit}
+.btn-outline{background:var(--header-bg);border:1px solid var(--border);padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit;white-space:nowrap}
 .btn-outline:hover{background:var(--hover-bg)}
-.dropdown{border:1px solid var(--border);padding:6px 12px;border-radius:8px;font-size:13px;outline:none;background:var(--input-bg);color:var(--text);cursor:pointer}
-.quality-widget{display:flex;align-items:center;gap:12px;margin-left:10px;flex-shrink:0}
-.quality-circle{width:40px;height:40px;border-radius:50%;background:conic-gradient(from 180deg,#d946ef,#3b82f6,#06b6d4);display:flex;align-items:center;justify-content:center;position:relative}
+.mode-group{display:flex;background:var(--hover-bg);border-radius:8px;padding:3px;gap:2px;flex-shrink:0}
+.mode-btn{padding:5px 12px;border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit;transition:.2s;white-space:nowrap}
+.mode-btn:hover{color:var(--text)}
+.mode-btn.active{background:var(--blue);color:#fff;box-shadow:0 1px 3px rgba(41,82,227,.2)}
+.quality-widget{display:flex;align-items:center;gap:10px;flex-shrink:0;margin-left:auto}
+.quality-circle{width:36px;height:36px;border-radius:50%;background:conic-gradient(from 180deg,#d946ef,#3b82f6,#06b6d4);display:flex;align-items:center;justify-content:center;position:relative}
 .quality-circle::before{content:"";position:absolute;inset:3px;background:var(--header-bg);border-radius:50%}
-.quality-number{position:relative;font-size:14px;font-weight:700;color:var(--text)}
+.quality-number{position:relative;font-size:13px;font-weight:700;color:var(--text)}
 .quality-text{display:flex;flex-direction:column}
-.quality-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.2}
-.quality-sub{font-size:12px;color:var(--muted)}
+.quality-title{font-size:12.5px;font-weight:700;color:var(--text);line-height:1.2}
+.quality-sub{font-size:11px;color:var(--muted)}
 
 /* WORKSPACE */
 .workspace{display:flex;flex:1;padding:24px;gap:24px;overflow:hidden;justify-content:center}
@@ -156,6 +166,9 @@ input:checked + .slider:before{transform:translateX(18px)}
 #ttsText{width:100%;flex:1;min-height:300px;padding:20px;border:1px solid var(--border);border-radius:12px;font-size:18px;resize:none;outline:none;margin-bottom:16px;font-family:inherit;line-height:1.8;background:var(--input-bg);color:var(--text)}
 #ttsText:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(41,82,227,.1)}
 
+/* FOOTER */
+.app-footer{background:var(--header-bg);border-top:1px solid var(--border);padding:6px 16px;text-align:center;font-size:10.5px;color:var(--muted);flex-shrink:0;line-height:1.5}
+
 /* DRAWER */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(2px);opacity:0;visibility:hidden;transition:.3s;z-index:90}
 .overlay.on{opacity:1;visibility:visible}
@@ -168,7 +181,6 @@ input:checked + .slider:before{transform:translateX(18px)}
 .set-group{margin-bottom:24px;display:none}
 .set-group.active{display:block}
 .set-group h4{font-size:12px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;letter-spacing:.5px}
-.set-group .set-hint{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5}
 .set-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border);font-size:14px;font-weight:500;color:var(--text)}
 .set-row:last-child{border-bottom:none}
 .set-row input[type="checkbox"]{accent-color:var(--blue);width:18px;height:18px;cursor:pointer}
@@ -208,7 +220,7 @@ input:checked + .slider:before{transform:translateX(18px)}
 .bodh-settings .dict-meta{display:flex;flex-direction:column;gap:2px;padding-right:10px;min-width:0}
 .bodh-settings .dict-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
 .bodh-settings .dict-pub{font-size:11px;color:var(--muted)}
-.reset-bar{display:flex;justify-content:flex-end;margin-bottom:10px}
+.reset-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .reset-btn{background:var(--hover-bg);border:1px solid var(--border);padding:5px 12px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;color:var(--text);font-family:inherit;display:flex;align-items:center;gap:5px;transition:.2s}
 .reset-btn:hover{background:rgba(239,68,68,.08);border-color:var(--red);color:var(--red)}
 
@@ -247,32 +259,33 @@ input:checked + .slider:before{transform:translateX(18px)}
   .header-right{order:2;margin-left:auto;flex-shrink:0;gap:8px}
   .top-nav{order:3;width:100%;border-radius:12px;margin-top:2px}
   .brand-text p{display:none}
-  .workspace{flex-direction:column;padding:16px;gap:16px;overflow:hidden}
-  .view-section{height:auto;flex:1;min-height:0;gap:0}
-  .editor-container{width:100%;min-height:0;padding:20px}
+  .workspace{flex-direction:column;padding:16px;gap:16px;overflow-y:auto;justify-content:flex-start}
+  .view-section{flex-direction:column;height:auto;min-height:0;flex:none;gap:16px}
+  .editor-container{width:100%;min-height:400px;height:auto;flex-shrink:0;padding:20px}
   .editor-content{padding-left:10px;font-size:17px}
+  .sidebar,.sidebar.hidden-sidebar{position:static;width:100%;height:auto;max-height:360px;padding:20px;margin:0;opacity:1;z-index:auto;border-radius:16px;box-shadow:0 4px 20px var(--shadow);transform:none;transition:none;overflow-y:auto;border:1px solid var(--border);flex-shrink:0}
+  .sidebar.hidden-sidebar{display:none}
+  .sidebar-overlay{display:none!important}
+  .sidebar-toggle-tab{left:12px;top:12px;transform:none;width:36px;height:36px;border-radius:8px;border:1px solid var(--border);border-right:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.08);background:var(--header-bg)}
+  .sidebar-toggle-tab svg{width:16px;height:16px}
   .quality-widget{display:none}
-  .tool-group{padding-right:12px}
-  .toolbar{flex-wrap:wrap;justify-content:center;gap:10px}
-  .tool-group{flex:1 1 auto;border-right:none;justify-content:center;padding:0}
+  .toolbar{flex-wrap:wrap;justify-content:flex-start;gap:10px}
+  .tool-group{border-right:none;padding-right:0}
   .settings-ribbon{flex-wrap:wrap;justify-content:flex-start;gap:12px;padding:10px 16px}
-  .sidebar,.sidebar.hidden-sidebar{position:fixed;top:0;left:0;height:100vh;height:100dvh;width:340px;max-width:85vw;padding:20px;margin-right:0;opacity:1;z-index:100;border-radius:0 16px 16px 0;box-shadow:4px 0 20px rgba(0,0,0,.15);transform:translateX(-100%);transition:transform .3s ease;overflow-y:auto;border:none;flex-direction:column}
-  .sidebar:not(.hidden-sidebar){transform:translateX(0)}
-  .sidebar-toggle-tab{left:16px;right:auto;top:auto;bottom:16px;transform:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.12);background:var(--header-bg)}
-  .sidebar-toggle-tab svg{width:18px;height:18px}
   .drawer{width:92vw;max-width:460px}
   .user-dropdown{right:-60px}
+  .top-links-bar{padding:6px 16px;justify-content:flex-end}
+  .top-links-bar a{font-size:11.5px;padding:4px 8px}
 }
 @media (max-width:768px){
   .nav-item{padding:10px 6px;font-size:13px}
   .nav-item svg{width:16px;height:16px}
   .share-dropdown{right:auto;left:0}
-  .settings-ribbon{padding:10px 0;gap:0;flex-wrap:nowrap;justify-content:flex-start;align-items:center;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
-  .settings-ribbon::-webkit-scrollbar{display:none}
-  .ribbon-group{flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:10px;width:auto;min-width:max-content;flex:0 0 auto;padding:0 16px}
-  .ribbon-group .set-row{flex-shrink:0;white-space:nowrap;background:var(--header-bg);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;gap:10px}
+  .settings-ribbon{padding:10px 12px}
   .drawer{width:95vw;max-width:460px}
   .user-dropdown{right:-100px;width:250px}
+  .top-links-bar{overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;scrollbar-width:none;padding:6px 12px}
+  .top-links-bar::-webkit-scrollbar{display:none}
 }
 @media (max-width:480px){
   .lang-toggle span{padding:4px 8px}
@@ -280,17 +293,15 @@ input:checked + .slider:before{transform:translateX(18px)}
   .btn-share{padding:8px}
   .editor-content{font-size:16px}
   .fab-btn{padding:8px 12px;font-size:13px}
-  .sidebar-toggle-tab{width:40px;height:40px;left:12px;bottom:12px}
+  .sidebar-toggle-tab{width:32px;height:32px;left:10px;top:10px}
   .brand-text h1{font-size:16px}
   .brand-logo{width:34px;height:34px}
   .user-avatar{width:32px;height:32px}
   .btn-icon{width:32px;height:32px}
   .login-box{padding:28px 24px}
   .drawer{width:100vw;max-width:100vw;border-radius:0}
-  .ribbon-group .set-row{padding:5px 12px;font-size:12px;gap:8px}
-  .ribbon-group select{font-size:12px;padding:3px 6px}
-  .ribbon-group input[type="range"]{width:80px}
   .user-dropdown{right:-110px;width:240px}
+  .top-links-bar a{font-size:11px;padding:4px 7px}
 }
 </style>
 </head>
@@ -347,6 +358,7 @@ input:checked + .slider:before{transform:translateX(18px)}
   <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
   <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></symbol>
 </defs></svg>
 
 <header>
@@ -395,13 +407,21 @@ input:checked + .slider:before{transform:translateX(18px)}
           <div class="stat-row"><span data-bn="ভাষা পছন্দ" data-en="Language">ভাষা পছন্দ</span><span data-bn="বাংলা" data-en="Bengali">বাংলা</span></div>
           <div class="stat-row"><span data-bn="প্রিয় অভিধান" data-en="Favorite dictionary">প্রিয় অভিধান</span><span data-bn="বাংলা একাডেমি" data-en="Bangla Academy">বাংলা একাডেমি</span></div>
         </div>
-        <button class="user-logout-btn" onclick="alert(currentLang==='bn'?'লগআউট হচ্ছে...':'Logging out...');document.getElementById('userMenu').classList.remove('active');" data-bn="লগআউট" data-en="Logout">লগআউট</button>
+        <button class="user-logout-btn" onclick="performLogout()" data-bn="লগআউট" data-en="Logout">লগআউট</button>
       </div>
     </div>
 
     <button class="btn-icon" id="openSet" onclick="toggleDrawer(true)"><svg><use href="#i-gear"/></svg></button>
   </div>
 </header>
+
+<!-- TOP LINKS BAR (above service bar, right-aligned) -->
+<div class="top-links-bar">
+  <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="প্রাইভেসি" data-en="Privacy">প্রাইভেসি</a>
+  <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="জিজ্ঞাসা" data-en="FAQ">জিজ্ঞাসা</a>
+  <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="ইউজার ম্যানুয়াল" data-en="User Manual">ইউজার ম্যানুয়াল</a>
+  <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a>
+</div>
 
 <!-- RIBBON for p3/p4/p5 -->
 <div class="settings-ribbon" id="settingsRibbon">
@@ -427,11 +447,30 @@ input:checked + .slider:before{transform:translateX(18px)}
     <span style="font-size:13px;font-weight:600;white-space:nowrap" data-bn="সাধু-চলিত:" data-en="Sadhu-Cholito:">সাধু-চলিত:</span>
     <label class="toggle-switch"><input type="checkbox" checked id="ribbonSadhu"><span class="slider"></span></label>
   </div>
-  <div class="tool-group" style="flex:0">
-    <div class="badge-group">
-      <div class="badge red"><div class="dot red"></div> <span data-bn="বানান" data-en="Spelling">বানান</span> <span id="spellCount">০</span></div>
-      <div class="badge blue"><div class="dot blue"></div> <span data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</span> <span id="gramCount">০</span></div>
+  <div class="tool-group">
+    <div class="mode-group">
+      <button class="mode-btn" data-check-mode="spell" onclick="setCheckMode('spell')" data-bn="বানান" data-en="Spelling">বানান</button>
+      <button class="mode-btn active" data-check-mode="grammar" onclick="setCheckMode('grammar')" data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</button>
     </div>
+  </div>
+  <div class="tool-group">
+    <div class="mode-group">
+      <button class="mode-btn" data-encoding-mode="ascii" onclick="setEncodingMode('ascii')" data-bn="আসকি" data-en="ASCII">আসকি</button>
+      <button class="mode-btn active" data-encoding-mode="unicode" onclick="setEncodingMode('unicode')" data-bn="ইউনিকোড" data-en="Unicode">ইউনিকোড</button>
+    </div>
+  </div>
+  <div class="tool-group" id="statsGroup">
+    <div class="badge-group">
+      <div class="badge red" id="spellBadge"><div class="dot red"></div> <span data-bn="বানান" data-en="Spelling">বানান</span> <span id="spellCount">০</span></div>
+      <div class="badge blue" id="gramBadge"><div class="dot blue"></div> <span data-bn="ব্যাকরণ" data-en="Grammar">ব্যাকরণ</span> <span id="gramCount">০</span></div>
+    </div>
+  </div>
+  <div class="tool-group">
+    <button class="btn-outline" onclick="showPersonalDictPopup(this)" id="personalDictBtn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-book"/></svg>
+      <span data-bn="ব্যক্তিগত শব্দকোষ" data-en="Personal Dictionary">ব্যক্তিগত শব্দকোষ</span>
+      <span id="personalDictCount" style="background:rgba(41,82,227,.15);color:var(--blue);padding:0 6px;border-radius:8px;font-size:11px;font-weight:700;">০</span>
+    </button>
   </div>
   <div class="quality-widget">
     <div class="quality-circle"><span class="quality-number" id="qualityNum">১০০</span></div>
@@ -499,7 +538,12 @@ input:checked + .slider:before{transform:translateX(18px)}
   </div>
 </div>
 
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebarOnMobile()"></div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- FOOTER -->
+<footer class="app-footer">
+  <span data-bn="© ২০২৪ বোধ। সর্বস্বত্ব সংরক্ষিত। | দাবিত্যাগ: এই সেবাটি কোনো প্রকার ওয়ারেন্টি ছাড়াই 'যেমন আছে তেমন' ভিত্তিতে প্রদান করা হয়েছে।" data-en="© 2024 Bodh. All rights reserved. | Disclaimer: This service is provided 'as is' without any warranty of any kind.">© ২০২৪ বোধ। সর্বস্বত্ব সংরক্ষিত। | দাবিত্যাগ: এই সেবাটি কোনো প্রকার ওয়ারেন্টি ছাড়াই 'যেমন আছে তেমন' ভিত্তিতে প্রদান করা হয়েছে।</span>
+</footer>
 
 <!-- SETTINGS DRAWER -->
 <div class="overlay" id="overlay" onclick="toggleDrawer(false)"></div>
@@ -509,7 +553,8 @@ input:checked + .slider:before{transform:translateX(18px)}
   <!-- P1 -->
   <div class="set-group active" data-svc="p1">
     <div class="reset-bar">
-      <button class="reset-btn" onclick="bsResetDemo()" title="Reset">
+      <span style="font-size:11px;color:var(--muted);font-weight:500" data-bn="সমস্ত সেটিংস ডিফল্টে ফিরিয়ে নিন" data-en="Restore all settings to default">সমস্ত সেটিংস ডিফল্টে ফিরিয়ে নিন</span>
+      <button class="reset-btn" onclick="bsResetDemo()" title="Reset all settings">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
         <span data-bn="রিসেট" data-en="Reset">রিসেট</span>
       </button>
@@ -647,12 +692,19 @@ input:checked + .slider:before{transform:translateX(18px)}
   <div id="bs-details-pos" class="details-pos" data-bn="বিশেষ্য" data-en="Noun">বিশেষ্য</div>
   <div id="bs-details-meaning" class="details-meaning" data-bn="অর্থ এখানে দেখাবে।" data-en="Meaning will appear here.">অর্থ এখানে দেখাবে।</div>
 </div>
+<div id="personal-dict-popup" class="bodh-popup" style="min-width:280px;max-width:340px;">
+  <div class="popup-header">
+    <span style="font-size:13px;font-weight:700;color:var(--text)" data-bn="ব্যক্তিগত শব্দকোষ" data-en="Personal Dictionary">ব্যক্তিগত শব্দকোষ</span>
+    <span style="cursor:pointer;color:var(--muted)" onclick="bsClosePopups()">✕</span>
+  </div>
+  <div id="personal-dict-list" style="max-height:300px;overflow-y:auto;"></div>
+</div>
 <div id="bs-toast" class="toast"></div>
 
 </div><!-- /mainApp -->
 
 <script>
-/* ============ GLOBAL LANG ============ */
+/* ============ LANG ============ */
 let currentLang = 'bn';
 function t(bn, en){ return currentLang === 'bn' ? bn : en; }
 
@@ -661,9 +713,7 @@ function setLang(lang){
   document.querySelectorAll('#langToggle span').forEach(s=>{
     s.classList.toggle('active', s.dataset.lang === lang);
   });
-  /* text content for all data-bn elements (excluding sidebar-specific) */
   document.querySelectorAll('[data-bn]').forEach(el=>{
-    /* Skip anything inside the p1 sidebar — sidebar must stay unchanged */
     if(el.closest('#sidebar-p1')) return;
     const val = lang === 'bn' ? el.dataset.bn : el.dataset.en;
     if(val !== undefined) el.textContent = val;
@@ -673,22 +723,40 @@ function setLang(lang){
     if(val !== undefined) el.placeholder = val;
   });
   bsClosePopups();
-  bsRenderEditor();       /* re-renders editor + sidebar; sidebar forced Bengali */
+  bsRenderEditor();
   bsRenderDictionaries();
   bsSyncSuggestionCount(bsState.suggestionCount);
+  updatePersonalDictCount();
 }
 
 document.querySelectorAll('#langToggle span').forEach(s=>{
   s.addEventListener('click', function(){ setLang(this.dataset.lang); });
 });
 
-/* ============ AUTH / THEME / SHARE / NAV / DRAWER ============ */
+/* ============ AUTH ============ */
 function performLogin(){
   const e=document.getElementById('loginEmail').value.trim();
   if(!e){alert('ইমেইল বা ফোন নম্বর দিন');return;}
+  try { localStorage.setItem('bodh_loggedin', '1'); } catch(err) {}
   document.getElementById('authScreen').style.display='none';
   document.getElementById('mainApp').classList.remove('hidden');
 }
+function performLogout(){
+  try { localStorage.removeItem('bodh_loggedin'); } catch(err) {}
+  document.getElementById('authScreen').style.display='flex';
+  document.getElementById('mainApp').classList.add('hidden');
+  document.getElementById('userMenu').classList.remove('active');
+}
+function checkLoginState(){
+  try {
+    if(localStorage.getItem('bodh_loggedin') === '1'){
+      document.getElementById('authScreen').style.display='none';
+      document.getElementById('mainApp').classList.remove('hidden');
+    }
+  } catch(err) {}
+}
+
+/* ============ THEME / SHARE / NAV / DRAWER ============ */
 function toggleTheme(){
   const isDark=document.documentElement.getAttribute('data-theme')==='dark';
   document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
@@ -728,39 +796,35 @@ function toggleSidebar(btn){
   sb.classList.toggle('hidden-sidebar');
   const hidden=sb.classList.contains('hidden-sidebar');
   btn.innerHTML='<svg><use href="#i-chevron-'+(hidden?'right':'left')+'"/></svg>';
-  if(window.innerWidth<=1024){
-    document.getElementById('sidebarOverlay').classList.toggle('active',!hidden);
-  }
-}
-function closeSidebarOnMobile(){
-  const sb=document.getElementById('sidebar-p1');
-  sb.classList.add('hidden-sidebar');
-  document.getElementById('sidebarOverlay').classList.remove('active');
 }
 
-/* ============ BODH STATE ============ */
+/* ============ STATE ============ */
+const defaultDictionaries = [
+  {id:'ba_adhunik',name:'বাংলা একাডেমি আধুনিক বাংলা অভিধান',nameEn:'Bangla Academy Modern Bengali Dictionary',pub:'বাংলা একাডেমি, ঢাকা',pubEn:'Bangla Academy, Dhaka',active:true},
+  {id:'ba_byaboharik',name:'ব্যবহারিক বাংলা অভিধান',nameEn:'Practical Bengali Dictionary',pub:'বাংলা একাডেমি, ঢাকা',pubEn:'Bangla Academy, Dhaka',active:true},
+  {id:'ba_promito',name:'প্রমিত বাংলা বানানের নিয়ম শব্দকোষ',nameEn:'Standard Bengali Spelling Rules Glossary',pub:'বাংলা একাডেমি, ঢাকা',pubEn:'Bangla Academy, Dhaka',active:true},
+  {id:'samsad',name:'সংসদ বাঙ্গালা অভিধান',nameEn:'Samsad Bengali Dictionary',pub:'সাহিত্য সংসদ, কলকাতা',pubEn:'Sahitya Samsad, Kolkata',active:true},
+  {id:'cholontika',name:'চলন্তিকা (আধুনিক বঙ্গভাষার অভিধান)',nameEn:'Chalantika (Modern Bengali Dictionary)',pub:'রাজশেখর বসু',pubEn:'Rajshekhar Basu',active:false},
+  {id:'jnanendra',name:'বাঙ্গালা ভাষার অভিধান',nameEn:'Dictionary of the Bengali Language',pub:'জ্ঞানেন্দ্রমোহন দাস',pubEn:'Gyanendramohan Das',active:false},
+  {id:'bongiyo',name:'বঙ্গীয় শব্দকোষ',nameEn:'Bengali Word Treasury',pub:'হরিচরণ বন্দ্যোপাধ্যায়',pubEn:'Haricharan Bandyopadhyay',active:false},
+  {id:'ancholik',name:'বাংলাদেশের আঞ্চলিক ভাষার অভিধান',nameEn:'Dictionary of Regional Dialects of Bangladesh',pub:'ড. মুহম্মদ শহীদুল্লাহ',pubEn:'Dr. Muhammad Shahidullah',active:false},
+  {id:'biggan',name:'বিজ্ঞান ও প্রযুক্তি পরিভাষা কোষ',nameEn:'Science & Technology Terminology',pub:'তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ',pubEn:'ICT Division',active:true},
+  {id:'chikitsa',name:'চিকিৎসা ও স্বাস্থ্য পরিভাষা অভিধান',nameEn:'Medical & Health Terminology Dictionary',pub:'জাতীয় পরিভাষা কমিটি',pubEn:'National Terminology Committee',active:true},
+  {id:'ain',name:'আইন ও দাপ্তরিক পরিভাষা অভিধান',nameEn:'Legal & Administrative Terminology',pub:'আইন মন্ত্রণালয়',pubEn:'Ministry of Law',active:true},
+  {id:'nam_sthan',name:'বাংলাদেশের স্থান ও ব্যক্তিনাম শব্দকোষ',nameEn:'Bangladesh Place & Personal Names',pub:'প্রমিত নাম ডেটাবেজ',pubEn:'Standard Names Database',active:true}
+];
+
 const bsState={
   multiSug:true,suggestionCount:5,personalDictIcon:true,wordDetails:true,
   colorCoding:true,ignoreQuotes:false,
+  checkMode:'grammar',
+  encodingMode:'unicode',
   rules:{
     'korta-kriya':true,'sadhu-cholit':true,'jotichinho':true,'banan-vul':true,
     'bibidho':true,'prottoy-bivokti':true,'faka-hobe':true,'otirikto-faka':true,
     'jothartho-shobdo':true,'obboy':true,'bahullo':true,'context-vul':true
   },
-  dictionaries:[
-    {id:'ba_adhunik',name:'বাংলা একাডেমি আধুনিক বাংলা অভিধান',nameEn:'Bangla Academy Modern Bengali Dictionary',pub:'বাংলা একাডেমি, ঢাকা',pubEn:'Bangla Academy, Dhaka',active:true},
-    {id:'ba_byaboharik',name:'ব্যবহারিক বাংলা অভিধান',nameEn:'Practical Bengali Dictionary',pub:'বাংলা একাডেমি, ঢাকা',pubEn:'Bangla Academy, Dhaka',active:true},
-    {id:'ba_promito',name:'প্রমিত বাংলা বানানের নিয়ম শব্দকোষ',nameEn:'Standard Bengali Spelling Rules Glossary',pub:'বাংলা একাডেমি, ঢাকা',pubEn:'Bangla Academy, Dhaka',active:true},
-    {id:'samsad',name:'সংসদ বাঙ্গালা অভিধান',nameEn:'Samsad Bengali Dictionary',pub:'সাহিত্য সংসদ, কলকাতা',pubEn:'Sahitya Samsad, Kolkata',active:true},
-    {id:'cholontika',name:'চলন্তিকা (আধুনিক বঙ্গভাষার অভিধান)',nameEn:'Chalantika (Modern Bengali Dictionary)',pub:'রাজশেখর বসু',pubEn:'Rajshekhar Basu',active:false},
-    {id:'jnanendra',name:'বাঙ্গালা ভাষার অভিধান',nameEn:'Dictionary of the Bengali Language',pub:'জ্ঞানেন্দ্রমোহন দাস',pubEn:'Gyanendramohan Das',active:false},
-    {id:'bongiyo',name:'বঙ্গীয় শব্দকোষ',nameEn:'Bengali Word Treasury',pub:'হরিচরণ বন্দ্যোপাধ্যায়',pubEn:'Haricharan Bandyopadhyay',active:false},
-    {id:'ancholik',name:'বাংলাদেশের আঞ্চলিক ভাষার অভিধান',nameEn:'Dictionary of Regional Dialects of Bangladesh',pub:'ড. মুহম্মদ শহীদুল্লাহ',pubEn:'Dr. Muhammad Shahidullah',active:false},
-    {id:'biggan',name:'বিজ্ঞান ও প্রযুক্তি পরিভাষা কোষ',nameEn:'Science & Technology Terminology',pub:'তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ',pubEn:'ICT Division',active:true},
-    {id:'chikitsa',name:'চিকিৎসা ও স্বাস্থ্য পরিভাষা অভিধান',nameEn:'Medical & Health Terminology Dictionary',pub:'জাতীয় পরিভাষা কমিটি',pubEn:'National Terminology Committee',active:true},
-    {id:'ain',name:'আইন ও দাপ্তরিক পরিভাষা অভিধান',nameEn:'Legal & Administrative Terminology',pub:'আইন মন্ত্রণালয়',pubEn:'Ministry of Law',active:true},
-    {id:'nam_sthan',name:'বাংলাদেশের স্থান ও ব্যক্তিনাম শব্দকোষ',nameEn:'Bangladesh Place & Personal Names',pub:'প্রমিত নাম ডেটাবেজ',pubEn:'Standard Names Database',active:true}
-  ],
+  dictionaries: JSON.parse(JSON.stringify(defaultDictionaries)),
   personalWords:[],activeWordIndex:null
 };
 
@@ -816,6 +880,26 @@ function getTokenLabel(token){
   return currentLang === 'bn' ? token.label : (token.labelEn || token.label);
 }
 
+/* ============ CHECK MODE / ENCODING MODE ============ */
+function setCheckMode(mode){
+  bsState.checkMode = mode;
+  document.querySelectorAll('[data-check-mode]').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.checkMode === mode);
+  });
+  bsRenderEditor();
+  bsClosePopups();
+}
+function setEncodingMode(mode){
+  bsState.encodingMode = mode;
+  document.querySelectorAll('[data-encoding-mode]').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.encodingMode === mode);
+  });
+  bsRenderEditor();
+  bsClosePopups();
+  bsToast(mode === 'ascii' ? t('আসকি মোড চালু','ASCII mode active') : t('ইউনিকোড মোড চালু','Unicode mode active'));
+}
+
+/* ============ SETTINGS FUNCTIONS ============ */
 function bsSwitchTab(id){
   document.querySelectorAll('.bs-tab-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.bs-tab-content').forEach(c=>c.classList.remove('active'));
@@ -881,20 +965,32 @@ function bsToggleDictionary(i,val){
   bsToast(`${nm} ${val ? t('চালু হয়েছে','enabled') : t('বন্ধ হয়েছে','disabled')}`);
 }
 
+/* ============ RULE ACTIVE (mode aware) ============ */
 function bsIsRuleActive(token){
   if(!token.rule)return false;
   if(!bsState.rules[token.rule])return false;
   if(bsState.personalWords.includes(token.text.trim()))return false;
   if(bsState.ignoreQuotes&&token.isQuote)return false;
+  if(bsState.checkMode === 'spell'){
+    if(token.category !== 'err-spell' && token.category !== 'err-space') return false;
+  }
   return true;
 }
 
+/* ============ RENDER EDITOR ============ */
 function bsRenderEditor(){
   const editor=document.getElementById('bs-editor');
   editor.innerHTML='';
-  let spellErr=0,gramErr=0;
+  let spellErr=0,gramErr=0,totalSpellErr=0,totalGramErr=0;
 
   bsTokens.forEach((token,index)=>{
+    const isErrorAtAll = token.rule && bsState.rules[token.rule] &&
+                        !bsState.personalWords.includes(token.text.trim()) &&
+                        !(bsState.ignoreQuotes && token.isQuote);
+    if(isErrorAtAll){
+      if(token.category==='err-spell') totalSpellErr++; else totalGramErr++;
+    }
+
     const span=document.createElement('span');
     span.className='word-token';
     span.textContent=token.text;
@@ -928,9 +1024,22 @@ function bsRenderEditor(){
 
   document.getElementById('spellCount').textContent=toBn(spellErr);
   document.getElementById('gramCount').textContent=toBn(gramErr);
-  bsUpdateQuality(spellErr+gramErr);
+
+  const spellBadge = document.getElementById('spellBadge');
+  const gramBadge = document.getElementById('gramBadge');
+  if(bsState.checkMode === 'spell'){
+    spellBadge.style.display = 'flex';
+    gramBadge.style.display = 'none';
+  } else {
+    spellBadge.style.display = 'flex';
+    gramBadge.style.display = 'flex';
+  }
+
+  bsUpdateQuality(totalSpellErr + totalGramErr);
   bsRenderSidebar();
+  updatePersonalDictCount();
 }
+
 function toBn(n){
   if(currentLang === 'en') return n.toString();
   const b=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
@@ -947,7 +1056,6 @@ function bsUpdateQuality(errors){
   else sub.textContent = t('উন্নতি প্রয়োজন','Needs improvement');
 }
 
-/* IMPORTANT: Sidebar is language-independent — always Bengali */
 function bsRenderSidebar(){
   const c=document.getElementById('bs-sidebar-cards');
   c.innerHTML='';
@@ -957,7 +1065,6 @@ function bsRenderSidebar(){
     card.className='suggestion-card';
     const type=t.category==='err-spell'?'':'blue';
     const sug=(t.suggestions&&t.suggestions[0])||'';
-    /* Always Bengali label in sidebar */
     const sideLabel = t.label || 'ত্রুটি';
     card.innerHTML=`<div class="card-type ${type}">${sideLabel}</div>
       <div class="suggestion-action"><span class="wrong-text">${t.text}</span><span>→</span>
@@ -970,6 +1077,7 @@ function bsRenderSidebar(){
   }
 }
 
+/* ============ POPUPS ============ */
 function bsOpenSuggestion(token,index,x,y){
   bsClosePopups();
   bsState.activeWordIndex=index;
@@ -1002,6 +1110,8 @@ function bsPositionPopup(popup,x,y){
 function bsClosePopups(){
   document.getElementById('bs-suggestion-popup').classList.remove('visible');
   document.getElementById('bs-details-popup').classList.remove('visible');
+  const pdp = document.getElementById('personal-dict-popup');
+  if(pdp) pdp.classList.remove('visible');
 }
 function bsApplySuggestion(index,word){
   bsTokens[index].text=word;bsTokens[index].rule=null;
@@ -1015,6 +1125,49 @@ function bsAddToPersonalDict(){
   bsClosePopups();bsRenderEditor();
   bsToast(t(`"${w}" ব্যক্তিগত শব্দকোষে যোগ হয়েছে`,`"${w}" added to personal dictionary`));
 }
+
+/* ============ PERSONAL DICTIONARY POPUP ============ */
+function updatePersonalDictCount(){
+  const el = document.getElementById('personalDictCount');
+  if(el) el.textContent = toBn(bsState.personalWords.length);
+}
+function showPersonalDictPopup(btn){
+  bsClosePopups();
+  const popup = document.getElementById('personal-dict-popup');
+  renderPersonalDictPopup();
+  const rect = btn.getBoundingClientRect();
+  const left = Math.min(rect.left, window.innerWidth - 340);
+  const top = Math.min(rect.bottom + 8, window.innerHeight - 400);
+  popup.style.left = Math.max(12, left) + 'px';
+  popup.style.top = Math.max(12, top) + 'px';
+  popup.classList.add('visible');
+}
+function renderPersonalDictPopup(){
+  const list = document.getElementById('personal-dict-list');
+  list.innerHTML = '';
+  if(bsState.personalWords.length === 0){
+    list.innerHTML = `<div style="text-align:center;color:var(--muted);font-size:13px;padding:24px 12px">${t('এখনো কোনো শব্দ যোগ করা হয়নি।','No words added yet.')}</div>`;
+    return;
+  }
+  bsState.personalWords.forEach((word) => {
+    const item = document.createElement('div');
+    item.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:1px solid var(--border);font-size:14px;gap:8px;';
+    item.innerHTML = `
+      <span style="flex:1;word-break:break-word;">${word}</span>
+      <button style="background:rgba(239,68,68,.1);color:var(--red);border:none;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;flex-shrink:0;" onclick="removePersonalWord('${word.replace(/'/g,"\\'")}')">${t('ডিলিট','Delete')}</button>
+    `;
+    list.appendChild(item);
+  });
+}
+function removePersonalWord(word){
+  bsState.personalWords = bsState.personalWords.filter(w => w !== word);
+  renderPersonalDictPopup();
+  updatePersonalDictCount();
+  bsRenderEditor();
+  bsToast(t(`"${word}" ডিলিট হয়েছে`,`"${word}" deleted`));
+}
+
+/* ============ RESET ============ */
 function bsResetDemo(){
   bsTokens=JSON.parse(JSON.stringify(bsInitialTokens));
   bsState.personalWords=[];
@@ -1025,21 +1178,34 @@ function bsResetDemo(){
   };
   bsState.multiSug=true;bsState.suggestionCount=5;bsState.personalDictIcon=true;
   bsState.wordDetails=true;bsState.colorCoding=true;bsState.ignoreQuotes=false;
+  bsState.checkMode='grammar';
+  bsState.encodingMode='unicode';
+  bsState.dictionaries = JSON.parse(JSON.stringify(defaultDictionaries));
+
   document.querySelectorAll('.bs-sync-multi').forEach(el=>el.checked=true);
   document.querySelectorAll('.bs-sync-pdict').forEach(el=>el.checked=true);
   document.querySelectorAll('.bs-sync-details').forEach(el=>el.checked=true);
   document.querySelectorAll('.bs-sug-box').forEach(b=>b.classList.add('open'));
   document.getElementById('ribbonSadhu').checked=true;
   document.getElementById('bs-editor').classList.add('color-coded');
+
   document.querySelectorAll('#bs-tab-bakoron input[type="checkbox"]').forEach(cb=>{
     const oc=cb.getAttribute('onchange')||'';
     if(oc.includes('bsToggleRule')||oc.includes('bsToggleColorCoding'))cb.checked=true;
     if(oc.includes('bsToggleIgnoreQuotes'))cb.checked=false;
   });
+
+  document.querySelectorAll('[data-check-mode]').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.checkMode === 'grammar');
+  });
+  document.querySelectorAll('[data-encoding-mode]').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.encodingMode === 'unicode');
+  });
+
   bsRenderDictionaries();
   bsRenderEditor();
   bsSyncSuggestionCount(5);
-  bsToast(t('সব সেটিংস ও নমুনা লেখা রিসেট হয়েছে','All settings and sample text reset'));
+  bsToast(t('সব সেটিংস (অভিধানসহ) ডিফল্টে রিসেট হয়েছে','All settings (including dictionaries) reset to default'));
 }
 function bsToast(msg){
   const t=document.getElementById('bs-toast');
@@ -1051,7 +1217,7 @@ document.getElementById('ribbonSadhu').addEventListener('change',function(){
   bsSyncCommon('sadhu',this.checked);
 });
 
-/* TTS */
+/* ============ TTS ============ */
 let bsUtterance=null;
 function toggleSpeak(text,btn){
   if(!('speechSynthesis' in window)){bsToast(t('এই ব্রাউজারে TTS সাপোর্ট নেই','TTS not supported in this browser'));return;}
@@ -1068,12 +1234,17 @@ function toggleSpeak(text,btn){
   btn.innerHTML=stopHTML;
 }
 
-/* INIT */
+/* ============ INIT ============ */
+checkLoginState();
 bsRenderDictionaries();
 bsRenderEditor();
 bsSyncSuggestionCount(5);
+updatePersonalDictCount();
+
 document.addEventListener('click',e=>{
-  if(!e.target.closest('.bodh-popup')&&!e.target.closest('.word-token'))bsClosePopups();
+  if(!e.target.closest('.bodh-popup') && !e.target.closest('.word-token') && !e.target.closest('#personalDictBtn')){
+    bsClosePopups();
+  }
 });
 </script>
 </body>
