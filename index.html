@@ -85,8 +85,8 @@ header{background:var(--header-bg);border-bottom:1px solid var(--border);padding
 .user-logout-btn{background:rgba(239,68,68,.1);color:var(--red);border:none;padding:9px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
 .user-logout-btn:hover{background:rgba(239,68,68,.2)}
 
-/* RIBBON */
-.settings-ribbon{display:none;background:var(--hover-bg);border-bottom:1px solid var(--border);padding:10px 24px;justify-content:flex-start;align-items:center;z-index:4;flex-shrink:0;flex-wrap:wrap;gap:12px}
+/* RIBBON — টুলবারের মতো ডিজাইন */
+.settings-ribbon{display:none;background:var(--header-bg);border-bottom:1px solid var(--border);padding:10px 24px;justify-content:flex-start;align-items:center;z-index:4;flex-shrink:0;flex-wrap:wrap;gap:12px;min-height:52px}
 .settings-ribbon.active{display:flex}
 .ribbon-group{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 .ribbon-group .set-row{display:flex;align-items:center;gap:10px;border:none;padding:0;font-size:13px;font-weight:500;white-space:nowrap;flex-shrink:0}
@@ -94,9 +94,9 @@ header{background:var(--header-bg);border-bottom:1px solid var(--border);padding
 .ribbon-group input[type="checkbox"]{accent-color:var(--blue);width:16px;height:16px;cursor:pointer;flex-shrink:0}
 .ribbon-group input[type="range"]{accent-color:var(--blue);width:100px}
 
-/* RIBBON ACTIONS (p3/p4/p5) */
+/* RIBBON ACTIONS — শুধু আইকন */
 .ribbon-actions{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
-.ribbon-actions .btn-outline{padding:6px 12px}
+.ribbon-actions .btn-outline{padding:0;width:36px;height:36px;min-width:36px;justify-content:center;display:flex;align-items:center;gap:0}
 .btn-outline svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
 /* TOOLBAR */
@@ -124,7 +124,6 @@ input:checked + .slider:before{transform:translateX(18px)}
 .mode-btn:hover{color:var(--text)}
 .mode-btn.active{background:var(--blue);color:#fff;box-shadow:0 1px 3px rgba(41,82,227,.2)}
 
-/* QUALITY WIDGET (margin-left সরানো হয়েছে .toolbar-right এ) */
 .quality-widget{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .quality-circle{width:36px;height:36px;border-radius:50%;background:conic-gradient(from 180deg,#d946ef,#3b82f6,#06b6d4);display:flex;align-items:center;justify-content:center;position:relative}
 .quality-circle::before{content:"";position:absolute;inset:3px;background:var(--header-bg);border-radius:50%}
@@ -133,7 +132,6 @@ input:checked + .slider:before{transform:translateX(18px)}
 .quality-title{font-size:12.5px;font-weight:700;color:var(--text);line-height:1.2}
 .quality-sub{font-size:11px;color:var(--muted)}
 
-/* TOOLBAR RIGHT (p1) */
 .toolbar-right{display:flex;align-items:center;gap:14px;margin-left:auto;flex-shrink:0}
 .toolbar-actions{display:flex;align-items:center;gap:8px}
 
@@ -188,15 +186,11 @@ input:checked + .slider:before{transform:translateX(18px)}
 .close-btn:hover{background:var(--border)}
 .set-group{margin-bottom:24px;display:none}
 .set-group.active{display:block}
-.set-group h4{font-size:12px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;letter-spacing:.5px}
-.set-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border);font-size:14px;font-weight:500;color:var(--text)}
-.set-row:last-child{border-bottom:none}
-.set-row input[type="checkbox"]{accent-color:var(--blue);width:18px;height:18px;cursor:pointer}
 .hidden{display:none!important}
 .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;pointer-events:none}
 .sidebar-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
 
-/* BODH SETTINGS */
+/* BODH SETTINGS — P1-এর মতো স্টাইল */
 .bodh-settings{font-family:'Hind Siliguri',sans-serif}
 .bodh-settings .bs-tabs{display:flex;background:var(--hover-bg);border-radius:10px;padding:4px;gap:4px;margin-bottom:14px}
 .bodh-settings .bs-tab-btn{flex:1;padding:9px 12px;border:none;background:transparent;color:var(--muted);font-size:14px;font-weight:600;cursor:pointer;border-radius:7px;transition:.2s;font-family:inherit}
@@ -216,19 +210,24 @@ input:checked + .slider:before{transform:translateX(18px)}
 .bodh-settings .slider-toggle:before{content:"";position:absolute;height:16px;width:16px;left:3px;bottom:3px;background:#fff;transition:.25s;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,.2)}
 .bodh-settings input:checked + .slider-toggle{background:var(--blue)}
 .bodh-settings input:checked + .slider-toggle:before{transform:translateX(18px)}
+.bodh-settings .setting-row select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-family:inherit;font-size:13px;outline:none;background:var(--input-bg);color:var(--text);max-width:170px;flex-shrink:0;cursor:pointer}
+.bodh-settings .setting-row select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(41,82,227,.1)}
+.bodh-settings .setting-row input[type="range"]{width:120px;flex-shrink:0;height:6px;accent-color:var(--blue);cursor:pointer}
 .bodh-settings .sub-box{margin-top:10px;padding:10px 12px;background:var(--hover-bg);border-radius:8px;display:none}
 .bodh-settings .sub-box.open{display:block;animation:fadeIn .2s ease}
 .bodh-settings .range-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text)}
 .bodh-settings .range-badge{background:var(--blue);color:#fff;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:700}
 .bodh-settings input[type="range"]{width:100%;accent-color:var(--blue);height:6px;cursor:pointer}
 .bodh-settings .section-divider{margin:12px 0 4px;border-top:1px dashed var(--border)}
+.bodh-settings .section-label{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.6px;margin:16px 0 4px;padding-top:8px;border-top:1px dashed var(--border)}
+.bodh-settings .section-label:first-child{margin-top:0;padding-top:0;border-top:none}
 .bodh-settings .dict-header-bar{display:flex;justify-content:space-between;align-items:center;background:rgba(41,82,227,.07);padding:8px 12px;border-radius:8px;margin-bottom:10px;font-size:13px;color:var(--blue);font-weight:600}
 .bodh-settings .dict-list-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--editor-bg);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:border-color .2s}
 .bodh-settings .dict-list-item:hover{border-color:var(--blue)}
 .bodh-settings .dict-meta{display:flex;flex-direction:column;gap:2px;padding-right:10px;min-width:0}
 .bodh-settings .dict-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
 .bodh-settings .dict-pub{font-size:11px;color:var(--muted)}
-.reset-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.reset-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .reset-btn{background:var(--hover-bg);border:1px solid var(--border);padding:5px 12px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;color:var(--text);font-family:inherit;display:flex;align-items:center;gap:5px;transition:.2s}
 .reset-btn:hover{background:rgba(239,68,68,.08);border-color:var(--red);color:var(--red)}
 
@@ -407,7 +406,6 @@ input:checked + .slider:before{transform:translateX(18px)}
       </div>
       <div class="lang-toggle" id="langToggle"><span class="active" data-lang="bn">BN</span><span data-lang="en">EN</span></div>
 
-      <!-- USER PROFILE -->
       <div class="user-wrapper">
         <div class="user-avatar" onclick="toggleUserMenu(event)">P</div>
         <div class="user-dropdown" id="userMenu">
@@ -433,30 +431,45 @@ input:checked + .slider:before{transform:translateX(18px)}
   </div>
 </header>
 
-<!-- RIBBON for p3/p4/p5 -->
+<!-- RIBBON (p3/p4/p5) — শুধু আইকন, আপলোড আগে / ডাউনলোড পরে -->
 <div class="settings-ribbon" id="settingsRibbon">
   <div class="ribbon-group" data-svc="p3" style="display:none">
-    <div class="set-row"><span data-bn="ভাষা:" data-en="Language:">ভাষা:</span><select><option data-bn="বাংলা" data-en="Bengali">বাংলা</option><option data-bn="ইংরেজি" data-en="English">ইংরেজি</option></select></div>
+    <div class="set-row"><span data-bn="ভাষা:" data-en="Language:">ভাষা:</span>
+      <select id="p3RibbonLang">
+        <option value="bn" data-bn="বাংলা" data-en="Bengali">বাংলা</option>
+        <option value="en" data-bn="ইংরেজি" data-en="English">ইংরেজি</option>
+      </select>
+    </div>
     <div class="set-row"><input type="checkbox" checked id="chkLive"><label for="chkLive" data-bn="লাইভ প্রতিলিপি" data-en="Live Transcript">লাইভ প্রতিলিপি</label></div>
-    <div class="set-row"><input type="checkbox" checked id="chkPause"><label for="chkPause" data-bn="অটো বিরাম" data-en="Auto Pause">অটো বিরাম</label></div>
   </div>
   <div class="ribbon-group" data-svc="p4" style="display:none">
-    <div class="set-row"><span data-bn="কণ্ঠ:" data-en="Voice:">কণ্ঠ:</span><select><option data-bn="নারী" data-en="Female">নারী</option><option data-bn="পুরুষ" data-en="Male">পুরুষ</option></select></div>
-    <div class="set-row"><span data-bn="গতি:" data-en="Speed:">গতি:</span><input type="range" min="0.5" max="2" step="0.1" value="1" id="voiceRateRibbon"></div>
-    <div class="set-row"><input type="checkbox" id="chkAudio"><label for="chkAudio" data-bn="অডিও ডাউনলোড" data-en="Download Audio">অডিও ডাউনলোড</label></div>
+    <div class="set-row"><span data-bn="কণ্ঠ:" data-en="Voice:">কণ্ঠ:</span>
+      <select id="p4RibbonVoice">
+        <option data-bn="নারী" data-en="Female">নারী</option>
+        <option data-bn="পুরুষ" data-en="Male">পুরুষ</option>
+      </select>
+    </div>
+    <div class="set-row"><span data-bn="গতি:" data-en="Speed:">গতি:</span>
+      <input type="range" min="0.5" max="2" step="0.1" value="1" id="voiceRateRibbon">
+    </div>
   </div>
   <div class="ribbon-group" data-svc="p5" style="display:none">
+    <div class="set-row"><span data-bn="ভাষা:" data-en="Language:">ভাষা:</span>
+      <select id="p5RibbonLang">
+        <option value="bn" data-bn="বাংলা" data-en="Bengali">বাংলা</option>
+        <option value="en" data-bn="ইংরেজি" data-en="English">ইংরেজি</option>
+      </select>
+    </div>
     <div class="set-row"><input type="checkbox" checked id="chkHand"><label for="chkHand" data-bn="হাতে লেখা" data-en="Handwriting">হাতে লেখা</label></div>
-    <div class="set-row"><input type="checkbox" checked id="chkTable"><label for="chkTable" data-bn="টেবিল শনাক্ত" data-en="Table Detection">টেবিল শনাক্ত</label></div>
   </div>
   <div class="ribbon-actions" id="ribbonActions">
-    <button class="btn-outline" id="ribbonDownloadBtn" onclick="ribbonAction('download')">
-      <svg><use href="#i-download"/></svg>
-      <span data-bn="ডাউনলোড" data-en="Download">ডাউনলোড</span>
-    </button>
-    <button class="btn-outline" id="ribbonUploadBtn" onclick="ribbonAction('upload')">
+    <!-- UPLOAD (আগে) -->
+    <button class="btn-outline" id="ribbonUploadBtn" onclick="ribbonAction('upload')" title="Upload" aria-label="Upload">
       <svg><use href="#i-upload"/></svg>
-      <span data-bn="আপলোড" data-en="Upload">আপলোড</span>
+    </button>
+    <!-- DOWNLOAD (পরে) -->
+    <button class="btn-outline" id="ribbonDownloadBtn" onclick="ribbonAction('download')" title="Download" aria-label="Download">
+      <svg><use href="#i-download"/></svg>
     </button>
   </div>
 </div>
@@ -516,7 +529,6 @@ input:checked + .slider:before{transform:translateX(18px)}
 <!-- WORKSPACE -->
 <div class="workspace">
 
-  <!-- P1 -->
   <div class="view-section active" id="p1">
     <div class="sidebar" id="sidebar-p1">
       <div class="sidebar-header"><h3>বানান ও ব্যাকরণ</h3></div>
@@ -532,7 +544,6 @@ input:checked + .slider:before{transform:translateX(18px)}
     </div>
   </div>
 
-  <!-- P3 -->
   <div class="view-section" id="p3">
     <div class="mic-view">
       <h2 style="margin-bottom:8px;font-size:18px" data-bn="কথা থেকে লেখা" data-en="Speech to Text">কথা থেকে লেখা</h2>
@@ -544,7 +555,6 @@ input:checked + .slider:before{transform:translateX(18px)}
     </div>
   </div>
 
-  <!-- P4 -->
   <div class="view-section" id="p4">
     <div class="editor-container">
       <textarea id="ttsText" data-bn-placeholder="যে লেখাটি শুনতে চান তা লিখুন..." data-en-placeholder="Type the text you want to listen to...">বাংলা আমাদের মাতৃভাষা। প্রত্যেক বছর একুশে ফেব্রুয়ারি আমরা ভাষা শহিদের গভীর শ্রদ্ধার সাথে স্মরণ করি। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে সারা বিশ্বব্যাপী পালিত হয়।</textarea>
@@ -555,7 +565,6 @@ input:checked + .slider:before{transform:translateX(18px)}
     </div>
   </div>
 
-  <!-- P5 -->
   <div class="view-section" id="p5">
     <div class="ocr-view">
       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.5" style="margin-bottom:16px"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></svg>
@@ -572,7 +581,6 @@ input:checked + .slider:before{transform:translateX(18px)}
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<!-- FOOTER -->
 <footer class="app-footer">
   <span data-bn="© ২০২৪ বোধ। সর্বস্বত্ব সংরক্ষিত। | দাবিত্যাগ: এই সেবাটি কোনো প্রকার ওয়ারেন্টি ছাড়াই 'যেমন আছে তেমন' ভিত্তিতে প্রদান করা হয়েছে।" data-en="© 2024 Bodh. All rights reserved. | Disclaimer: This service is provided 'as is' without any warranty of any kind.">© ২০২৪ বোধ। সর্বস্বত্ব সংরক্ষিত। | দাবিত্যাগ: এই সেবাটি কোনো প্রকার ওয়ারেন্টি ছাড়াই 'যেমন আছে তেমন' ভিত্তিতে প্রদান করা হয়েছে।</span>
 </footer>
@@ -582,7 +590,7 @@ input:checked + .slider:before{transform:translateX(18px)}
 <aside class="drawer" id="drawer">
   <div class="drawer-header"><h3 data-bn="সেটিংস" data-en="Settings">সেটিংস</h3><button class="close-btn" onclick="toggleDrawer(false)">✕</button></div>
 
-  <!-- P1 -->
+  <!-- ===================== P1 — বানান ও ব্যাকরণ ===================== -->
   <div class="set-group active" data-svc="p1">
     <div class="reset-bar">
       <span style="font-size:11px;color:var(--muted);font-weight:500" data-bn="সমস্ত সেটিংস ডিফল্টে ফিরিয়ে নিন" data-en="Restore all settings to default">সমস্ত সেটিংস ডিফল্টে ফিরিয়ে নিন</span>
@@ -598,7 +606,6 @@ input:checked + .slider:before{transform:translateX(18px)}
         <button class="bs-tab-btn" onclick="bsSwitchTab('abhidhan')" data-bn="অভিধান" data-en="Dictionary">অভিধান</button>
       </div>
 
-      <!-- বানান tab -->
       <div id="bs-tab-banan" class="bs-tab-content active">
         <div class="setting-item">
           <div class="setting-row">
@@ -633,7 +640,6 @@ input:checked + .slider:before{transform:translateX(18px)}
         </div>
       </div>
 
-      <!-- ব্যাকরণ tab -->
       <div id="bs-tab-bakoron" class="bs-tab-content">
         <div class="setting-item">
           <div class="setting-row">
@@ -682,7 +688,6 @@ input:checked + .slider:before{transform:translateX(18px)}
         <div class="setting-item"><div class="setting-row"><div class="setting-info"><div class="setting-title" data-bn="উদ্ধৃতি চিহ্নের ভেতরের লেখা উপেক্ষা" data-en="Ignore Text Inside Quotes">উদ্ধৃতি চিহ্নের ভেতরের লেখা উপেক্ষা</div><div class="setting-desc" data-bn="উদ্ধৃতির ভেতরের সংলাপ ব্যাকরণ যাচাই থেকে বাদ" data-en="Skip grammar checks for dialogue inside quotation marks">উদ্ধৃতির ভেতরের সংলাপ ব্যাকরণ যাচাই থেকে বাদ</div></div><label class="switch"><input type="checkbox" onchange="bsToggleIgnoreQuotes(this.checked)"><span class="slider-toggle"></span></label></div></div>
       </div>
 
-      <!-- অভিধান tab -->
       <div id="bs-tab-abhidhan" class="bs-tab-content">
         <div class="dict-header-bar"><span data-bn="মোট সক্রিয় অভিধান" data-en="Active dictionaries">মোট সক্রিয় অভিধান</span><span id="bs-active-dict-count">৮ / ১২টি চালু</span></div>
         <div id="bs-dictionary-list"></div>
@@ -690,25 +695,579 @@ input:checked + .slider:before{transform:translateX(18px)}
     </div>
   </div>
 
-  <!-- P3 -->
+  <!-- ===================== P3 — কথা → লেখা ===================== -->
   <div class="set-group" data-svc="p3">
-    <h4 data-bn="কথা → লেখা সেটিংস" data-en="Speech → Text Settings">কথা → লেখা সেটিংস</h4>
-    <div class="set-row"><span data-bn="ভাষা" data-en="Language">ভাষা</span><select><option data-bn="বাংলা" data-en="Bengali">বাংলা</option><option data-bn="ইংরেজি" data-en="English">ইংরেজি</option></select></div>
-    <div class="set-row"><span data-bn="লাইভ প্রতিলিপি" data-en="Live Transcript">লাইভ প্রতিলিপি</span><input type="checkbox" checked></div>
-    <div class="set-row"><span data-bn="অটো বিরাম" data-en="Auto Pause">অটো বিরাম</span><input type="checkbox" checked></div>
+    <div class="reset-bar">
+      <span style="font-size:11px;color:var(--muted);font-weight:500" data-bn="সমস্ত সেটিংস ডিফল্টে ফিরিয়ে নিন" data-en="Restore all settings to default">সমস্ত সেটিংস ডিফল্টে ফিরিয়ে নিন</span>
+      <button class="reset-btn" onclick="resetServiceSettings('p3')" title="Reset all settings">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        <span data-bn="রিসেট" data-en="Reset">রিসেট</span>
+      </button>
+    </div>
+    <div class="bodh-settings">
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ভাষা নির্বাচন" data-en="Language Selection">ভাষা নির্বাচন</div>
+            <div class="setting-desc" data-bn="স্বীকৃত ভাষা নির্বাচন করুন" data-en="Choose the recognition language">স্বীকৃত ভাষা নির্বাচন করুন</div>
+          </div>
+          <select>
+            <option data-bn="বাংলা" data-en="Bengali" selected>বাংলা</option>
+            <option data-bn="ইংরেজি" data-en="English">ইংরেজি</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="বানান সংশোধন করুন" data-en="Correct Spelling">বানান সংশোধন করুন</div>
+            <div class="setting-desc" data-bn="রূপান্তরিত লেখায় বানান স্বয়ংক্রিয়ভাবে ঠিক করা হবে" data-en="Auto-correct spelling in the transcribed text">রূপান্তরিত লেখায় বানান স্বয়ংক্রিয়ভাবে ঠিক করা হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="অটো-কপি" data-en="Auto-copy">অটো-কপি</div>
+            <div class="setting-desc" data-bn="রূপান্তর শেষে স্বয়ংক্রিয়ভাবে ক্লিপবোর্ডে কপি হবে" data-en="Automatically copy result to clipboard after transcription">রূপান্তর শেষে স্বয়ংক্রিয়ভাবে ক্লিপবোর্ডে কপি হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="কথা বলার বিরতিতে স্বয়ংক্রিয়ভাবে থামুন" data-en="Auto-stop on speech pause">কথা বলার বিরতিতে স্বয়ংক্রিয়ভাবে থামুন</div>
+            <div class="setting-desc" data-bn="কথা বলা বন্ধ হলে রেকর্ডিং স্বয়ংক্রিয়ভাবে থেমে যাবে" data-en="Recording stops automatically when speech pauses">কথা বলা বন্ধ হলে রেকর্ডিং স্বয়ংক্রিয়ভাবে থেমে যাবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="যতিচিহ্ন যোগ করুন" data-en="Add Punctuation">যতিচিহ্ন যোগ করুন</div>
+            <div class="setting-desc" data-bn="বাক্য শেষে দাঁড়ি ও স্বাভাবিক যতিচিহ্ন যুক্ত হবে" data-en="Automatically add sentence-ending punctuation">বাক্য শেষে দাঁড়ি ও স্বাভাবিক যতিচিহ্ন যুক্ত হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ভয়েসের ভাষার ধরন" data-en="Voice Language Type">ভয়েসের ভাষার ধরন</div>
+            <div class="setting-desc" data-bn="প্রমিত বা আঞ্চলিক উচ্চারণ চেনা হবে" data-en="Recognize standard or regional pronunciation">প্রমিত বা আঞ্চলিক উচ্চারণ চেনা হবে</div>
+          </div>
+          <select>
+            <option data-bn="প্রমিত" data-en="Standard" selected>প্রমিত</option>
+            <option data-bn="আঞ্চলিক" data-en="Regional">আঞ্চলিক</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ইন্টারিম রেজাল্ট দেখান" data-en="Show Interim Results">ইন্টারিম রেজাল্ট দেখান</div>
+            <div class="setting-desc" data-bn="কথা বলার সময়েই সাময়িক ফল দেখাবে" data-en="Show partial results as you speak">কথা বলার সময়েই সাময়িক ফল দেখাবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="একাধিকবার শোনার সুযোগ" data-en="Multiple Listening Attempts">একাধিকবার শোনার সুযোগ</div>
+            <div class="setting-desc" data-bn="একই বাক্য একাধিকবার শোনা ও রূপান্তর করা যাবে" data-en="Allow re-listening and re-transcribing the same phrase">একই বাক্য একাধিকবার শোনা ও রূপান্তর করা যাবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="লেখার ফন্ট সাইজ" data-en="Text Font Size">লেখার ফন্ট সাইজ</div>
+            <div class="setting-desc" data-bn="রূপান্তরিত লেখার আকার নির্ধারণ করুন" data-en="Set the font size for the transcribed text">রূপান্তরিত লেখার আকার নির্ধারণ করুন</div>
+          </div>
+          <select>
+            <option data-bn="ছোট" data-en="Small">ছোট</option>
+            <option data-bn="মাঝারি" data-en="Medium" selected>মাঝারি</option>
+            <option data-bn="বড়" data-en="Large">বড়</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- P4 -->
+
+  <!-- ===================== P4 — লেখা → কথা (হেডিং বাদ) ===================== -->
   <div class="set-group" data-svc="p4">
-    <h4 data-bn="লেখা → কথা সেটিংস" data-en="Text → Speech Settings">লেখা → কথা সেটিংস</h4>
-    <div class="set-row"><span data-bn="কণ্ঠ" data-en="Voice">কণ্ঠ</span><select><option data-bn="নারী" data-en="Female">নারী</option><option data-bn="পুরুষ" data-en="Male">পুরুষ</option></select></div>
-    <div class="set-row"><span data-bn="গতি" data-en="Speed">গতি</span><input type="range" min="0.5" max="2" step="0.1" value="1"></div>
-    <div class="set-row"><span data-bn="অডিও ডাউনলোড" data-en="Download Audio">অডিও ডাউনলোড</span><input type="checkbox"></div>
+    <div class="reset-bar">
+      <span style="font-size:11px;color:var(--muted);font-weight:500" data-bn="সমস্ত সেটিংস ডিফল্টে ফিরিয়ে নিন" data-en="Restore all settings to default">সমস্ত সেটিংস ডিফল্টে ফিরিয়ে নিন</span>
+      <button class="reset-btn" onclick="resetServiceSettings('p4')" title="Reset all settings">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        <span data-bn="রিসেট" data-en="Reset">রিসেট</span>
+      </button>
+    </div>
+    <div class="bodh-settings">
+      <div class="section-label" data-bn="ভয়েস" data-en="Voice">ভয়েস</div>
+
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ভাষা নির্বাচন" data-en="Language Selection">ভাষা নির্বাচন</div>
+            <div class="setting-desc" data-bn="টেক্সট পাঠের ভাষা নির্বাচন করুন" data-en="Choose the language for text reading">টেক্সট পাঠের ভাষা নির্বাচন করুন</div>
+          </div>
+          <select>
+            <option data-bn="বাংলা" data-en="Bengali" selected>বাংলা</option>
+            <option data-bn="ইংরেজি" data-en="English">ইংরেজি</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="কণ্ঠ নির্বাচন" data-en="Voice Selection">কণ্ঠ নির্বাচন</div>
+            <div class="setting-desc" data-bn="নারীবাচক বা পুরুষবাচক কণ্ঠ বেছে নিন" data-en="Choose female or male voice">নারীবাচক বা পুরুষবাচক কণ্ঠ বেছে নিন</div>
+          </div>
+          <select>
+            <option data-bn="নারী" data-en="Female" selected>নারী</option>
+            <option data-bn="পুরুষ" data-en="Male">পুরুষ</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ভয়েসের ভাষার ধরন" data-en="Voice Language Type">ভয়েসের ভাষার ধরন</div>
+            <div class="setting-desc" data-bn="প্রমিত বা আঞ্চলিক উচ্চারণে পাঠ করা হবে" data-en="Read in standard or regional pronunciation">প্রমিত বা আঞ্চলিক উচ্চারণে পাঠ করা হবে</div>
+          </div>
+          <select>
+            <option data-bn="প্রমিত" data-en="Standard" selected>প্রমিত</option>
+            <option data-bn="আঞ্চলিক" data-en="Regional">আঞ্চলিক</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="কোড মিক্সিং" data-en="Code Mixing">কোড মিক্সিং</div>
+            <div class="setting-desc" data-bn="বাংলা-ইংরেজি মিশ্রিত লেখা যথাযথভাবে পাঠ করা হবে" data-en="Correctly read mixed Bengali-English text">বাংলা-ইংরেজি মিশ্রিত লেখা যথাযথভাবে পাঠ করা হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+
+      <div class="section-label" data-bn="গতি ও উচ্চারণ" data-en="Speed & Pronunciation">গতি ও উচ্চারণ</div>
+
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="কথা বলার গতি" data-en="Speech Speed">কথা বলার গতি</div>
+            <div class="setting-desc" data-bn="পাঠের গতি বাড়ান বা কমান" data-en="Increase or decrease reading speed">পাঠের গতি বাড়ান বা কমান</div>
+          </div>
+          <input type="range" min="0.5" max="2" step="0.1" value="1">
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="কণ্ঠের তীক্ষ্ণতা" data-en="Pitch">কণ্ঠের তীক্ষ্ণতা</div>
+            <div class="setting-desc" data-bn="কণ্ঠস্বরের তীক্ষ্ণতা নিয়ন্ত্রণ করুন" data-en="Adjust the pitch of the voice">কণ্ঠস্বরের তীক্ষ্ণতা নিয়ন্ত্রণ করুন</div>
+          </div>
+          <input type="range" min="0.5" max="2" step="0.1" value="1">
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ভলিউম" data-en="Volume">ভলিউম</div>
+            <div class="setting-desc" data-bn="পাঠের শব্দের মাত্রা নিয়ন্ত্রণ করুন" data-en="Control playback volume">পাঠের শব্দের মাত্রা নিয়ন্ত্রণ করুন</div>
+          </div>
+          <input type="range" min="0" max="1" step="0.05" value="1">
+        </div>
+      </div>
+
+      <div class="section-label" data-bn="বিরতি" data-en="Pauses">বিরতি</div>
+
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="সেন্টেন্স ব্রেকারে পর বিরতি" data-en="Pause after sentence break">সেন্টেন্স ব্রেকারে পর বিরতি</div>
+            <div class="setting-desc" data-bn="বাক্য শেষে কত সেকেন্ড থামবে" data-en="Seconds to pause after a sentence">বাক্য শেষে কত সেকেন্ড থামবে</div>
+          </div>
+          <input type="range" min="0" max="2" step="0.1" value="0.5">
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="কমার পর বিরতি" data-en="Pause after comma">কমার পর বিরতি</div>
+            <div class="setting-desc" data-bn="কমার পর কত সেকেন্ড থামবে" data-en="Seconds to pause after a comma">কমার পর কত সেকেন্ড থামবে</div>
+          </div>
+          <input type="range" min="0" max="1" step="0.1" value="0.3">
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="অনুচ্ছেদের পর বিরতি" data-en="Pause after paragraph">অনুচ্ছেদের পর বিরতি</div>
+            <div class="setting-desc" data-bn="অনুচ্ছেদ শেষে কত সেকেন্ড থামবে" data-en="Seconds to pause after a paragraph">অনুচ্ছেদ শেষে কত সেকেন্ড থামবে</div>
+          </div>
+          <input type="range" min="0" max="3" step="0.1" value="1">
+        </div>
+      </div>
+
+      <div class="section-label" data-bn="উচ্চারণ নিয়ম" data-en="Pronunciation Rules">উচ্চারণ নিয়ম</div>
+
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ইমোজি ও প্রতীক পাঠ" data-en="Read emoji & symbols">ইমোজি ও প্রতীক পাঠ</div>
+            <div class="setting-desc" data-bn="ইমোজি ও বিশেষ চিহ্ন শব্দে পড়ে শোনাবে" data-en="Read emojis and special symbols as words">ইমোজি ও বিশেষ চিহ্ন শব্দে পড়ে শোনাবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="সংখ্যা ও তারিখ পাঠরীতি" data-en="Number & date reading style">সংখ্যা ও তারিখ পাঠরীতি</div>
+            <div class="setting-desc" data-bn="সংখ্যা স্বাভাবিক বা শব্দে পড়া হবে" data-en="Read numbers normally or in words">সংখ্যা স্বাভাবিক বা শব্দে পড়া হবে</div>
+          </div>
+          <select>
+            <option data-bn="স্বাভাবিক" data-en="Normal" selected>স্বাভাবিক</option>
+            <option data-bn="শব্দে" data-en="In words">শব্দে</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="সংক্ষিপ্ত রূপ সম্প্রসারণ" data-en="Expand abbreviations">সংক্ষিপ্ত রূপ সম্প্রসারণ</div>
+            <div class="setting-desc" data-bn="সংক্ষিপ্ত রূপকে পূর্ণ রূপে পড়া হবে" data-en="Read abbreviations as full forms">সংক্ষিপ্ত রূপকে পূর্ণ রূপে পড়া হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+
+      <div class="section-label" data-bn="প্রদর্শন" data-en="Display">প্রদর্শন</div>
+
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="লাইভ শব্দ হাইলাইটিং" data-en="Live word highlighting">লাইভ শব্দ হাইলাইটিং</div>
+            <div class="setting-desc" data-bn="পাঠের সময় চলমান শব্দ হাইলাইট হবে" data-en="Highlight the currently spoken word">পাঠের সময় চলমান শব্দ হাইলাইট হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="অটো-স্ক্রল" data-en="Auto-scroll">অটো-স্ক্রল</div>
+            <div class="setting-desc" data-bn="পাঠের সাথে সাথে লেখা স্বয়ংক্রিয়ভাবে স্ক্রল হবে" data-en="Text auto-scrolls with the reading">পাঠের সাথে সাথে লেখা স্বয়ংক্রিয়ভাবে স্ক্রল হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="নির্বাচিত অংশ পড়ুন" data-en="Read selected text only">নির্বাচিত অংশ পড়ুন</div>
+            <div class="setting-desc" data-bn="শুধু নির্বাচিত অংশ পাঠ করা হবে" data-en="Read only the selected portion">শুধু নির্বাচিত অংশ পাঠ করা হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="রিপিট" data-en="Repeat">রিপিট</div>
+            <div class="setting-desc" data-bn="একই লেখা কতবার পাঠ করা হবে" data-en="How many times to repeat playback">একই লেখা কতবার পাঠ করা হবে</div>
+          </div>
+          <select>
+            <option value="0" data-bn="না" data-en="No" selected>না</option>
+            <option value="1" data-bn="১ বার" data-en="Once">১ বার</option>
+            <option value="2" data-bn="২ বার" data-en="Twice">২ বার</option>
+            <option value="3" data-bn="৩ বার" data-en="Thrice">৩ বার</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ফন্ট সাইজ" data-en="Font Size">ফন্ট সাইজ</div>
+            <div class="setting-desc" data-bn="পাঠ্য এলাকার লেখার আকার" data-en="Font size of the text area">পাঠ্য এলাকার লেখার আকার</div>
+          </div>
+          <select>
+            <option data-bn="ছোট" data-en="Small">ছোট</option>
+            <option data-bn="মাঝারি" data-en="Medium" selected>মাঝারি</option>
+            <option data-bn="বড়" data-en="Large">বড়</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-label" data-bn="অডিও আউটপুট" data-en="Audio Output">অডিও আউটপুট</div>
+
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="অডিও ফরম্যাট" data-en="Audio format">অডিও ফরম্যাট</div>
+            <div class="setting-desc" data-bn="ডাউনলোডকৃত অডিওর ফরম্যাট" data-en="Format of the downloadable audio">ডাউনলোডকৃত অডিওর ফরম্যাট</div>
+          </div>
+          <select>
+            <option selected>MP3</option>
+            <option>WAV</option>
+            <option>OGG</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="অডিও কোয়ালিটি" data-en="Audio quality">অডিও কোয়ালিটি</div>
+            <div class="setting-desc" data-bn="অডিওর গুণমান নির্ধারণ করুন" data-en="Choose audio quality level">অডিওর গুণমান নির্ধারণ করুন</div>
+          </div>
+          <select>
+            <option data-bn="নিম্ন" data-en="Low">নিম্ন</option>
+            <option data-bn="মাঝারি" data-en="Medium" selected>মাঝারি</option>
+            <option data-bn="উচ্চ" data-en="High">উচ্চ</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ব্যাকগ্রাউন্ড মিউজিক" data-en="Background music">ব্যাকগ্রাউন্ড মিউজিক</div>
+            <div class="setting-desc" data-bn="পাঠের সাথে হালকা আবহসংগীত যোগ হবে" data-en="Add soft background music during playback">পাঠের সাথে হালকা আবহসংগীত যোগ হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- P5 -->
+
+  <!-- ===================== P5 — ওসিআর ===================== -->
   <div class="set-group" data-svc="p5">
-    <h4 data-bn="ওসিআর সেটিংস" data-en="OCR Settings">ওসিআর সেটিংস</h4>
-    <div class="set-row"><span data-bn="হাতে লেখা" data-en="Handwriting">হাতে লেখা</span><input type="checkbox" checked></div>
-    <div class="set-row"><span data-bn="টেবিল শনাক্ত" data-en="Table Detection">টেবিল শনাক্ত</span><input type="checkbox" checked></div>
+    <div class="reset-bar">
+      <span style="font-size:11px;color:var(--muted);font-weight:500" data-bn="সমস্ত সেটিংস ডিফল্টে ফিরিয়ে নিন" data-en="Restore all settings to default">সমস্ত সেটিংস ডিফল্টে ফিরিয়ে নিন</span>
+      <button class="reset-btn" onclick="resetServiceSettings('p5')" title="Reset all settings">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        <span data-bn="রিসেট" data-en="Reset">রিসেট</span>
+      </button>
+    </div>
+    <div class="bodh-settings">
+      <div class="section-label" data-bn="সাধারণ" data-en="General">সাধারণ</div>
+
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ভাষা নির্বাচন" data-en="Language Selection">ভাষা নির্বাচন</div>
+            <div class="setting-desc" data-bn="OCR-এর স্বীকৃত ভাষা" data-en="Recognition language for OCR">OCR-এর স্বীকৃত ভাষা</div>
+          </div>
+          <select>
+            <option data-bn="বাংলা" data-en="Bengali" selected>বাংলা</option>
+            <option data-bn="ইংরেজি" data-en="English">ইংরেজি</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="বানান সংশোধন করুন" data-en="Correct Spelling">বানান সংশোধন করুন</div>
+            <div class="setting-desc" data-bn="OCR থেকে পাওয়া লেখার বানান স্বয়ংক্রিয়ভাবে ঠিক হবে" data-en="Auto-correct spelling of OCR output">OCR থেকে পাওয়া লেখার বানান স্বয়ংক্রিয়ভাবে ঠিক হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="যুক্তাক্ষর ফিক্স" data-en="Fix conjuncts">যুক্তাক্ষর ফিক্স</div>
+            <div class="setting-desc" data-bn="ভাঙা যুক্তাক্ষর স্বয়ংক্রিয়ভাবে জোড়া লাগানো হবে" data-en="Auto-fix broken conjunct consonants">ভাঙা যুক্তাক্ষর স্বয়ংক্রিয়ভাবে জোড়া লাগানো হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="হাতের লেখা মোড" data-en="Handwriting mode">হাতের লেখা মোড</div>
+            <div class="setting-desc" data-bn="হাতে লেখা পৃষ্ঠা চেনার জন্য বিশেষ মোড" data-en="Special mode for recognizing handwritten text">হাতে লেখা পৃষ্ঠা চেনার জন্য বিশেষ মোড</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+
+      <div class="section-label" data-bn="ইমেজ প্রসেসিং" data-en="Image Processing">ইমেজ প্রসেসিং</div>
+
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="দাগ ও ঝাপসা ভাব কমানো" data-en="Reduce noise & blur">দাগ ও ঝাপসা ভাব কমানো</div>
+            <div class="setting-desc" data-bn="ছবির দাগ ও ঝাপসা ভাব কমিয়ে স্পষ্ট করা হবে" data-en="Denoise and deblur the image for clarity">ছবির দাগ ও ঝাপসা ভাব কমিয়ে স্পষ্ট করা হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ছবি সোজা ও পরিষ্কার করা" data-en="Straighten & clean image">ছবি সোজা ও পরিষ্কার করা</div>
+            <div class="setting-desc" data-bn="বাঁকা ছবি স্বয়ংক্রিয়ভাবে সোজা ও পরিষ্কার হবে" data-en="Auto-rotate skewed images and clean them">বাঁকা ছবি স্বয়ংক্রিয়ভাবে সোজা ও পরিষ্কার হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ইনভার্ট কালার" data-en="Invert colors">ইনভার্ট কালার</div>
+            <div class="setting-desc" data-bn="সাদা-কালো ছবির রঙ উল্টে দেওয়া হবে" data-en="Invert black/white for better recognition">সাদা-কালো ছবির রঙ উল্টে দেওয়া হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+
+      <div class="section-label" data-bn="কনটেন্ট শনাক্তকরণ" data-en="Content Detection">কনটেন্ট শনাক্তকরণ</div>
+
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="গাণিতিক সমীকরণ" data-en="Mathematical equations">গাণিতিক সমীকরণ</div>
+            <div class="setting-desc" data-bn="ছবিতে থাকা সমীকরণ শনাক্ত ও রূপান্তর হবে" data-en="Detect and convert equations in images">ছবিতে থাকা সমীকরণ শনাক্ত ও রূপান্তর হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="টেবিল ও ছক সংরক্ষণ" data-en="Preserve tables">টেবিল ও ছক সংরক্ষণ</div>
+            <div class="setting-desc" data-bn="টেবিল আকারে থাকা তথ্য সারণি হিসেবে সংরক্ষিত হবে" data-en="Preserve tabular data as tables in output">টেবিল আকারে থাকা তথ্য সারণি হিসেবে সংরক্ষিত হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="একাধিক কলাম" data-en="Multiple columns">একাধিক কলাম</div>
+            <div class="setting-desc" data-bn="বহু-কলাম লেখা সঠিকভাবে ক্রমানুসারে পড়া হবে" data-en="Read multi-column text in correct order">বহু-কলাম লেখা সঠিকভাবে ক্রমানুসারে পড়া হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+
+      <div class="section-label" data-bn="আউটপুট" data-en="Output">আউটপুট</div>
+
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="অপ্রয়োজনীয় লাইন ব্রেক জোড়া লাগানো" data-en="Join unnecessary line breaks">অপ্রয়োজনীয় লাইন ব্রেক জোড়া লাগানো</div>
+            <div class="setting-desc" data-bn="মাঝপথে ভাঙা বাক্য জোড়া লাগিয়ে দেওয়া হবে" data-en="Merge broken lines into continuous sentences">মাঝপথে ভাঙা বাক্য জোড়া লাগিয়ে দেওয়া হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="হেডার ও ফুটার বাদ দেওয়া" data-en="Remove headers & footers">হেডার ও ফুটার বাদ দেওয়া</div>
+            <div class="setting-desc" data-bn="পৃষ্ঠার ওপর-নিচের পুনরাবৃত্ত অংশ বাদ যাবে" data-en="Skip repeating header/footer content">পৃষ্ঠার ওপর-নিচের পুনরাবৃত্ত অংশ বাদ যাবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="সন্দেহজনক শব্দ হাইলাইট" data-en="Highlight doubtful words">সন্দেহজনক শব্দ হাইলাইট</div>
+            <div class="setting-desc" data-bn="যে শব্দগুলো নিশ্চিতভাবে চেনা যায়নি তা হাইলাইট হবে" data-en="Highlight words with low confidence">যে শব্দগুলো নিশ্চিতভাবে চেনা যায়নি তা হাইলাইট হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ব্যক্তিগত তথ্য গোপন করা" data-en="Redact personal data">ব্যক্তিগত তথ্য গোপন করা</div>
+            <div class="setting-desc" data-bn="ফোন নম্বর, ইমেইল ইত্যাদি স্বয়ংক্রিয়ভাবে মাস্ক হবে" data-en="Auto-mask phone numbers, emails, etc.">ফোন নম্বর, ইমেইল ইত্যাদি স্বয়ংক্রিয়ভাবে মাস্ক হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="নির্দিষ্ট অংশ সিলেক্ট" data-en="Select specific region">নির্দিষ্ট অংশ সিলেক্ট</div>
+            <div class="setting-desc" data-bn="ছবির নির্দিষ্ট অংশ বেছে নিয়ে OCR করা যাবে" data-en="OCR a chosen region of the image">ছবির নির্দিষ্ট অংশ বেছে নিয়ে OCR করা যাবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="পৃষ্ঠা নির্বাচন" data-en="Page selection">পৃষ্ঠা নির্বাচন</div>
+            <div class="setting-desc" data-bn="সব পৃষ্ঠা বা নির্দিষ্ট পৃষ্ঠা প্রসেস করা হবে" data-en="Process all pages or selected pages">সব পৃষ্ঠা বা নির্দিষ্ট পৃষ্ঠা প্রসেস করা হবে</div>
+          </div>
+          <select>
+            <option data-bn="সব" data-en="All" selected>সব</option>
+            <option data-bn="নির্দিষ্ট" data-en="Custom">নির্দিষ্ট</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="অটো-কপি" data-en="Auto-copy">অটো-কপি</div>
+            <div class="setting-desc" data-bn="OCR শেষে ফলাফল ক্লিপবোর্ডে স্বয়ংক্রিয়ভাবে কপি হবে" data-en="Auto-copy OCR result to clipboard">OCR শেষে ফলাফল ক্লিপবোর্ডে স্বয়ংক্রিয়ভাবে কপি হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="আগের লেখার সাথে যুক্ত করা" data-en="Append to previous text">আগের লেখার সাথে যুক্ত করা</div>
+            <div class="setting-desc" data-bn="নতুন ফলাফল আগের লেখার শেষে যোগ হবে" data-en="Append new result to previous text">নতুন ফলাফল আগের লেখার শেষে যোগ হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="ডাউনলোড ফরম্যাট" data-en="Download format">ডাউনলোড ফরম্যাট</div>
+            <div class="setting-desc" data-bn="ফলাফল কোন ফরম্যাটে ডাউনলোড হবে" data-en="Format for downloading the result">ফলাফল কোন ফরম্যাটে ডাউনলোড হবে</div>
+          </div>
+          <select>
+            <option selected>TXT</option>
+            <option>DOCX</option>
+            <option>PDF</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="অফলাইন মোড" data-en="Offline mode">অফলাইন মোড</div>
+            <div class="setting-desc" data-bn="ইন্টারনেট ছাড়া ডিভাইসে প্রসেস করা হবে" data-en="Process on device without internet">ইন্টারনেট ছাড়া ডিভাইসে প্রসেস করা হবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-title" data-bn="অটো-ডিলিট" data-en="Auto-delete">অটো-ডিলিট</div>
+            <div class="setting-desc" data-bn="প্রসেস শেষে আপলোডকৃত ছবি স্বয়ংক্রিয়ভাবে মুছে যাবে" data-en="Auto-delete uploaded images after processing">প্রসেস শেষে আপলোডকৃত ছবি স্বয়ংক্রিয়ভাবে মুছে যাবে</div>
+          </div>
+          <label class="switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+        </div>
+      </div>
+    </div>
   </div>
 </aside>
 
@@ -836,12 +1395,11 @@ function toggleSidebar(btn){
   btn.innerHTML='<svg><use href="#i-chevron-'+(hidden?'right':'left')+'"/></svg>';
 }
 
-/* ============ RIBBON ACTIONS (Download / Upload) ============ */
+/* ============ RIBBON ACTIONS ============ */
 function ribbonAction(action, service){
   const svc = service || (document.querySelector('.nav-item.active')?.dataset.p) || 'p1';
   if(action === 'download'){
     bsToast(t('ডাউনলোড শুরু হচ্ছে...','Download starting...'));
-    // চাইলে সার্ভিস-ভিত্তিক ডাউনলোড লজিক এখানে বসান
   } else if(action === 'upload'){
     const inp = document.createElement('input');
     inp.type = 'file';
@@ -856,6 +1414,25 @@ function ribbonAction(action, service){
     };
     inp.click();
   }
+}
+
+/* ============ RESET SERVICE SETTINGS (p3/p4/p5) ============ */
+function resetServiceSettings(svc){
+  const group = document.querySelector(`.set-group[data-svc="${svc}"]`);
+  if(!group){ bsToast(t('সেটিংস পাওয়া যায়নি','Settings not found')); return; }
+  group.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.checked = cb.defaultChecked;
+  });
+  group.querySelectorAll('select').forEach(s => {
+    for(let i = 0; i < s.options.length; i++){
+      s.options[i].selected = s.options[i].defaultSelected;
+    }
+  });
+  group.querySelectorAll('input[type="range"]').forEach(r => {
+    const dv = r.getAttribute('value');
+    if(dv !== null) r.value = dv;
+  });
+  bsToast(t('সব সেটিংস ডিফল্টে রিসেট হয়েছে','All settings reset to default'));
 }
 
 /* ============ STATE ============ */
@@ -1025,7 +1602,7 @@ function bsToggleDictionary(i,val){
   bsToast(`${nm} ${val ? t('চালু হয়েছে','enabled') : t('বন্ধ হয়েছে','disabled')}`);
 }
 
-/* ============ RULE ACTIVE (mode aware) ============ */
+/* ============ RULE ACTIVE ============ */
 function bsIsRuleActive(token){
   if(!token.rule)return false;
   if(!bsState.rules[token.rule])return false;
@@ -1227,7 +1804,7 @@ function removePersonalWord(word){
   bsToast(t(`"${word}" ডিলিট হয়েছে`,`"${word}" deleted`));
 }
 
-/* ============ RESET ============ */
+/* ============ RESET (P1) ============ */
 function bsResetDemo(){
   bsTokens=JSON.parse(JSON.stringify(bsInitialTokens));
   bsState.personalWords=[];
