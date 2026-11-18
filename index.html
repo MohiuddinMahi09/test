@@ -94,6 +94,11 @@ header{background:var(--header-bg);border-bottom:1px solid var(--border);padding
 .ribbon-group input[type="checkbox"]{accent-color:var(--blue);width:16px;height:16px;cursor:pointer;flex-shrink:0}
 .ribbon-group input[type="range"]{accent-color:var(--blue);width:100px}
 
+/* RIBBON ACTIONS (p3/p4/p5) */
+.ribbon-actions{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+.ribbon-actions .btn-outline{padding:6px 12px}
+.btn-outline svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
 /* TOOLBAR */
 .toolbar{background:var(--header-bg);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;flex-wrap:wrap;gap:12px;z-index:5;flex-shrink:0}
 .tool-group{display:flex;align-items:center;gap:10px;flex-shrink:0;padding-right:14px;border-right:1px solid var(--border)}
@@ -118,13 +123,19 @@ input:checked + .slider:before{transform:translateX(18px)}
 .mode-btn{padding:5px 12px;border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit;transition:.2s;white-space:nowrap}
 .mode-btn:hover{color:var(--text)}
 .mode-btn.active{background:var(--blue);color:#fff;box-shadow:0 1px 3px rgba(41,82,227,.2)}
-.quality-widget{display:flex;align-items:center;gap:10px;flex-shrink:0;margin-left:auto}
+
+/* QUALITY WIDGET (margin-left সরানো হয়েছে .toolbar-right এ) */
+.quality-widget{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .quality-circle{width:36px;height:36px;border-radius:50%;background:conic-gradient(from 180deg,#d946ef,#3b82f6,#06b6d4);display:flex;align-items:center;justify-content:center;position:relative}
 .quality-circle::before{content:"";position:absolute;inset:3px;background:var(--header-bg);border-radius:50%}
 .quality-number{position:relative;font-size:13px;font-weight:700;color:var(--text)}
 .quality-text{display:flex;flex-direction:column}
 .quality-title{font-size:12.5px;font-weight:700;color:var(--text);line-height:1.2}
 .quality-sub{font-size:11px;color:var(--muted)}
+
+/* TOOLBAR RIGHT (p1) */
+.toolbar-right{display:flex;align-items:center;gap:14px;margin-left:auto;flex-shrink:0}
+.toolbar-actions{display:flex;align-items:center;gap:8px}
 
 /* WORKSPACE */
 .workspace{display:flex;flex:1;padding:24px;gap:24px;overflow:hidden;justify-content:center}
@@ -268,6 +279,7 @@ input:checked + .slider:before{transform:translateX(18px)}
   .sidebar-toggle-tab{left:12px;top:12px;transform:none;width:36px;height:36px;border-radius:8px;border:1px solid var(--border);border-right:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.08);background:var(--header-bg)}
   .sidebar-toggle-tab svg{width:16px;height:16px}
   .quality-widget{display:none}
+  .toolbar-actions .btn-outline span{font-size:12px}
   .toolbar{flex-wrap:wrap;justify-content:flex-start;gap:10px}
   .tool-group{border-right:none;padding-right:0}
   .settings-ribbon{flex-wrap:wrap;justify-content:flex-start;gap:12px;padding:10px 16px}
@@ -351,6 +363,7 @@ input:checked + .slider:before{transform:translateX(18px)}
   <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
   <symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></symbol>
   <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
   <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
   <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
@@ -436,6 +449,16 @@ input:checked + .slider:before{transform:translateX(18px)}
     <div class="set-row"><input type="checkbox" checked id="chkHand"><label for="chkHand" data-bn="হাতে লেখা" data-en="Handwriting">হাতে লেখা</label></div>
     <div class="set-row"><input type="checkbox" checked id="chkTable"><label for="chkTable" data-bn="টেবিল শনাক্ত" data-en="Table Detection">টেবিল শনাক্ত</label></div>
   </div>
+  <div class="ribbon-actions" id="ribbonActions">
+    <button class="btn-outline" id="ribbonDownloadBtn" onclick="ribbonAction('download')">
+      <svg><use href="#i-download"/></svg>
+      <span data-bn="ডাউনলোড" data-en="Download">ডাউনলোড</span>
+    </button>
+    <button class="btn-outline" id="ribbonUploadBtn" onclick="ribbonAction('upload')">
+      <svg><use href="#i-upload"/></svg>
+      <span data-bn="আপলোড" data-en="Upload">আপলোড</span>
+    </button>
+  </div>
 </div>
 
 <!-- TOOLBAR p1 -->
@@ -469,11 +492,23 @@ input:checked + .slider:before{transform:translateX(18px)}
       <span id="personalDictCount" style="background:rgba(41,82,227,.15);color:var(--blue);padding:0 6px;border-radius:8px;font-size:11px;font-weight:700;">০</span>
     </button>
   </div>
-  <div class="quality-widget">
-    <div class="quality-circle"><span class="quality-number" id="qualityNum">১০০</span></div>
-    <div class="quality-text">
-      <div class="quality-title" data-bn="লেখার মান" data-en="Writing Quality">লেখার মান</div>
-      <div class="quality-sub" id="qualitySub" data-bn="চমৎকার" data-en="Excellent">চমৎকার</div>
+  <div class="toolbar-right">
+    <div class="quality-widget">
+      <div class="quality-circle"><span class="quality-number" id="qualityNum">১০০</span></div>
+      <div class="quality-text">
+        <div class="quality-title" data-bn="লেখার মান" data-en="Writing Quality">লেখার মান</div>
+        <div class="quality-sub" id="qualitySub" data-bn="চমৎকার" data-en="Excellent">চমৎকার</div>
+      </div>
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn-outline" onclick="ribbonAction('download','p1')">
+        <svg><use href="#i-download"/></svg>
+        <span data-bn="ডাউনলোড" data-en="Download">ডাউনলোড</span>
+      </button>
+      <button class="btn-outline" onclick="ribbonAction('upload','p1')">
+        <svg><use href="#i-upload"/></svg>
+        <span data-bn="আপলোড" data-en="Upload">আপলোড</span>
+      </button>
     </div>
   </div>
 </div>
@@ -779,8 +814,14 @@ document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',()=
   document.getElementById('mainToolbar').style.display=(p==='p1')?'flex':'none';
   const ribbon=document.getElementById('settingsRibbon');
   if(p==='p1'){ribbon.classList.remove('active');}
-  else{ribbon.classList.add('active');
-    ribbon.querySelectorAll('.ribbon-group').forEach(g=>g.style.display=g.dataset.svc===p?'flex':'none');}
+  else{
+    ribbon.classList.add('active');
+    ribbon.querySelectorAll('.ribbon-group').forEach(g=>g.style.display=g.dataset.svc===p?'flex':'none');
+    const uploadBtn=document.getElementById('ribbonUploadBtn');
+    if(uploadBtn){
+      uploadBtn.style.display = (p==='p5') ? 'none' : 'flex';
+    }
+  }
   document.querySelectorAll('.set-group').forEach(g=>g.classList.toggle('active',g.dataset.svc===p));
 }));
 
@@ -793,6 +834,28 @@ function toggleSidebar(btn){
   sb.classList.toggle('hidden-sidebar');
   const hidden=sb.classList.contains('hidden-sidebar');
   btn.innerHTML='<svg><use href="#i-chevron-'+(hidden?'right':'left')+'"/></svg>';
+}
+
+/* ============ RIBBON ACTIONS (Download / Upload) ============ */
+function ribbonAction(action, service){
+  const svc = service || (document.querySelector('.nav-item.active')?.dataset.p) || 'p1';
+  if(action === 'download'){
+    bsToast(t('ডাউনলোড শুরু হচ্ছে...','Download starting...'));
+    // চাইলে সার্ভিস-ভিত্তিক ডাউনলোড লজিক এখানে বসান
+  } else if(action === 'upload'){
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = svc === 'p5' ? 'image/*,.pdf'
+               : svc === 'p3' ? 'audio/*'
+               : 'text/plain,application/pdf,.doc,.docx';
+    inp.onchange = () => {
+      if(inp.files[0]){
+        bsToast(t(`ফাইল "${inp.files[0].name}" আপলোড হয়েছে`,
+                  `File "${inp.files[0].name}" uploaded`));
+      }
+    };
+    inp.click();
+  }
 }
 
 /* ============ STATE ============ */
