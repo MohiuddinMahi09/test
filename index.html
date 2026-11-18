@@ -32,7 +32,12 @@ svg{display:block}
 .login-box button:hover{background:var(--blue-hover)}
 
 /* HEADER */
-header{background:var(--header-bg);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;z-index:10;flex-shrink:0}
+header{background:var(--header-bg);border-bottom:1px solid var(--border);padding:2px 24px 0;display:flex;flex-direction:column;z-index:10;flex-shrink:0}
+.header-main{display:flex;align-items:center;justify-content:space-between;gap:16px;height:52px}
+.header-top-links{display:flex;justify-content:flex-end;align-items:center;gap:2px;flex-shrink:0}
+.header-top-links a{font-size:9.5px;color:var(--muted);text-decoration:none;padding:1px 6px;border-radius:4px;transition:.2s;font-weight:500;white-space:nowrap;line-height:1.4}
+.header-top-links a:hover{color:var(--blue);background:rgba(41,82,227,.08)}
+[data-theme="dark"] .header-top-links a:hover{background:rgba(59,130,246,.15);color:var(--blue)}
 .header-left{display:flex;align-items:center;gap:32px;width:100%;max-width:850px}
 .brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .brand-logo{width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -79,14 +84,6 @@ header{background:var(--header-bg);border-bottom:1px solid var(--border);padding
 .stat-row span:last-child{color:var(--text);font-weight:600}
 .user-logout-btn{background:rgba(239,68,68,.1);color:var(--red);border:none;padding:9px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
 .user-logout-btn:hover{background:rgba(239,68,68,.2)}
-
-/* TOP LINKS BAR */
-.top-links-bar{background:var(--header-bg);border-bottom:1px solid var(--border);padding:6px 24px;display:flex;justify-content:flex-end;align-items:center;gap:4px;z-index:6;flex-shrink:0;transition:background .3s;flex-wrap:wrap}
-.top-links-bar a{font-size:12px;color:var(--muted);text-decoration:none;padding:5px 10px;border-radius:6px;transition:.2s;font-weight:500;white-space:nowrap;display:inline-block;line-height:1.3}
-.top-links-bar a:hover{color:var(--blue);background:rgba(41,82,227,.08)}
-.top-links-bar a:active,.top-links-bar a.active{background:rgba(41,82,227,.15);color:var(--blue)}
-[data-theme="dark"] .top-links-bar a:hover{background:rgba(59,130,246,.15);color:var(--blue)}
-[data-theme="dark"] .top-links-bar a:active,[data-theme="dark"] .top-links-bar a.active{background:rgba(59,130,246,.25);color:var(--blue)}
 
 /* RIBBON */
 .settings-ribbon{display:none;background:var(--hover-bg);border-bottom:1px solid var(--border);padding:10px 24px;justify-content:flex-start;align-items:center;z-index:4;flex-shrink:0;flex-wrap:wrap;gap:12px}
@@ -253,12 +250,14 @@ input:checked + .slider:before{transform:translateX(18px)}
 
 /* RESPONSIVE */
 @media (max-width:1024px){
-  header{flex-wrap:wrap;height:auto;padding:10px 16px;gap:10px}
+  header{padding:2px 16px 0}
+  .header-main{flex-wrap:wrap;height:auto;gap:10px;padding-bottom:8px}
   .header-left{display:contents}
   .brand{order:1;flex-shrink:0}
   .header-right{order:2;margin-left:auto;flex-shrink:0;gap:8px}
   .top-nav{order:3;width:100%;border-radius:12px;margin-top:2px}
   .brand-text p{display:none}
+  .header-top-links a{font-size:9px;padding:1px 5px}
   .workspace{flex-direction:column;padding:16px;gap:16px;overflow-y:auto;justify-content:flex-start}
   .view-section{flex-direction:column;height:auto;min-height:0;flex:none;gap:16px}
   .editor-container{width:100%;min-height:400px;height:auto;flex-shrink:0;padding:20px}
@@ -274,8 +273,6 @@ input:checked + .slider:before{transform:translateX(18px)}
   .settings-ribbon{flex-wrap:wrap;justify-content:flex-start;gap:12px;padding:10px 16px}
   .drawer{width:92vw;max-width:460px}
   .user-dropdown{right:-60px}
-  .top-links-bar{padding:6px 16px;justify-content:flex-end}
-  .top-links-bar a{font-size:11.5px;padding:4px 8px}
 }
 @media (max-width:768px){
   .nav-item{padding:10px 6px;font-size:13px}
@@ -284,8 +281,8 @@ input:checked + .slider:before{transform:translateX(18px)}
   .settings-ribbon{padding:10px 12px}
   .drawer{width:95vw;max-width:460px}
   .user-dropdown{right:-100px;width:250px}
-  .top-links-bar{overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;scrollbar-width:none;padding:6px 12px}
-  .top-links-bar::-webkit-scrollbar{display:none}
+  .header-top-links{overflow-x:auto;flex-wrap:nowrap;justify-content:flex-end;scrollbar-width:none}
+  .header-top-links::-webkit-scrollbar{display:none}
 }
 @media (max-width:480px){
   .lang-toggle span{padding:4px 8px}
@@ -301,7 +298,7 @@ input:checked + .slider:before{transform:translateX(18px)}
   .login-box{padding:28px 24px}
   .drawer{width:100vw;max-width:100vw;border-radius:0}
   .user-dropdown{right:-110px;width:240px}
-  .top-links-bar a{font-size:11px;padding:4px 7px}
+  .header-top-links a{font-size:8.5px;padding:1px 4px}
 }
 </style>
 </head>
@@ -362,66 +359,66 @@ input:checked + .slider:before{transform:translateX(18px)}
 </defs></svg>
 
 <header>
-  <div class="header-left">
-    <div class="brand">
-      <div class="brand-logo"><svg><use href="#i-logo"/></svg></div>
-      <div class="brand-text">
-        <h1 data-bn="বোধ" data-en="Bodh">বোধ</h1>
-        <p data-bn="বাংলাকে বোঝে, নির্ভুলভাবে" data-en="Understands Bengali, Accurately">বাংলাকে বোঝে, নির্ভুলভাবে</p>
-      </div>
-    </div>
-    <nav class="top-nav" id="serviceNav">
-      <div class="nav-item active" data-p="p1"><svg><use href="#i-spell"/></svg><span data-bn="বানান ও ব্যাকরণ" data-en="Spelling & Grammar">বানান ও ব্যাকরণ</span></div>
-      <div class="nav-item" data-p="p3"><svg><use href="#i-mic"/></svg><span data-bn="কথা → লেখা" data-en="Speech → Text">কথা → লেখা</span></div>
-      <div class="nav-item" data-p="p4"><svg><use href="#i-speak"/></svg><span data-bn="লেখা → কথা" data-en="Text → Speech">লেখা → কথা</span></div>
-      <div class="nav-item" data-p="p5"><svg><use href="#i-ocr"/></svg><span data-bn="ওসিআর" data-en="OCR">ওসিআর</span></div>
-    </nav>
+  <div class="header-top-links">
+    <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="প্রাইভেসি" data-en="Privacy">প্রাইভেসি</a>
+    <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="জিজ্ঞাসা" data-en="FAQ">জিজ্ঞাসা</a>
+    <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="ইউজার ম্যানুয়াল" data-en="User Manual">ইউজার ম্যানুয়াল</a>
+    <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a>
   </div>
-  <div class="header-right">
-    <button class="btn-icon" id="themeToggle" onclick="toggleTheme()"><svg><use href="#i-moon" id="themeIcon"/></svg></button>
-    <div class="share-wrapper">
-      <button class="btn-share" onclick="toggleShareMenu(event)"><svg><use href="#i-share"/></svg><span data-bn="শেয়ার" data-en="Share">শেয়ার</span></button>
-      <div class="share-dropdown" id="shareMenu">
-        <a href="mailto:?subject=Bodh" class="share-item">Email</a>
-        <a href="#" class="share-item">Facebook</a>
-        <a href="#" class="share-item">Twitter</a>
-        <div class="share-item" onclick="copyLink()" data-bn="লিঙ্ক কপি" data-en="Copy Link">লিঙ্ক কপি</div>
+  <div class="header-main">
+    <div class="header-left">
+      <div class="brand">
+        <div class="brand-logo"><svg><use href="#i-logo"/></svg></div>
+        <div class="brand-text">
+          <h1 data-bn="বোধ" data-en="Bodh">বোধ</h1>
+          <p data-bn="বাংলাকে বোঝে, নির্ভুলভাবে" data-en="Understands Bengali, Accurately">বাংলাকে বোঝে, নির্ভুলভাবে</p>
+        </div>
       </div>
+      <nav class="top-nav" id="serviceNav">
+        <div class="nav-item active" data-p="p1"><svg><use href="#i-spell"/></svg><span data-bn="বানান ও ব্যাকরণ" data-en="Spelling & Grammar">বানান ও ব্যাকরণ</span></div>
+        <div class="nav-item" data-p="p3"><svg><use href="#i-mic"/></svg><span data-bn="কথা → লেখা" data-en="Speech → Text">কথা → লেখা</span></div>
+        <div class="nav-item" data-p="p4"><svg><use href="#i-speak"/></svg><span data-bn="লেখা → কথা" data-en="Text → Speech">লেখা → কথা</span></div>
+        <div class="nav-item" data-p="p5"><svg><use href="#i-ocr"/></svg><span data-bn="ওসিআর" data-en="OCR">ওসিআর</span></div>
+      </nav>
     </div>
-    <div class="lang-toggle" id="langToggle"><span class="active" data-lang="bn">BN</span><span data-lang="en">EN</span></div>
+    <div class="header-right">
+      <button class="btn-icon" id="themeToggle" onclick="toggleTheme()"><svg><use href="#i-moon" id="themeIcon"/></svg></button>
+      <div class="share-wrapper">
+        <button class="btn-share" onclick="toggleShareMenu(event)"><svg><use href="#i-share"/></svg><span data-bn="শেয়ার" data-en="Share">শেয়ার</span></button>
+        <div class="share-dropdown" id="shareMenu">
+          <a href="mailto:?subject=Bodh" class="share-item">Email</a>
+          <a href="#" class="share-item">Facebook</a>
+          <a href="#" class="share-item">Twitter</a>
+          <div class="share-item" onclick="copyLink()" data-bn="লিঙ্ক কপি" data-en="Copy Link">লিঙ্ক কপি</div>
+        </div>
+      </div>
+      <div class="lang-toggle" id="langToggle"><span class="active" data-lang="bn">BN</span><span data-lang="en">EN</span></div>
 
-    <!-- USER PROFILE -->
-    <div class="user-wrapper">
-      <div class="user-avatar" onclick="toggleUserMenu(event)">P</div>
-      <div class="user-dropdown" id="userMenu">
-        <div class="user-profile-head">
-          <div class="user-avatar-lg">P</div>
-          <div>
-            <div class="user-profile-name" data-bn="পরীক্ষা ব্যবহারকারী" data-en="Test User">পরীক্ষা ব্যবহারকারী</div>
-            <div class="user-profile-email">user@bodh.app</div>
+      <!-- USER PROFILE -->
+      <div class="user-wrapper">
+        <div class="user-avatar" onclick="toggleUserMenu(event)">P</div>
+        <div class="user-dropdown" id="userMenu">
+          <div class="user-profile-head">
+            <div class="user-avatar-lg">P</div>
+            <div>
+              <div class="user-profile-name" data-bn="পরীক্ষা ব্যবহারকারী" data-en="Test User">পরীক্ষা ব্যবহারকারী</div>
+              <div class="user-profile-email">user@bodh.app</div>
+            </div>
           </div>
+          <div class="user-profile-stat">
+            <div class="stat-row"><span data-bn="সদস্য হয়েছেন" data-en="Member since">সদস্য হয়েছেন</span><span data-bn="জানুয়ারি ২০২৪" data-en="January 2024">জানুয়ারি ২০২৪</span></div>
+            <div class="stat-row"><span data-bn="মোট সংশোধন" data-en="Total corrections">মোট সংশোধন</span><span data-bn="২৪৫" data-en="245">২৪৫</span></div>
+            <div class="stat-row"><span data-bn="ভাষা পছন্দ" data-en="Language">ভাষা পছন্দ</span><span data-bn="বাংলা" data-en="Bengali">বাংলা</span></div>
+            <div class="stat-row"><span data-bn="প্রিয় অভিধান" data-en="Favorite dictionary">প্রিয় অভিধান</span><span data-bn="বাংলা একাডেমি" data-en="Bangla Academy">বাংলা একাডেমি</span></div>
+          </div>
+          <button class="user-logout-btn" onclick="performLogout()" data-bn="লগআউট" data-en="Logout">লগআউট</button>
         </div>
-        <div class="user-profile-stat">
-          <div class="stat-row"><span data-bn="সদস্য হয়েছেন" data-en="Member since">সদস্য হয়েছেন</span><span data-bn="জানুয়ারি ২০২৪" data-en="January 2024">জানুয়ারি ২০২৪</span></div>
-          <div class="stat-row"><span data-bn="মোট সংশোধন" data-en="Total corrections">মোট সংশোধন</span><span data-bn="২৪৫" data-en="245">২৪৫</span></div>
-          <div class="stat-row"><span data-bn="ভাষা পছন্দ" data-en="Language">ভাষা পছন্দ</span><span data-bn="বাংলা" data-en="Bengali">বাংলা</span></div>
-          <div class="stat-row"><span data-bn="প্রিয় অভিধান" data-en="Favorite dictionary">প্রিয় অভিধান</span><span data-bn="বাংলা একাডেমি" data-en="Bangla Academy">বাংলা একাডেমি</span></div>
-        </div>
-        <button class="user-logout-btn" onclick="performLogout()" data-bn="লগআউট" data-en="Logout">লগআউট</button>
       </div>
-    </div>
 
-    <button class="btn-icon" id="openSet" onclick="toggleDrawer(true)"><svg><use href="#i-gear"/></svg></button>
+      <button class="btn-icon" id="openSet" onclick="toggleDrawer(true)"><svg><use href="#i-gear"/></svg></button>
+    </div>
   </div>
 </header>
-
-<!-- TOP LINKS BAR (above service bar, right-aligned) -->
-<div class="top-links-bar">
-  <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="প্রাইভেসি" data-en="Privacy">প্রাইভেসি</a>
-  <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="জিজ্ঞাসা" data-en="FAQ">জিজ্ঞাসা</a>
-  <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="ইউজার ম্যানুয়াল" data-en="User Manual">ইউজার ম্যানুয়াল</a>
-  <a href="https://www.revegroup.com" target="_blank" rel="noopener" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a>
-</div>
 
 <!-- RIBBON for p3/p4/p5 -->
 <div class="settings-ribbon" id="settingsRibbon">
