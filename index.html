@@ -156,7 +156,14 @@ input:checked + .slider:before{transform:translateX(18px)}
 .suggestion-card:hover{border-color:var(--blue);box-shadow:0 4px 12px rgba(41,82,227,.08)}
 .card-type{font-size:12px;font-weight:700;margin-bottom:8px;color:var(--red)}
 .card-type.blue{color:var(--grammar-blue)}
-.suggestion-action{display:flex;align-items:center;gap:12px;margin-bottom:12px;color:var(--text);flex-wrap:wrap}
+
+/* সাজেশন সারি: ভুল শব্দ | তীর | সঠিক শব্দ — তিনটি নির্দিষ্ট কলামে, তাই তীর সবসময় একই জায়গায় থাকে */
+.suggestion-action{display:grid;grid-template-columns:120px 24px minmax(0,1fr);align-items:center;column-gap:8px;margin-bottom:12px;color:var(--text)}
+.suggestion-action .wrong-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.suggestion-action .sg-arrow{text-align:center;line-height:1}
+.suggestion-action .correct-btn{justify-self:start;max-width:100%}
+.suggestion-action > span:last-child:not(.sg-arrow):not(.wrong-text){justify-self:start}
+
 .wrong-text{text-decoration:line-through;color:var(--muted)}
 .correct-btn{background:var(--blue);color:#fff;border:none;padding:4px 16px;border-radius:6px;font-weight:600;cursor:pointer;font-family:inherit}
 .correct-btn:hover{background:var(--blue-hover)}
@@ -1315,7 +1322,7 @@ function bsRenderSidebar(){
     const sug=(t.suggestions&&t.suggestions[0])||'';
     const sideLabel = t.label || 'ত্রুটি';
     card.innerHTML=`<div class="card-type ${type}">${sideLabel}</div>
-      <div class="suggestion-action"><span class="wrong-text">${t.text}</span><span>→</span>
+      <div class="suggestion-action"><span class="wrong-text">${t.text}</span><span class="sg-arrow">→</span>
       ${sug?`<button class="correct-btn" onclick="bsApplySuggestion(${i},'${sug.replace(/'/g,"\\'")}')">${sug}</button>`:`<span style="font-weight:600">${t.text}</span>`}
       </div>`;
     c.appendChild(card);
